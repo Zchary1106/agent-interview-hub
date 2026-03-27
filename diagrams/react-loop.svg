@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981"/>
+    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="550" fill="url(#bg)" rx="12"/>
+  
+  <text x="400" y="38" text-anchor="middle" fill="#f59e0b" font-size="22" font-weight="bold">Agent ReAct 循环图</text>
+  <text x="400" y="58" text-anchor="middle" fill="#94a3b8" font-size="12">Reasoning + Acting 交替迭代</text>
+
+  <!-- User input at top -->
+  <rect x="310" y="75" width="180" height="50" rx="12" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="400" y="100" text-anchor="middle" fill="#1e293b" font-size="15" font-weight="bold">👤 用户输入</text>
+  <text x="400" y="116" text-anchor="middle" fill="#78350f" font-size="10">自然语言问题/指令</text>
+
+  <!-- Arrow down to Thought -->
+  <line x1="400" y1="125" x2="400" y2="155" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Main loop circle - using positioned boxes around a circle -->
+  <!-- Thought (top of loop) -->
+  <rect x="305" y="160" width="190" height="55" rx="12" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="400" y="183" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">🧠 推理 (Thought)</text>
+  <text x="400" y="202" text-anchor="middle" fill="#93c5fd" font-size="10">分析问题，制定计划</text>
+
+  <!-- Action (right of loop) -->
+  <path d="M 495 187 Q 580 187 580 270" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="555" y="225" fill="#fbbf24" font-size="11" transform="rotate(40 555 225)">需要工具</text>
+
+  <rect x="490" y="275" width="190" height="55" rx="12" fill="#334155" filter="url(#shadow)" stroke="#f59e0b" stroke-width="2"/>
+  <text x="585" y="298" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">⚡ 行动 (Action)</text>
+  <text x="585" y="317" text-anchor="middle" fill="#fbbf24" font-size="10">选择并调用工具</text>
+
+  <!-- Tool (bottom of loop) -->
+  <path d="M 585 330 Q 585 380 400 380" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="305" y="360" width="190" height="55" rx="12" fill="#334155" filter="url(#shadow)" stroke="#10b981" stroke-width="2"/>
+  <text x="400" y="383" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">🔧 执行工具 (Tool)</text>
+  <text x="400" y="402" text-anchor="middle" fill="#6ee7b7" font-size="10">搜索/计算/API调用</text>
+
+  <!-- Observation (left of loop) -->
+  <path d="M 305 387 Q 220 387 220 310" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="110" y="275" width="200" height="55" rx="12" fill="#334155" filter="url(#shadow)" stroke="#ef4444" stroke-width="2"/>
+  <text x="210" y="298" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">👁️ 观察 (Observation)</text>
+  <text x="210" y="317" text-anchor="middle" fill="#fca5a5" font-size="10">获取工具返回结果</text>
+
+  <!-- Back to Thought -->
+  <path d="M 210 275 Q 210 187 305 187" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="235" y="225" fill="#fbbf24" font-size="11" transform="rotate(-40 235 225)">继续推理</text>
+
+  <!-- Loop label in center -->
+  <circle cx="400" cy="280" r="35" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="5,3" opacity="0.4"/>
+  <text x="400" y="276" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">ReAct</text>
+  <text x="400" y="291" text-anchor="middle" fill="#f59e0b" font-size="10">循环</text>
+
+  <!-- Exit path -->
+  <rect x="570" y="160" width="190" height="55" rx="12" fill="#10b981" filter="url(#shadow)"/>
+  <text x="665" y="183" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">✅ 最终回答</text>
+  <text x="665" y="202" text-anchor="middle" fill="#d1fae5" font-size="10">返回用户结果</text>
+
+  <line x1="495" y1="180" x2="570" y2="180" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="533" y="173" text-anchor="middle" fill="#6ee7b7" font-size="10">无需工具</text>
+
+  <!-- Legend -->
+  <rect x="40" y="450" width="720" height="80" rx="10" fill="#1e293b" opacity="0.6" stroke="#334155"/>
+  <text x="60" y="475" fill="#f59e0b" font-size="13" font-weight="bold">ReAct 模式核心思想</text>
+  <text x="60" y="498" fill="#94a3b8" font-size="11">• 推理(Reasoning)与行动(Acting)交替进行，每一步都有明确的思考过程</text>
+  <text x="60" y="518" fill="#94a3b8" font-size="11">• Agent 自主决定何时使用工具、使用哪个工具，以及何时给出最终答案</text>
+</svg>

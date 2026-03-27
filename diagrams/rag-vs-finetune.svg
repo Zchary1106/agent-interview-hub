@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+  <rect width="900" height="500" fill="url(#bg)" rx="12"/>
+  
+  <text x="450" y="38" text-anchor="middle" fill="#f59e0b" font-size="22" font-weight="bold">RAG vs Fine-tuning 对比</text>
+
+  <!-- Left: RAG -->
+  <text x="225" y="72" text-anchor="middle" fill="#3b82f6" font-size="17" font-weight="bold">📚 RAG (检索增强生成)</text>
+  
+  <rect x="145" y="90" width="160" height="45" rx="10" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="225" y="117" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🗄️ 外部知识库</text>
+  <line x1="225" y1="135" x2="225" y2="160" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="145" y="165" width="160" height="45" rx="10" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="225" y="192" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🔍 实时检索</text>
+  <line x1="225" y1="210" x2="225" y2="235" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="145" y="240" width="160" height="45" rx="10" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="225" y="267" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">📝 增强 Prompt</text>
+  <line x1="225" y1="285" x2="225" y2="310" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="155" y="315" width="140" height="45" rx="10" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="225" y="342" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">🤖 通用 LLM</text>
+  <line x1="225" y1="360" x2="225" y2="385" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="155" y="390" width="140" height="45" rx="10" fill="#10b981" filter="url(#shadow)"/>
+  <text x="225" y="417" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">✅ 回答</text>
+
+  <!-- Right: Fine-tuning -->
+  <text x="675" y="72" text-anchor="middle" fill="#f59e0b" font-size="17" font-weight="bold">🔧 Fine-tuning (微调)</text>
+  
+  <rect x="595" y="90" width="160" height="45" rx="10" fill="#334155" filter="url(#shadow)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="675" y="117" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">📊 训练数据</text>
+  <line x1="675" y1="135" x2="675" y2="160" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+  <rect x="595" y="165" width="160" height="45" rx="10" fill="#334155" filter="url(#shadow)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="675" y="192" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">⚙️ 模型训练</text>
+  <line x1="675" y1="210" x2="675" y2="310" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)" stroke-dasharray="6,3"/>
+  <text x="690" y="265" fill="#94a3b8" font-size="10">耗时数小时~天</text>
+
+  <rect x="605" y="315" width="140" height="45" rx="10" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="675" y="342" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="bold">🤖 定制 LLM</text>
+  <line x1="675" y1="360" x2="675" y2="385" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+  <rect x="605" y="390" width="140" height="45" rx="10" fill="#10b981" filter="url(#shadow)"/>
+  <text x="675" y="417" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">✅ 回答</text>
+
+  <!-- Center comparison -->
+  <rect x="370" y="85" width="160" height="365" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="450" y="110" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="bold">⚖️ 对比维度</text>
+
+  <line x1="380" y1="120" x2="520" y2="120" stroke="#334155" stroke-width="1"/>
+
+  <text x="450" y="148" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">💰 成本</text>
+  <text x="420" y="167" text-anchor="middle" fill="#10b981" font-size="11">低 ✓</text>
+  <text x="480" y="167" text-anchor="middle" fill="#ef4444" font-size="11">高 ✗</text>
+
+  <line x1="390" y1="180" x2="510" y2="180" stroke="#334155" stroke-width="0.5"/>
+
+  <text x="450" y="205" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">🔄 更新速度</text>
+  <text x="420" y="224" text-anchor="middle" fill="#10b981" font-size="11">实时 ✓</text>
+  <text x="480" y="224" text-anchor="middle" fill="#ef4444" font-size="11">需重训 ✗</text>
+
+  <line x1="390" y1="237" x2="510" y2="237" stroke="#334155" stroke-width="0.5"/>
+
+  <text x="450" y="262" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">👻 幻觉控制</text>
+  <text x="420" y="281" text-anchor="middle" fill="#10b981" font-size="11">好 ✓</text>
+  <text x="480" y="281" text-anchor="middle" fill="#f59e0b" font-size="11">一般 ~</text>
+
+  <line x1="390" y1="294" x2="510" y2="294" stroke="#334155" stroke-width="0.5"/>
+
+  <text x="450" y="319" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">🎯 领域适配</text>
+  <text x="420" y="338" text-anchor="middle" fill="#f59e0b" font-size="11">一般 ~</text>
+  <text x="480" y="338" text-anchor="middle" fill="#10b981" font-size="11">强 ✓</text>
+
+  <line x1="390" y1="351" x2="510" y2="351" stroke="#334155" stroke-width="0.5"/>
+
+  <text x="450" y="376" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">🔒 数据隐私</text>
+  <text x="420" y="395" text-anchor="middle" fill="#10b981" font-size="11">可控 ✓</text>
+  <text x="480" y="395" text-anchor="middle" fill="#f59e0b" font-size="11">需注意 ~</text>
+
+  <line x1="390" y1="408" x2="510" y2="408" stroke="#334155" stroke-width="0.5"/>
+
+  <text x="450" y="433" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">📐 实现难度</text>
+  <text x="420" y="442" text-anchor="middle" fill="#10b981" font-size="10">中等</text>
+  <text x="480" y="442" text-anchor="middle" fill="#ef4444" font-size="10">较高</text>
+
+  <!-- Bottom recommendation -->
+  <rect x="100" y="455" width="700" height="35" rx="8" fill="#334155" opacity="0.6"/>
+  <text x="450" y="477" text-anchor="middle" fill="#94a3b8" font-size="12">💡 实践建议：优先尝试 RAG，不满足需求时再考虑 Fine-tuning，两者也可组合使用 (RAG + Fine-tuned LLM)</text>
+</svg>

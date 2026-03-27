@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981"/>
+    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="500" fill="url(#bg)" rx="12"/>
+  
+  <text x="450" y="38" text-anchor="middle" fill="#f59e0b" font-size="22" font-weight="bold">LangGraph 图结构示意</text>
+  <text x="450" y="58" text-anchor="middle" fill="#94a3b8" font-size="12">基于状态图的 Agent 工作流编排</text>
+
+  <!-- START node -->
+  <circle cx="80" cy="230" r="30" fill="#10b981" filter="url(#shadow)"/>
+  <text x="80" y="235" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">START</text>
+
+  <!-- Arrow to agent_node -->
+  <line x1="110" y1="230" x2="175" y2="230" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+
+  <!-- agent_node -->
+  <rect x="180" y="200" width="160" height="60" rx="12" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="260" y="225" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">🤖 agent_node</text>
+  <text x="260" y="245" text-anchor="middle" fill="#93c5fd" font-size="10">LLM 推理决策</text>
+
+  <!-- Arrow to condition -->
+  <line x1="340" y1="230" x2="405" y2="230" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  
+  <!-- State label on arrow -->
+  <rect x="350" y="210" width="50" height="18" rx="4" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+  <text x="375" y="223" text-anchor="middle" fill="#fbbf24" font-size="9">State</text>
+
+  <!-- should_continue (diamond/condition) -->
+  <polygon points="480,190 555,230 480,270 405,230" fill="#334155" filter="url(#shadow)" stroke="#f59e0b" stroke-width="2"/>
+  <text x="480" y="225" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">should_</text>
+  <text x="480" y="240" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">continue</text>
+  <text x="480" y="255" text-anchor="middle" fill="#fbbf24" font-size="9">条件路由</text>
+
+  <!-- Arrow to tool_node (down) -->
+  <line x1="480" y1="270" x2="480" y2="330" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="500" y="305" fill="#fbbf24" font-size="11">有工具调用</text>
+
+  <!-- tool_node -->
+  <rect x="400" y="335" width="160" height="60" rx="12" fill="#334155" filter="url(#shadow)" stroke="#10b981" stroke-width="2"/>
+  <text x="480" y="360" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">🔧 tool_node</text>
+  <text x="480" y="380" text-anchor="middle" fill="#6ee7b7" font-size="10">执行工具调用</text>
+
+  <!-- Loop back to agent_node -->
+  <path d="M 400 365 Q 260 365 260 260" stroke="#3b82f6" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="300" y="340" fill="#93c5fd" font-size="10">返回结果</text>
+  
+  <rect x="280" y="300" width="50" height="18" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+  <text x="305" y="313" text-anchor="middle" fill="#93c5fd" font-size="9">State</text>
+
+  <!-- Arrow to END -->
+  <line x1="555" y1="230" x2="640" y2="230" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+  <text x="598" y="220" fill="#fca5a5" font-size="11">无工具调用</text>
+
+  <!-- END node -->
+  <circle cx="670" cy="230" r="30" fill="#ef4444" filter="url(#shadow)"/>
+  <text x="670" y="235" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">END</text>
+
+  <!-- State persistence sidebar -->
+  <rect x="710" y="80" width="170" height="200" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="795" y="105" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="bold">💾 状态持久化</text>
+  
+  <rect x="725" y="115" width="140" height="35" rx="6" fill="#334155"/>
+  <text x="795" y="137" text-anchor="middle" fill="#f8fafc" font-size="11">Checkpoint 检查点</text>
+  
+  <rect x="725" y="160" width="140" height="35" rx="6" fill="#334155"/>
+  <text x="795" y="177" text-anchor="middle" fill="#f8fafc" font-size="10">State 状态快照</text>
+  <text x="795" y="190" text-anchor="middle" fill="#94a3b8" font-size="9">messages, data</text>
+  
+  <rect x="725" y="205" width="140" height="35" rx="6" fill="#334155"/>
+  <text x="795" y="222" text-anchor="middle" fill="#f8fafc" font-size="10">Thread 线程管理</text>
+  <text x="795" y="235" text-anchor="middle" fill="#94a3b8" font-size="9">支持暂停/恢复</text>
+
+  <rect x="725" y="250" width="140" height="22" rx="6" fill="#334155"/>
+  <text x="795" y="265" text-anchor="middle" fill="#94a3b8" font-size="9">SQLite / Postgres</text>
+
+  <!-- State object detail -->
+  <rect x="40" y="320" width="250" height="160" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="165" y="345" text-anchor="middle" fill="#3b82f6" font-size="13" font-weight="bold">📦 State 对象</text>
+  <text x="60" y="370" fill="#f8fafc" font-size="11" font-family="monospace">{"{"}</text>
+  <text x="75" y="390" fill="#fbbf24" font-size="11" font-family="monospace">"messages"</text>
+  <text x="190" y="390" fill="#94a3b8" font-size="11" font-family="monospace">: [...],</text>
+  <text x="75" y="410" fill="#fbbf24" font-size="11" font-family="monospace">"next_step"</text>
+  <text x="190" y="410" fill="#94a3b8" font-size="11" font-family="monospace">: "...",</text>
+  <text x="75" y="430" fill="#fbbf24" font-size="11" font-family="monospace">"tool_calls"</text>
+  <text x="195" y="430" fill="#94a3b8" font-size="11" font-family="monospace">: [...]</text>
+  <text x="60" y="450" fill="#f8fafc" font-size="11" font-family="monospace">{"}"}</text>
+
+  <!-- Key features -->
+  <rect x="590" y="320" width="290" height="160" rx="10" fill="#1e293b" opacity="0.6" stroke="#334155"/>
+  <text x="610" y="345" fill="#f59e0b" font-size="13" font-weight="bold">核心特性</text>
+  <text x="610" y="370" fill="#94a3b8" font-size="11">✅ 图结构定义工作流，灵活编排</text>
+  <text x="610" y="392" fill="#94a3b8" font-size="11">✅ 条件边实现动态路由</text>
+  <text x="610" y="414" fill="#94a3b8" font-size="11">✅ 状态在节点间自动传递</text>
+  <text x="610" y="436" fill="#94a3b8" font-size="11">✅ 支持检查点、暂停、人工介入</text>
+  <text x="610" y="458" fill="#94a3b8" font-size="11">✅ 支持循环，适合 Agent 场景</text>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="550" fill="url(#bg)" rx="12"/>
+  
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" fill="#f59e0b" font-size="22" font-weight="bold">RAG 工作流程图</text>
+  
+  <!-- Phase labels -->
+  <rect x="30" y="55" width="840" height="25" rx="4" fill="#334155" opacity="0.5"/>
+  <text x="250" y="72" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="bold">⬇ 离线索引阶段</text>
+  <text x="650" y="72" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="bold">⬇ 在线查询阶段</text>
+  <line x1="450" y1="55" x2="450" y2="80" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4"/>
+
+  <!-- Offline indexing pipeline (top row) -->
+  <rect x="40" y="95" width="120" height="55" rx="10" fill="#334155" filter="url(#shadow)"/>
+  <text x="100" y="118" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">📄 文档库</text>
+  <text x="100" y="137" text-anchor="middle" fill="#94a3b8" font-size="10">PDF/网页/文本</text>
+
+  <line x1="160" y1="122" x2="195" y2="122" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="200" y="95" width="120" height="55" rx="10" fill="#334155" filter="url(#shadow)"/>
+  <text x="260" y="118" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">✂️ 分块</text>
+  <text x="260" y="137" text-anchor="middle" fill="#94a3b8" font-size="10">Chunking</text>
+
+  <line x1="320" y1="122" x2="355" y2="122" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <rect x="360" y="95" width="120" height="55" rx="10" fill="#334155" filter="url(#shadow)"/>
+  <text x="420" y="118" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🔢 向量化</text>
+  <text x="420" y="137" text-anchor="middle" fill="#94a3b8" font-size="10">Embedding</text>
+
+  <line x1="480" y1="122" x2="515" y2="122" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Vector DB (shared, center) -->
+  <rect x="520" y="85" width="140" height="75" rx="12" fill="#1e40af" filter="url(#shadow)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="590" y="115" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🗄️ 向量数据库</text>
+  <text x="590" y="135" text-anchor="middle" fill="#93c5fd" font-size="10">Vector Store</text>
+  <text x="590" y="150" text-anchor="middle" fill="#93c5fd" font-size="9">Pinecone / Milvus / FAISS</text>
+
+  <!-- Online query pipeline (bottom) -->
+  <rect x="40" y="220" width="120" height="55" rx="10" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="100" y="245" text-anchor="middle" fill="#1e293b" font-size="13" font-weight="bold">👤 用户提问</text>
+  <text x="100" y="262" text-anchor="middle" fill="#78350f" font-size="10">自然语言问题</text>
+
+  <line x1="160" y1="247" x2="195" y2="247" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="200" y="220" width="130" height="55" rx="10" fill="#334155" filter="url(#shadow)"/>
+  <text x="265" y="243" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🔢 Query向量化</text>
+  <text x="265" y="262" text-anchor="middle" fill="#94a3b8" font-size="10">Embedding</text>
+
+  <line x1="330" y1="247" x2="365" y2="247" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="370" y="220" width="130" height="55" rx="10" fill="#334155" filter="url(#shadow)"/>
+  <text x="435" y="243" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🔍 相似性检索</text>
+  <text x="435" y="262" text-anchor="middle" fill="#94a3b8" font-size="10">Top-K 文档</text>
+
+  <!-- Arrow from vector DB down to retrieval -->
+  <line x1="590" y1="160" x2="590" y2="195" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="590" y1="195" x2="500" y2="195" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="500" y1="195" x2="435" y2="220" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <line x1="500" y1="247" x2="535" y2="247" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="540" y="220" width="130" height="55" rx="10" fill="#334155" filter="url(#shadow)"/>
+  <text x="605" y="238" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="bold">📝 拼接上下文</text>
+  <text x="605" y="255" text-anchor="middle" fill="#94a3b8" font-size="10">Context + Query</text>
+  <text x="605" y="270" text-anchor="middle" fill="#94a3b8" font-size="9">→ Prompt</text>
+
+  <line x1="670" y1="247" x2="705" y2="247" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="710" y="220" width="120" height="55" rx="10" fill="#334155" filter="url(#shadow)"/>
+  <text x="770" y="243" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🤖 LLM 生成</text>
+  <text x="770" y="262" text-anchor="middle" fill="#94a3b8" font-size="10">GPT / Claude</text>
+
+  <!-- Final answer -->
+  <line x1="770" y1="275" x2="770" y2="310" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="690" y="315" width="160" height="55" rx="10" fill="#10b981" filter="url(#shadow)"/>
+  <text x="770" y="338" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">✅ 带来源的回答</text>
+  <text x="770" y="357" text-anchor="middle" fill="#d1fae5" font-size="10">Answer + Sources</text>
+
+  <!-- Legend -->
+  <rect x="40" y="400" width="820" height="130" rx="10" fill="#1e293b" opacity="0.6" stroke="#334155"/>
+  <text x="60" y="425" fill="#f59e0b" font-size="14" font-weight="bold">关键概念</text>
+  
+  <circle cx="70" cy="448" r="5" fill="#3b82f6"/>
+  <text x="85" y="453" fill="#94a3b8" font-size="11">离线索引: 将文档预处理为向量，存入数据库（一次性或定期更新）</text>
+  
+  <circle cx="70" cy="473" r="5" fill="#f59e0b"/>
+  <text x="85" y="478" fill="#94a3b8" font-size="11">在线查询: 用户问题实时检索相关文档，增强 LLM 上下文后生成回答</text>
+  
+  <circle cx="70" cy="498" r="5" fill="#10b981"/>
+  <text x="85" y="503" fill="#94a3b8" font-size="11">核心优势: 无需重训模型，知识可实时更新，回答可溯源，减少幻觉</text>
+  
+  <circle cx="70" cy="518" r="5" fill="#ef4444"/>
+  <text x="85" y="523" fill="#94a3b8" font-size="11">关键挑战: 分块策略、Embedding 质量、检索精度、上下文窗口限制</text>
+</svg>
