@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 550" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="550" fill="url(#bg)" rx="12"/>
+  
+  <text x="480" y="38" text-anchor="middle" fill="#f59e0b" font-size="22" font-weight="bold">Multi-Agent 协作模式</text>
+  <text x="480" y="58" text-anchor="middle" fill="#94a3b8" font-size="12">三种常见的多智能体协作架构</text>
+
+  <!-- Pattern 1: Supervisor -->
+  <rect x="20" y="75" width="290" height="450" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <rect x="20" y="75" width="290" height="40" rx="12" fill="#334155"/>
+  <rect x="20" y="103" width="290" height="12" fill="#334155"/>
+  <text x="165" y="100" text-anchor="middle" fill="#f59e0b" font-size="15" font-weight="bold">① Supervisor 模式</text>
+
+  <!-- Supervisor node -->
+  <rect x="80" y="140" width="170" height="55" rx="10" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="165" y="163" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="bold">👑 Supervisor</text>
+  <text x="165" y="183" text-anchor="middle" fill="#78350f" font-size="10">任务分配 & 结果汇总</text>
+
+  <!-- Lines down to workers -->
+  <line x1="115" y1="195" x2="80" y2="245" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="165" y1="195" x2="165" y2="245" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="215" y1="195" x2="250" y2="245" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Worker agents -->
+  <rect x="35" y="250" width="88" height="65" rx="8" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="79" y="275" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">🔍 研究</text>
+  <text x="79" y="293" text-anchor="middle" fill="#93c5fd" font-size="9">Agent</text>
+
+  <rect x="133" y="250" width="88" height="65" rx="8" fill="#334155" filter="url(#shadow)" stroke="#10b981" stroke-width="1.5"/>
+  <text x="177" y="275" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">💻 编码</text>
+  <text x="177" y="293" text-anchor="middle" fill="#6ee7b7" font-size="9">Agent</text>
+
+  <rect x="230" y="250" width="68" height="65" rx="8" fill="#334155" filter="url(#shadow)" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="264" y="275" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">✍️ 写作</text>
+  <text x="264" y="293" text-anchor="middle" fill="#fca5a5" font-size="9">Agent</text>
+
+  <!-- Return arrows -->
+  <line x1="79" y1="315" x2="115" y2="375" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="177" y1="315" x2="165" y2="375" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="264" y1="315" x2="215" y2="375" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+
+  <rect x="100" y="375" width="130" height="40" rx="8" fill="#10b981" filter="url(#shadow)"/>
+  <text x="165" y="400" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="bold">📋 汇总结果</text>
+
+  <text x="165" y="450" text-anchor="middle" fill="#94a3b8" font-size="10">适合：任务可分解</text>
+  <text x="165" y="468" text-anchor="middle" fill="#94a3b8" font-size="10">需要中心协调</text>
+  <text x="165" y="486" text-anchor="middle" fill="#94a3b8" font-size="10">典型框架：LangGraph</text>
+
+  <!-- Pattern 2: Pipeline -->
+  <rect x="335" y="75" width="290" height="450" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <rect x="335" y="75" width="290" height="40" rx="12" fill="#334155"/>
+  <rect x="335" y="103" width="290" height="12" fill="#334155"/>
+  <text x="480" y="100" text-anchor="middle" fill="#3b82f6" font-size="15" font-weight="bold">② Pipeline 模式</text>
+
+  <!-- Pipeline agents vertical -->
+  <rect x="410" y="145" width="140" height="50" rx="10" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="480" y="170" text-anchor="middle" fill="#1e293b" font-size="13" font-weight="bold">📥 输入</text>
+
+  <line x1="480" y1="195" x2="480" y2="220" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="400" y="225" width="160" height="50" rx="10" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="480" y="250" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🔍 Agent A</text>
+  <text x="480" y="267" text-anchor="middle" fill="#93c5fd" font-size="9">信息收集</text>
+
+  <line x1="480" y1="275" x2="480" y2="300" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <text x="510" y="292" fill="#94a3b8" font-size="9">传递结果</text>
+
+  <rect x="400" y="305" width="160" height="50" rx="10" fill="#334155" filter="url(#shadow)" stroke="#10b981" stroke-width="1.5"/>
+  <text x="480" y="330" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">⚙️ Agent B</text>
+  <text x="480" y="347" text-anchor="middle" fill="#6ee7b7" font-size="9">数据处理</text>
+
+  <line x1="480" y1="355" x2="480" y2="380" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <text x="510" y="372" fill="#94a3b8" font-size="9">传递结果</text>
+
+  <rect x="400" y="385" width="160" height="50" rx="10" fill="#334155" filter="url(#shadow)" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="480" y="410" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">📝 Agent C</text>
+  <text x="480" y="427" text-anchor="middle" fill="#fca5a5" font-size="9">生成报告</text>
+
+  <text x="480" y="468" text-anchor="middle" fill="#94a3b8" font-size="10">适合：顺序处理流程</text>
+  <text x="480" y="486" text-anchor="middle" fill="#94a3b8" font-size="10">上下游依赖明确</text>
+  <text x="480" y="504" text-anchor="middle" fill="#94a3b8" font-size="10">典型框架：CrewAI</text>
+
+  <!-- Pattern 3: Debate -->
+  <rect x="650" y="75" width="290" height="450" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <rect x="650" y="75" width="290" height="40" rx="12" fill="#334155"/>
+  <rect x="650" y="103" width="290" height="12" fill="#334155"/>
+  <text x="795" y="100" text-anchor="middle" fill="#10b981" font-size="15" font-weight="bold">③ Debate 模式</text>
+
+  <!-- Debate agents -->
+  <rect x="670" y="165" width="120" height="60" rx="10" fill="#334155" filter="url(#shadow)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="730" y="190" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🅰️ Agent 正方</text>
+  <text x="730" y="210" text-anchor="middle" fill="#93c5fd" font-size="9">提出论点</text>
+
+  <rect x="800" y="165" width="120" height="60" rx="10" fill="#334155" filter="url(#shadow)" stroke="#ef4444" stroke-width="2"/>
+  <text x="860" y="190" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">🅱️ Agent 反方</text>
+  <text x="860" y="210" text-anchor="middle" fill="#fca5a5" font-size="9">反驳论点</text>
+
+  <!-- Debate arrows -->
+  <path d="M 790 175 L 800 175" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 800 215 L 790 215" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="795" y="198" text-anchor="middle" fill="#fbbf24" font-size="18">⚡</text>
+
+  <!-- Multiple rounds -->
+  <text x="795" y="255" text-anchor="middle" fill="#94a3b8" font-size="11">多轮辩论...</text>
+  <line x1="795" y1="262" x2="795" y2="290" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrow)"/>
+
+  <!-- Judge -->
+  <rect x="720" y="295" width="150" height="60" rx="10" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="795" y="320" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="bold">⚖️ Judge Agent</text>
+  <text x="795" y="340" text-anchor="middle" fill="#78350f" font-size="10">裁判/综合判断</text>
+
+  <line x1="795" y1="355" x2="795" y2="390" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="730" y="395" width="130" height="40" rx="8" fill="#10b981" filter="url(#shadow)"/>
+  <text x="795" y="420" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="bold">🏆 最优方案</text>
+
+  <text x="795" y="468" text-anchor="middle" fill="#94a3b8" font-size="10">适合：需要多角度思考</text>
+  <text x="795" y="486" text-anchor="middle" fill="#94a3b8" font-size="10">提高决策质量</text>
+  <text x="795" y="504" text-anchor="middle" fill="#94a3b8" font-size="10">典型框架：AutoGen</text>
+</svg>
