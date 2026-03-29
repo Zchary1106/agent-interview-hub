@@ -112,6 +112,8 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 .main {
   margin-left: var(--sidebar-w);
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: calc(100vw - var(--sidebar-w));
 }
 .topbar {
   position: sticky;
@@ -189,6 +191,9 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   padding: 24px;
   max-width: 1000px;
   margin: 0 auto;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .content-section {
   display: none;
