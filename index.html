@@ -113,6 +113,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   margin-left: var(--sidebar-w);
   min-height: 100vh;
   overflow-x: hidden;
+  width: calc(100vw - var(--sidebar-w));
   max-width: calc(100vw - var(--sidebar-w));
 }
 .topbar {
@@ -198,6 +199,8 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 .content-section {
   display: none;
   animation: fadeIn 0.3s ease;
+  min-width: 0;
+  max-width: 100%;
 }
 .content-section.active { display: block; }
 @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
@@ -236,6 +239,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   margin: 12px 0;
   font-size: 13px;
   line-height: 1.5;
+  max-width: 100%;
 }
 .section-body code {
   background: var(--bg3);
@@ -270,6 +274,9 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
 }
 .section-body th {
   background: var(--bg3);
