@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/github/license/Zchary1106/agent-interview-hub?style=flat-square)](LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Zchary1106/agent-interview-hub?style=flat-square)](https://github.com/Zchary1106/agent-interview-hub/commits/main)
 
-**250+ 面试题（全部带答案）· 9 家大厂真实面经 · 16 周完整学习路线图**
+**250+ 面试题（全部带答案）· 9 家大厂真实面经 · 6 道实操考题 · 16 周完整学习路线图**
 
 [📖 在线阅读](https://zchary1106.github.io/agent-interview-hub/) · [⭐ Star 支持](https://github.com/Zchary1106/agent-interview-hub) · [🐛 提交面经](https://github.com/Zchary1106/agent-interview-hub/issues)
 
@@ -22,7 +22,7 @@
 专为**国内大厂 AI Agent 工程师**跳槽/求职打造的一站式面试知识库。
 
 - 🎯 **面向谁** — 准备跳槽阿里、字节、腾讯、百度等大厂 Agent 岗位的工程师
-- 📚 **包含什么** — 250+ 高频面试题（全部附答案）、9 家大厂岗位要求与真实面经、14 篇深度技术文档
+- 📚 **包含什么** — 250+ 高频面试题（全部附答案）、9 家大厂岗位要求与真实面经、6 道限时实操考题、17 篇深度技术文档
 - 🗺️ **学习路线** — 从零到 Offer 的 16 周完整学习计划
 - ✨ **特色亮点** — 题目全带答案、面经来自牛客真实分享、支持 GitHub Pages 在线浏览
 
@@ -83,6 +83,24 @@ AI Agent 工程师知识体系
 | 12 | [高频拷打题 - 牛客热帖](通用知识/高频拷打题-牛客热帖.md) | 牛客论坛高赞面试拷打合集 |
 | 13 | [技术知识点汇总](通用知识/技术知识点汇总.md) | 速查手册：关键知识点一网打尽 |
 | 14 | [其他公司面经 - 快手携程等](通用知识/其他公司面经-快手携程等.md) | 快手、携程等公司面经补充 |
+| 15 | [Agent 核心概念面试题（英文）](通用知识/Agent核心概念面试题(英文).md) | 英文版核心概念高频问答 |
+| 16 | [系统设计面试题（英文）](通用知识/系统设计面试题(英文).md) | 英文版系统设计题与参考答案 |
+| 17 | [AI 协作与工程化面试题（英文）](通用知识/AI协作与工程化面试题(英文).md) | 英文版 AI 协作工程化问答 |
+
+---
+
+## 🎯 实操考题（限时挑战）
+
+> 来自 [agent-interview-prep](https://github.com/Zchary1106/agent-interview-prep) 项目，模拟真实面试场景的限时编程题
+
+| # | 题目 | 难度 | 限时 |
+|---|------|:----:|:----:|
+| 1 | [智能文档问答 Agent](项目实战/实操考题/01-智能文档问答Agent.md) | ⭐⭐ | 4-6h |
+| 2 | [多 Agent 团队协作](项目实战/实操考题/02-多Agent团队协作.md) | ⭐⭐ | 4-6h |
+| 3 | [ReAct 模式 Agent](项目实战/实操考题/03-ReAct模式Agent.md) | ⭐⭐ | 3-5h |
+| 4 | [AI 限时全栈开发](项目实战/实操考题/04-AI限时全栈开发.md) | ⭐⭐ | 2-3h |
+| 5 | [AI 调试挑战](项目实战/实操考题/05-AI调试挑战.md) | ⭐⭐⭐ | 1-2h |
+| 6 | [AI Code Review Agent](项目实战/实操考题/06-AI-CodeReview-Agent.md) | ⭐⭐⭐ | 4-6h |
 
 ---
 
