@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/github/license/Zchary1106/agent-interview-hub?style=flat-square)](LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Zchary1106/agent-interview-hub?style=flat-square)](https://github.com/Zchary1106/agent-interview-hub/commits/main)
 
-**250+ 面试题（全部带答案）· 9 家大厂真实面经 · 6 道实操考题 · 16 周完整学习路线图**
+**300+ 面试题（全部带答案）· 9 家大厂真实面经 · 6 道实操考题 · 16 周完整学习路线图**
 
 [📖 在线阅读](https://zchary1106.github.io/agent-interview-hub/) · [⭐ Star 支持](https://github.com/Zchary1106/agent-interview-hub) · [🐛 提交面经](https://github.com/Zchary1106/agent-interview-hub/issues)
 
@@ -22,7 +22,7 @@
 专为**国内大厂 AI Agent 工程师**跳槽/求职打造的一站式面试知识库。
 
 - 🎯 **面向谁** — 准备跳槽阿里、字节、腾讯、百度等大厂 Agent 岗位的工程师
-- 📚 **包含什么** — 250+ 高频面试题（全部附答案）、9 家大厂岗位要求与真实面经、6 道限时实操考题、17 篇深度技术文档
+- 📚 **包含什么** — 300+ 高频面试题（全部附答案）、9 家大厂岗位要求与真实面经、6 道限时实操考题、20 篇深度技术文档
 - 🗺️ **学习路线** — 从零到 Offer 的 16 周完整学习计划
 - ✨ **特色亮点** — 题目全带答案、面经来自牛客真实分享、支持 GitHub Pages 在线浏览
 
@@ -41,11 +41,14 @@ AI Agent 工程师知识体系
 ├── 🔧 核心层
 │   ├── Agent 设计模式（ReAct / Plan-and-Execute / Multi-Agent）
 │   ├── RAG 全链路（检索 / 分块 / 重排 / 生成）
+│   ├── Function Calling / Tool Use 🆕
+│   ├── MCP（Model Context Protocol）🆕
 │   ├── 主流框架（LangChain / LangGraph / AutoGen）
 │   └── Context Engineering 上下文工程
 │
 ├── 🚀 进阶层
 │   ├── Agentic RAG / GraphRAG
+│   ├── Agentic Coding 与 AI 编程工具 🆕
 │   ├── 模型微调 / 推理优化 / 量化部署
 │   └── Agent 安全、评估与对齐
 │
@@ -67,6 +70,8 @@ AI Agent 工程师知识体系
 
 ## 📚 通用知识
 
+### 🔧 核心技术
+
 | # | 文档 | 简介 |
 |---|------|------|
 | 1 | [Agent 核心概念与设计模式](通用知识/Agent核心概念与设计模式.md) | ReAct、Plan-and-Execute、Multi-Agent 等核心范式 |
@@ -74,18 +79,31 @@ AI Agent 工程师知识体系
 | 3 | [LangChain 与 LangGraph 深度解析](通用知识/LangChain与LangGraph深度解析.md) | 链式调用到图编排的演进与实战 |
 | 4 | [RAG 核心知识与面试题](通用知识/RAG核心知识与面试题.md) | 检索增强生成全链路：分块、检索、重排、生成 |
 | 5 | [Agentic RAG 与 GraphRAG 深度解析](通用知识/Agentic%20RAG与GraphRAG深度解析.md) | 从朴素 RAG 到 Agent 驱动的智能检索 |
-| 6 | [Context Engineering 上下文工程](通用知识/Context%20Engineering上下文工程.md) | 上下文窗口管理、压缩与优化策略 |
+| 6 | [Context Engineering 上下文工程](通用知识/Context%20Engineering上下文工程.md) | 上下文窗口管理、压缩与优化策略（含 Anthropic 最新实践）🔄 |
 | 7 | [Agent 安全与评估体系](通用知识/Agent安全与评估体系.md) | Prompt 注入防御、幻觉检测、评估框架 |
 | 8 | [大模型推理优化与部署](通用知识/大模型推理优化与部署.md) | 量化、蒸馏、KV Cache、vLLM 等推理加速 |
-| 9 | [核心概念详解与参考答案](通用知识/核心概念详解与参考答案.md) | 高频概念题精讲与标准答案 |
-| 10 | [八股文完整答案集](通用知识/八股文完整答案集.md) | 69 道八股题，全部附详细解答 |
-| 11 | [八股文题库 - DataWhale 开源](通用知识/八股文题库-DataWhale开源.md) | DataWhale 社区精选题库 |
-| 12 | [高频拷打题 - 牛客热帖](通用知识/高频拷打题-牛客热帖.md) | 牛客论坛高赞面试拷打合集 |
-| 13 | [技术知识点汇总](通用知识/技术知识点汇总.md) | 速查手册：关键知识点一网打尽 |
-| 14 | [其他公司面经 - 快手携程等](通用知识/其他公司面经-快手携程等.md) | 快手、携程等公司面经补充 |
-| 15 | [Agent 核心概念面试题（英文）](通用知识/Agent核心概念面试题(英文).md) | 英文版核心概念高频问答 |
-| 16 | [系统设计面试题（英文）](通用知识/系统设计面试题(英文).md) | 英文版系统设计题与参考答案 |
-| 17 | [AI 协作与工程化面试题（英文）](通用知识/AI协作与工程化面试题(英文).md) | 英文版 AI 协作工程化问答 |
+| 9 | [Function Calling 与 Tool Use 专题](通用知识/Function%20Calling与Tool%20Use专题.md) | 三大厂商实现对比、调用模式、安全防御 🆕 |
+| 10 | [MCP 与工具生态](通用知识/MCP与工具生态.md) | Model Context Protocol 架构、开发实战、企业应用 🆕 |
+| 11 | [Agentic Coding 与 AI 编程工具](通用知识/Agentic%20Coding与AI编程工具.md) | Claude Code / Cursor / Copilot 对比、Hooks、人机协作 🆕 |
+
+### 📝 面试题库
+
+| # | 文档 | 简介 |
+|---|------|------|
+| 12 | [核心概念详解与参考答案](通用知识/核心概念详解与参考答案.md) | 高频概念题精讲与标准答案 |
+| 13 | [八股文完整答案集](通用知识/八股文完整答案集.md) | 69 道八股题，全部附详细解答 |
+| 14 | [八股文题库 - DataWhale 开源](通用知识/八股文题库-DataWhale开源.md) | DataWhale 社区精选题库 |
+| 15 | [高频拷打题 - 牛客热帖](通用知识/高频拷打题-牛客热帖.md) | 牛客论坛高赞面试拷打合集 |
+| 16 | [技术知识点汇总](通用知识/技术知识点汇总.md) | 速查手册：关键知识点一网打尽 |
+| 17 | [其他公司面经 - 快手携程等](通用知识/其他公司面经-快手携程等.md) | 快手、携程等公司面经补充 |
+
+### 🌐 进阶面试题
+
+| # | 文档 | 简介 |
+|---|------|------|
+| 18 | [Agent 核心概念面试题 - 进阶篇](通用知识/Agent核心概念面试题-进阶篇.md) | 核心概念高频问答进阶版 |
+| 19 | [系统设计面试题 - 进阶篇](通用知识/系统设计面试题-进阶篇.md) | 系统设计题与参考答案进阶版 |
+| 20 | [AI 协作与工程化面试题 - 进阶篇](通用知识/AI协作与工程化面试题-进阶篇.md) | AI 协作工程化问答进阶版 |
 
 ---
 
@@ -113,10 +131,10 @@ AI Agent 工程师知识体系
 | [小红书](小红书/) | ✅ | ✅ | ✅ |
 | [百度](百度/) | ✅ | ✅ | — |
 | [腾讯](腾讯/) | ✅ | ✅ | — |
-| [美团](美团/) | — | ✅ | — |
-| [蚂蚁集团](蚂蚁集团/) | — | ✅ | — |
-| [华为](华为/) | — | ✅ | — |
-| [快手](快手/) | — | ✅ | — |
+| [美团](美团/) | ✅ | ✅ | ✅ |
+| [蚂蚁集团](蚂蚁集团/) | ✅ | ✅ | ✅ |
+| [华为](华为/) | ✅ | ✅ | ✅ |
+| [快手](快手/) | ✅ | ✅ | ✅ |
 
 ---
 
@@ -141,9 +159,10 @@ cd agent-interview-hub
 1. 📖 先看 [学习路线图](Agent工程师学习路线图.md)，了解全局
 2. 🧱 通读 [Agent 核心概念与设计模式](通用知识/Agent核心概念与设计模式.md)
 3. 🔧 深入 [RAG](通用知识/RAG核心知识与面试题.md) 和 [LangChain/LangGraph](通用知识/LangChain与LangGraph深度解析.md)
-4. 📝 刷 [八股文完整答案集](通用知识/八股文完整答案集.md)（69 题）
-5. 🏢 针对目标公司看对应面经
-6. 🔥 最后用 [高频拷打题](通用知识/高频拷打题-牛客热帖.md) 查漏补缺
+4. 🆕 掌握 [Function Calling](通用知识/Function%20Calling与Tool%20Use专题.md) 和 [MCP](通用知识/MCP与工具生态.md)（2025 高频新考点）
+5. 📝 刷 [八股文完整答案集](通用知识/八股文完整答案集.md)（69 题）
+6. 🏢 针对目标公司看对应面经
+7. 🔥 最后用 [高频拷打题](通用知识/高频拷打题-牛客热帖.md) 查漏补缺
 
 ---
 
