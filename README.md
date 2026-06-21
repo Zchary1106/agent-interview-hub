@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/github/license/Zchary1106/agent-interview-hub?style=flat-square)](LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Zchary1106/agent-interview-hub?style=flat-square)](https://github.com/Zchary1106/agent-interview-hub/commits/main)
 
-**300+ 面试题（全部带答案）· 9 家大厂真实面经 · 6 道实操考题 · 16 周完整学习路线图**
+**300+ 面试题（全部带答案）· 14 家公司岗位要求与面经（含 Anthropic 等海外顶级 AI 公司）· 6 道实操考题 · 16 周完整学习路线图**
 
 [📖 在线阅读](https://zchary1106.github.io/agent-interview-hub/) · [⭐ Star 支持](https://github.com/Zchary1106/agent-interview-hub) · [🐛 提交面经](https://github.com/Zchary1106/agent-interview-hub/issues)
 
@@ -122,7 +122,7 @@ AI Agent 工程师知识体系
 
 ---
 
-## 🏢 大厂面经
+## 🏢 国内大厂面经
 
 | 公司 | 岗位要求 | 面试题 | 真实面经 |
 |------|:--------:|:------:|:--------:|
@@ -135,6 +135,18 @@ AI Agent 工程师知识体系
 | [蚂蚁集团](蚂蚁集团/) | ✅ | ✅ | ✅ |
 | [华为](华为/) | ✅ | ✅ | ✅ |
 | [快手](快手/) | ✅ | ✅ | ✅ |
+
+## 🌍 海外顶级 AI 公司面经
+
+| 公司 | 岗位要求 | 面试题 | 真实面经 |
+|------|:--------:|:------:|:--------:|
+| [OpenAI](OpenAI/) | ✅ | ✅ | ✅ |
+| [Anthropic](Anthropic/) 🆕 | ✅ | ✅ | ✅ |
+| [谷歌 (Google DeepMind)](谷歌/) | ✅ | ✅ | — |
+| [微软 (Microsoft)](微软/) | ✅ | ✅ | — |
+| [初创公司](初创公司/) | ✅ | ✅ | — |
+
+> 📖 海外公司综合攻略：[海外顶级AI公司面试攻略-2026](通用知识/海外顶级AI公司面试攻略-2026.md) 🆕
 
 ---
 
