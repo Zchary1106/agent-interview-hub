@@ -166,6 +166,16 @@ cd agent-interview-hub
 # 用任意 Markdown 编辑器打开即可
 ```
 
+### 本地构建静态站
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 scripts/build_site.py
+python3 -m http.server 8000 -d dist
+```
+
+生成结果会输出到 `dist/`。GitHub Pages 通过 `.github/workflows/pages.yml` 在 `main` 分支 push 后自动构建并发布。
+
 ### 推荐阅读顺序
 
 1. 📖 先看 [学习路线图](Agent工程师学习路线图.md)，了解全局
