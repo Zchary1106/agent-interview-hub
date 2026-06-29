@@ -22,6 +22,7 @@
 | 小红书 | [字节 agent开发 1-3面面经 5月](https://www.xiaohongshu.com/search_result/6a0ae15e000000003601db35) | 豆包场景、长会话、多Agent A2A、Memory、RAG、幻觉治理 |
 | 小红书 | [字节跳动AI开发 一面](https://www.xiaohongshu.com/search_result/69a43830000000001600a6a1) | AI 应用开发一面 |
 | 牛客 | [字节 AI 应用岗面试真题](https://www.nowcoder.com/discuss/882634966025175040) | 法律RAG、工具路由、评测、chunking、rerank |
+| 牛客 | [4轮拿下字节Offer！LLM面试题合集](https://www.nowcoder.com/discuss/746382064101908480) | RAG召回排序、Prompt评测、ReAct、LoRA、SFT、Attention、幻觉 |
 | 博客园 | [字节 AI Agent 二面（飞连）面试题与参考解答](https://www.cnblogs.com/tuaran/p/20164742) | Tool Calling、bad case、Memory、RAG优化、Agentic RAG |
 | CSDN | [字节跳动大模型实习面经：从 Agent 记忆到 RAG 优化](https://gitcode.csdn.net/6a2ccdca10ee7a33f27c07bf.html) | 长短期记忆、Query Rewrite、Hybrid Retrieval、RRF、Rerank、HyDE |
 | CSDN | [双非本｜字节跳动飞书团队 RAG 面经](https://devpress.csdn.net/v1/article/detail/151567056) | BGE-M3、Qwen3-Embedding、LoRA、多路召回、父子文档 |
