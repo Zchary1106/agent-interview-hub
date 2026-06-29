@@ -303,6 +303,8 @@ def collect_docs() -> OrderedDict[str, list[Doc]]:
         and path not in seen
         and ".git" not in path.parts
         and "dist" not in path.parts
+        and "agents" not in path.parts
+        and "templates" not in path.parts
     )
     add("📄 其他文档", remaining)
 
