@@ -12,15 +12,17 @@
 | CSDN / 博客园 / 掘金 | 8 | 适合作为 Agent/RAG 高频题和专题归纳来源 |
 | 知乎 | 2 | 适合作为大模型算法实习和海外 AI 面试补充 |
 
+> 注：小红书搜索结果链接依赖登录态和平台签名，公开静态站直链容易失效。因此本文只保留小红书原标题，阅读时请在小红书站内搜索对应标题。
+
 ## P0：优先阅读的真实面经
 
 ### 字节跳动
 
 | 来源 | 标题 | 核心考点 |
 |---|---|---|
-| 小红书 | [字节跳动Agent开发岗二面（贼难）](https://www.xiaohongshu.com/search_result/6a1ab93a0000000035029e6f) | 多Agent、LangGraph、Skills、上下文工程、Agent评估、SFT |
-| 小红书 | [字节 agent开发 1-3面面经 5月](https://www.xiaohongshu.com/search_result/6a0ae15e000000003601db35) | 豆包场景、长会话、多Agent A2A、Memory、RAG、幻觉治理 |
-| 小红书 | [字节跳动AI开发 一面](https://www.xiaohongshu.com/search_result/69a43830000000001600a6a1) | AI 应用开发一面 |
+| 小红书 | 字节跳动Agent开发岗二面（贼难）（小红书站内搜索原标题） | 多Agent、LangGraph、Skills、上下文工程、Agent评估、SFT |
+| 小红书 | 字节 agent开发 1-3面面经 5月（小红书站内搜索原标题） | 豆包场景、长会话、多Agent A2A、Memory、RAG、幻觉治理 |
+| 小红书 | 字节跳动AI开发 一面（小红书站内搜索原标题） | AI 应用开发一面 |
 | 牛客 | [字节 AI 应用岗面试真题](https://www.nowcoder.com/discuss/882634966025175040) | 法律RAG、工具路由、评测、chunking、rerank |
 | 牛客 | [4轮拿下字节Offer！LLM面试题合集](https://www.nowcoder.com/discuss/746382064101908480) | RAG召回排序、Prompt评测、ReAct、LoRA、SFT、Attention、幻觉 |
 | 博客园 | [字节 AI Agent 二面（飞连）面试题与参考解答](https://www.cnblogs.com/tuaran/p/20164742) | Tool Calling、bad case、Memory、RAG优化、Agentic RAG |
@@ -31,16 +33,16 @@
 
 | 来源 | 标题 | 核心考点 |
 |---|---|---|
-| 小红书 | [腾讯ai应用一面面经](https://www.xiaohongshu.com/search_result/6a4216040000000016027829) | 多Agent协作、AgentContext、Run Trace、Skills、上下文注入、风控Agent |
-| 小红书 | [腾讯 Agent二面凉经带答案](https://www.xiaohongshu.com/search_result/6a1c1e5c000000003501dd46) | Agent 二面深挖 |
-| 小红书 | [腾讯 ai 应用开发 一面](https://www.xiaohongshu.com/search_result/69d9d3c8000000001a021c89) | AI 应用开发一面 |
+| 小红书 | 腾讯ai应用一面面经（小红书站内搜索原标题） | 多Agent协作、AgentContext、Run Trace、Skills、上下文注入、风控Agent |
+| 小红书 | 腾讯 Agent二面凉经带答案（小红书站内搜索原标题） | Agent 二面深挖 |
+| 小红书 | 腾讯 ai 应用开发 一面（小红书站内搜索原标题） | AI 应用开发一面 |
 | 牛客 | [大模型、Agent面经总结【04/28】腾讯 / 百度 总结](https://www.nowcoder.com/discuss/878600528970735616) | Agent编排、RAG热更新、失败重试、金融安全、LoRA/DPO |
 
 ### 阿里 / 蚂蚁 / 淘天
 
 | 来源 | 标题 | 核心考点 |
 |---|---|---|
-| 小红书 | [淘天AI Agent一面 问麻了](https://www.xiaohongshu.com/search_result/6a41d72b000000002100a51e) | RAG、BM25、OCR、多Agent State、Checkpoint、MCP、LangGraph、SSE |
+| 小红书 | 淘天AI Agent一面 问麻了（小红书站内搜索原标题） | RAG、BM25、OCR、多Agent State、Checkpoint、MCP、LangGraph、SSE |
 | 牛客 | [阿里淘宝闪购 · Agent 算法工程师 · 27届实习一面](https://www.nowcoder.com/discuss/879393838081597440) | Agent框架选型、HITL、风险控制、Memory、AI Coding |
 | 牛客 | [5月20日，蚂蚁智能体与大模型应用 一面](https://www.nowcoder.com/discuss/888874988554448896) | 幻觉治理、Skill、Spring AI、Claude Code、混合检索 |
 | 牛客 | [Agent 开发面经总结【04/24】阿里巴巴 / 蚂蚁 / 字节跳动 总结](https://www.nowcoder.com/discuss/877151327091027968) | Multi-Agent、RAG、MCP、Function Calling、LangChain/LangGraph |
@@ -50,14 +52,14 @@
 
 | 公司 | 来源 | 标题 | 核心考点 |
 |---|---|---|---|
-| 美团 | 小红书 | [美团 AI Agent开发 一面面经](https://www.xiaohongshu.com/search_result/6a33f73b00000000220157f1) | PDF RAG、RAGAS、MCP、ReAct、Rerank、JSON工具调用 |
-| 美团 | 小红书 | [美团AI-Agent工程师面经，看看难度](https://www.xiaohongshu.com/search_result/6a2197c3000000002101a9e7) | AI-Agent 工程师面经 |
+| 美团 | 小红书 | 美团 AI Agent开发 一面面经（小红书站内搜索原标题） | PDF RAG、RAGAS、MCP、ReAct、Rerank、JSON工具调用 |
+| 美团 | 小红书 | 美团AI-Agent工程师面经，看看难度（小红书站内搜索原标题） | AI-Agent 工程师面经 |
 | 美团 | 知乎 | [Meituan Large Model Algorithm Intern questions](https://www.zhihu.com/en/article/688624199) | RAG项目、指标、Qwen、LoRA、PDF/表格解析 |
-| 快手 | 小红书 | [快手AI Agent开发一面](https://www.xiaohongshu.com/search_result/69b65422000000001a0312bc) | 父子索引、BM25、Rerank、Memory、Prompt注入防御、RAG评测 |
-| 快手 | 小红书 | [快手AI Agent开发实习生面经2026.6.12](https://www.xiaohongshu.com/search_result/6a2bdd4e0000000016026052) | ReAct、多模型API、单/多Agent、RAG优化、算法题 |
-| 百度 | 小红书 | [百度 大模型应用开发 一面面经](https://www.xiaohongshu.com/search_result/69c7613e000000002202790d) | 多模态RAG、表格切片、Memory总结、Function Call、语义缓存 |
+| 快手 | 小红书 | 快手AI Agent开发一面（小红书站内搜索原标题） | 父子索引、BM25、Rerank、Memory、Prompt注入防御、RAG评测 |
+| 快手 | 小红书 | 快手AI Agent开发实习生面经2026.6.12（小红书站内搜索原标题） | ReAct、多模型API、单/多Agent、RAG优化、算法题 |
+| 百度 | 小红书 | 百度 大模型应用开发 一面面经（小红书站内搜索原标题） | 多模态RAG、表格切片、Memory总结、Function Call、语义缓存 |
 | 京东 | 牛客 | [京东 Agent开发 暑期一面](https://www.nowcoder.com/discuss/876932752833077248) | 电商RAG、意图识别、Redis向量检索、HNSW、幻觉兜底 |
-| 小红书 | 小红书 | [小红书 AI Agent开发一面](https://www.xiaohongshu.com/search_result/69d214f10000000023004de5) | 电商Agent、主从架构、Tool调用、RAG索引、Prompt调试 |
+| 小红书 | 小红书 | 小红书 AI Agent开发一面（小红书站内搜索原标题） | 电商Agent、主从架构、Tool调用、RAG索引、Prompt调试 |
 | 理想汽车 | 知乎 | [Li Auto Large Model Algorithm Intern experience](https://www.zhihu.com/en/article/680860432) | RAG、数据集规模、SFT、CoT/ToT、部署、vLLM |
 
 ## P1：专题题库与高频考点
