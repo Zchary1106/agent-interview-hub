@@ -177,6 +177,25 @@ python3 -m http.server 8000 -d dist
 
 生成结果会输出到 `dist/`。GitHub Pages 通过 `.github/workflows/pages.yml` 在 `main` 分支 push 后自动构建并发布。
 
+### 安装面经采集 Agent
+
+本仓库内置 Interview Collector Agent，用于从牛客、小红书、知乎、CSDN、博客园、掘金、GitHub 等公开来源搜索面经，整理成结构化候选，再同步到索引和公司文档。
+
+```bash
+bash agents/interview-collector/install.sh --targets copilot,claude,cursor,generic
+```
+
+支持安装到：
+
+| 平台 | 写入位置 |
+|---|---|
+| GitHub Copilot CLI | `~/.copilot/instructions/interview-collector.instructions.md` |
+| Claude Code | `~/.claude/skills/interview-collector/SKILL.md` |
+| Cursor | `.cursor/rules/interview-collector.mdc` |
+| 通用/国内 Agent | `~/.agent-interview-hub/interview-collector/AGENT.md` |
+
+详见 [Interview Collector Agent 说明](agents/interview-collector/README.md)。
+
 ### 推荐阅读顺序
 
 1. 📖 先看 [学习路线图](Agent工程师学习路线图.md)，了解全局
