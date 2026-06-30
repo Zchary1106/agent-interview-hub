@@ -1,0 +1,43 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile scripts
+        run: |
+          python -m py_compile scripts/build_site.py
+          python -m py_compile scripts/collect_interviews.py
+          python -m py_compile scripts/validate_data.py
+
+      - name: Validate data files
+        run: python scripts/validate_data.py
+
+      - name: Build site (smoke test)
+        run: python scripts/build_site.py
+
+      - name: Check generated site
+        run: |
+          test -f dist/index.html
+          test -f dist/interview-questions.html
+          test -f dist/data/interviews.json
