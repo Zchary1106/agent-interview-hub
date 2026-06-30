@@ -21,6 +21,17 @@
 7. 生成或更新 Markdown 索引和公司面经摘要。
 8. 验证 JSON 和静态站构建。
 
+## 可执行脚本
+
+如果当前仓库包含 `scripts/collect_interviews.py`，优先用脚本跑候选采集：
+
+```bash
+python3 scripts/collect_interviews.py doctor
+python3 scripts/collect_interviews.py search --query "AI Agent 大模型 面经 2026"
+python3 scripts/collect_interviews.py render
+python3 scripts/build_site.py
+```
+
 ## 输出字段
 
 ```json
@@ -39,4 +50,3 @@
   "summary": "一到两句摘要。"
 }
 ```
-

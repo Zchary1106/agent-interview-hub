@@ -2,3 +2,5 @@ dist/
 __pycache__/
 .DS_Store
 .cursor/
+data/interview_candidates.json
+data/interview_candidates.md

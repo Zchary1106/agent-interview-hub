@@ -44,6 +44,58 @@ bash agents/interview-collector/install.sh --targets claude,cursor
 | GitHub 资源 | `gh search repos`, `gh search code` |
 | RSS | Python `feedparser` |
 
+## 完整采集流程
+
+本目录既提供跨平台 Agent prompt，也提供可执行的采集辅助脚本：[`../../scripts/collect_interviews.py`](../../scripts/collect_interviews.py)。
+
+### 1. 检查工具
+
+```bash
+python3 scripts/collect_interviews.py doctor
+```
+
+### 2. 搜索公开来源
+
+```bash
+python3 scripts/collect_interviews.py search \
+  --platform nowcoder \
+  --platform zhihu \
+  --platform blogs \
+  --platform github \
+  --query "AI Agent 大模型 面经 2026" \
+  --output data/interview_candidates.json \
+  --report data/interview_candidates.md
+```
+
+### 3. 搜索小红书（可选）
+
+小红书依赖本机 OpenCLI 和浏览器登录态。脚本不会把不稳定的小红书直链写进公开 Markdown，而是保留 note id 和“站内搜索原标题”。
+
+```bash
+python3 scripts/collect_interviews.py search \
+  --platform xiaohongshu \
+  --query "AI Agent 面经" \
+  --append
+```
+
+### 4. 审核候选
+
+脚本输出两个文件：
+
+| 文件 | 作用 |
+|---|---|
+| `data/interview_candidates.json` | 原始候选，供 Agent / 维护者审核 |
+| `data/interview_candidates.md` | 可读报告，方便快速筛选 |
+
+审核后再把高质量条目整理进 `data/interviews.json`，并更新 `通用知识/最新AI-Agent面经索引.md` 或公司文档。
+
+### 5. 验证站点
+
+```bash
+python3 -m json.tool data/interviews.json
+python3 scripts/build_site.py
+```
+
 ## 输出原则
 
 - `data/interviews.json` 是结构化数据源。
@@ -69,6 +121,15 @@ bash agents/interview-collector/install.sh --targets claude,cursor
 构建静态站验证
 ```
 
+对应脚本命令：
+
+```bash
+python3 scripts/collect_interviews.py doctor
+python3 scripts/collect_interviews.py search --query "AI Agent 大模型 面经 2026"
+python3 scripts/collect_interviews.py render
+python3 scripts/build_site.py
+```
+
 ## 质量标准
 
 | 分数 | 含义 |
@@ -85,4 +146,3 @@ bash agents/interview-collector/install.sh --targets claude,cursor
 - Claude template: [`templates/claude/SKILL.md`](templates/claude/SKILL.md)
 - Cursor template: [`templates/cursor/interview-collector.mdc`](templates/cursor/interview-collector.mdc)
 - Generic template: [`templates/generic/AGENT.md`](templates/generic/AGENT.md)
-
