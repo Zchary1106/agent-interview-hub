@@ -303,10 +303,28 @@ def collect_docs() -> OrderedDict[str, list[Doc]]:
         and path not in seen
         and ".git" not in path.parts
         and "dist" not in path.parts
+        and "agents" not in path.parts
+        and "templates" not in path.parts
+        and not (path.parent == DATA_DIR and path.name.startswith("interview_candidates"))
     )
     add("📄 其他文档", remaining)
 
     return groups
+
+
+def copy_data_assets() -> None:
+    if not DATA_DIR.exists():
+        return
+
+    target = DIST / "data"
+    target.mkdir(parents=True, exist_ok=True)
+    for path in DATA_DIR.iterdir():
+        if path.name.startswith("interview_candidates"):
+            continue
+        if path.is_dir():
+            shutil.copytree(path, target / path.name)
+        else:
+            shutil.copy2(path, target / path.name)
 
 
 def build_md_link_map(docs: list[Doc]) -> dict[str, str]:
@@ -922,8 +940,7 @@ def build() -> None:
     if DIAGRAMS_DIR.exists():
         shutil.copytree(DIAGRAMS_DIR, DIST / "diagrams")
 
-    if DATA_DIR.exists():
-        shutil.copytree(DATA_DIR, DIST / "data")
+    copy_data_assets()
 
 
     (DIST / "index.html").write_text(render_index(groups), encoding="utf-8")
