@@ -26,10 +26,12 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 DIAGRAMS_DIR = ROOT / "diagrams"
+DATA_DIR = ROOT / "data"
 
 ROOT_DOCS = ["Agent工程师学习路线图.md"]
 
 GENERAL_ORDER = [
+    "最新AI-Agent面经索引.md",
     "Agent核心概念与设计模式.md",
     "Agent框架全景.md",
     "LangChain与LangGraph深度解析.md",
@@ -320,7 +322,14 @@ def rewrite_markdown_links(markup: str, doc: Doc, md_link_map: dict[str, str]) -
         url, _, _ = href.partition("#")
         decoded = urllib.parse.unquote(url)
         if not decoded.endswith(".md"):
-            return match.group(0)
+            target = (doc.path.parent / decoded).resolve()
+            try:
+                rel = target.relative_to(ROOT).as_posix()
+            except ValueError:
+                return match.group(0)
+            if not target.exists():
+                return match.group(0)
+            return f'href="{html.escape(rel, quote=True)}"'
 
         target = (doc.path.parent / decoded).resolve()
         try:
@@ -912,6 +921,10 @@ def build() -> None:
 
     if DIAGRAMS_DIR.exists():
         shutil.copytree(DIAGRAMS_DIR, DIST / "diagrams")
+
+    if DATA_DIR.exists():
+        shutil.copytree(DATA_DIR, DIST / "data")
+
 
     (DIST / "index.html").write_text(render_index(groups), encoding="utf-8")
     (DIST / "interview-questions.html").write_text(render_interview_questions(), encoding="utf-8")
