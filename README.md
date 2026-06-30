@@ -196,6 +196,36 @@ bash agents/interview-collector/install.sh --targets copilot,claude,cursor,gener
 
 详见 [Interview Collector Agent 说明](agents/interview-collector/README.md)。
 
+完整采集流程也可以用脚本跑：
+
+```bash
+# 1. 检查本机搜索/读取工具
+python3 scripts/collect_interviews.py doctor
+
+# 2. 搜索公开来源，生成候选 JSON 和 Markdown 报告
+python3 scripts/collect_interviews.py search \
+  --platform nowcoder \
+  --platform zhihu \
+  --platform blogs \
+  --platform github \
+  --query "AI Agent 大模型 面经 2026" \
+  --output data/interview_candidates.json \
+  --report data/interview_candidates.md
+
+# 3. 人工或 Agent 审核候选后，再整理进 data/interviews.json
+python3 -m json.tool data/interviews.json
+python3 scripts/build_site.py
+```
+
+如果本机已配置 OpenCLI，也可以追加小红书搜索：
+
+```bash
+python3 scripts/collect_interviews.py search \
+  --platform xiaohongshu \
+  --query "AI Agent 面经" \
+  --append
+```
+
 ### 推荐阅读顺序
 
 1. 📖 先看 [学习路线图](Agent工程师学习路线图.md)，了解全局
