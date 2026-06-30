@@ -925,6 +925,7 @@ def build() -> None:
     if DATA_DIR.exists():
         shutil.copytree(DATA_DIR, DIST / "data")
 
+
     (DIST / "index.html").write_text(render_index(groups), encoding="utf-8")
     (DIST / "interview-questions.html").write_text(render_interview_questions(), encoding="utf-8")
 
