@@ -17,6 +17,8 @@ import shutil
 import subprocess
 import sys
 import urllib.parse
+import urllib.request
+import xml.etree.ElementTree as ET
 from collections import OrderedDict
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
@@ -271,6 +273,7 @@ def parse_xiaohongshu_output(output: str, raw_query: str) -> list[Candidate]:
     candidates: list[Candidate] = []
     current: dict[str, str] | None = None
     pending_key: str | None = None
+    rank_count = 0
 
     def finish() -> None:
         if not current or not current.get("title"):
@@ -296,6 +299,7 @@ def parse_xiaohongshu_output(output: str, raw_query: str) -> list[Candidate]:
     for raw_line in output.splitlines():
         line = raw_line.rstrip()
         if line.startswith("- rank:"):
+            rank_count += 1
             finish()
             current = {}
             pending_key = None
@@ -318,6 +322,12 @@ def parse_xiaohongshu_output(output: str, raw_query: str) -> list[Candidate]:
             current[key] = value.strip("'\"")
 
     finish()
+    if rank_count and len(candidates) < rank_count:
+        print(
+            f"warning: 小红书解析得到 {len(candidates)}/{rank_count} 条结果，"
+            "OpenCLI 输出格式可能已变化",
+            file=sys.stderr,
+        )
     return candidates
 
 
@@ -368,6 +378,69 @@ def search_github(query: str, limit: int) -> list[Candidate]:
             )
         )
     return candidates
+
+
+def fetch_rss(feed_url: str, timeout: int = 30) -> bytes:
+    request = urllib.request.Request(
+        feed_url,
+        headers={"User-Agent": "agent-interview-hub-collector/1.0"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return response.read()
+    except Exception as exc:  # noqa: BLE001 - surface a uniform RuntimeError
+        raise RuntimeError(f"Failed to fetch RSS feed {feed_url}: {exc}") from exc
+
+
+def _local_tag(tag: str) -> str:
+    return tag.split("}", 1)[-1].lower() if "}" in tag else tag.lower()
+
+
+def parse_rss(content: bytes, feed_url: str) -> list[Candidate]:
+    try:
+        root = ET.fromstring(content)
+    except ET.ParseError as exc:
+        raise RuntimeError(f"Failed to parse RSS feed {feed_url}: {exc}") from exc
+
+    entries = [elem for elem in root.iter() if _local_tag(elem.tag) in {"item", "entry"}]
+    candidates: list[Candidate] = []
+    for entry in entries:
+        title = None
+        link = None
+        published = None
+        summary = ""
+        for child in entry:
+            tag = _local_tag(child.tag)
+            if tag == "title":
+                title = (child.text or "").strip()
+            elif tag == "link":
+                link = child.get("href") or (child.text or "").strip()
+            elif tag in {"pubdate", "published", "updated", "date"} and not published:
+                published = (child.text or "").strip()
+            elif tag in {"description", "summary", "content"} and not summary:
+                cleaned = re.sub(r"<[^>]+>", " ", child.text or "")
+                summary = re.sub(r"\s+", " ", cleaned).strip()[:500]
+        if not title:
+            continue
+        platform = infer_platform_from_url(link or feed_url)
+        if platform not in {"牛客", "知乎", "CSDN", "博客园", "掘金", "GitHub"}:
+            platform = "RSS"
+        candidates.append(
+            make_candidate(
+                platform=platform,
+                title=title,
+                source_url=link,
+                summary=summary or "RSS 订阅条目。",
+                published_at=(published[:10] if published else None),
+                raw_query=feed_url,
+            )
+        )
+    return candidates
+
+
+def search_rss(feed_url: str) -> list[Candidate]:
+    content = fetch_rss(feed_url)
+    return parse_rss(content, feed_url)
 
 
 def expand_queries(platforms: Iterable[str], queries: Iterable[str]) -> list[tuple[str, str]]:
@@ -465,6 +538,33 @@ def command_doctor(_: argparse.Namespace) -> int:
     return 0
 
 
+def _finalize_candidates(
+    args: argparse.Namespace,
+    new_candidates: list[Candidate],
+    errors: list[str],
+    fail_message: str,
+) -> int:
+    if errors and not new_candidates:
+        print(f"completed with {len(errors)} warning(s)", file=sys.stderr)
+        print(fail_message, file=sys.stderr)
+        return 1
+
+    candidates = new_candidates
+    if args.append:
+        candidates = load_existing(args.output) + candidates
+    candidates = dedupe_candidates(candidates)
+    write_candidates(args.output, candidates)
+    if args.report:
+        render_report(args.report, candidates)
+
+    print(f"wrote {len(candidates)} candidates to {args.output}")
+    if args.report:
+        print(f"wrote report to {args.report}")
+    if errors:
+        print(f"completed with {len(errors)} warning(s)", file=sys.stderr)
+    return 0
+
+
 def command_search(args: argparse.Namespace) -> int:
     platforms = args.platform or ["nowcoder", "zhihu", "blogs", "github"]
     queries = args.query or DEFAULT_QUERIES
@@ -484,25 +584,32 @@ def command_search(args: argparse.Namespace) -> int:
             errors.append(str(exc))
             print(f"warning: {exc}", file=sys.stderr)
 
-    if errors and not new_candidates:
-        print(f"completed with {len(errors)} warning(s)", file=sys.stderr)
-        print("no candidates collected because all requested searches failed", file=sys.stderr)
-        return 1
+    return _finalize_candidates(
+        args,
+        new_candidates,
+        errors,
+        "no candidates collected because all requested searches failed",
+    )
 
-    candidates = new_candidates
-    if args.append:
-        candidates = load_existing(args.output) + candidates
-    candidates = dedupe_candidates(candidates)
-    write_candidates(args.output, candidates)
-    if args.report:
-        render_report(args.report, candidates)
 
-    print(f"wrote {len(candidates)} candidates to {args.output}")
-    if args.report:
-        print(f"wrote report to {args.report}")
-    if errors:
-        print(f"completed with {len(errors)} warning(s)", file=sys.stderr)
-    return 0
+def command_rss(args: argparse.Namespace) -> int:
+    new_candidates: list[Candidate] = []
+    errors: list[str] = []
+
+    for feed_url in args.feed:
+        try:
+            print(f"fetching rss: {feed_url}", file=sys.stderr)
+            new_candidates.extend(search_rss(feed_url))
+        except RuntimeError as exc:
+            errors.append(str(exc))
+            print(f"warning: {exc}", file=sys.stderr)
+
+    return _finalize_candidates(
+        args,
+        new_candidates,
+        errors,
+        "no candidates collected because all feeds failed",
+    )
 
 
 def command_render(args: argparse.Namespace) -> int:
@@ -532,6 +639,13 @@ def build_parser() -> argparse.ArgumentParser:
     sub_search.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     sub_search.add_argument("--append", action="store_true", help="Append to existing output before dedupe")
     sub_search.set_defaults(func=command_search)
+
+    sub_rss = sub.add_parser("rss", help="Collect candidates from RSS/Atom feeds")
+    sub_rss.add_argument("--feed", action="append", required=True, help="RSS/Atom feed URL. Repeatable.")
+    sub_rss.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    sub_rss.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    sub_rss.add_argument("--append", action="store_true", help="Append to existing output before dedupe")
+    sub_rss.set_defaults(func=command_rss)
 
     sub_render = sub.add_parser("render", help="Render a Markdown report from candidate JSON")
     sub_render.add_argument("--input", type=Path, default=DEFAULT_OUTPUT)
