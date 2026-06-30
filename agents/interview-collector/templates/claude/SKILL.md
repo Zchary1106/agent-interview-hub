@@ -28,6 +28,8 @@ Use this skill when the user asks to collect, summarize, deduplicate, or update 
 ## Commands
 
 ```bash
+python3 scripts/collect_interviews.py doctor
+python3 scripts/collect_interviews.py search --query "AI Agent 大模型 面经 2026"
 agent-reach doctor --json
 mcporter call 'exa.web_search_exa(query: "AI Agent 大模型 面经 2026", numResults: 10)'
 curl -s "https://r.jina.ai/https://example.com/page"

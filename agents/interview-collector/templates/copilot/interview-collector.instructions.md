@@ -16,6 +16,8 @@ Preferred workflow:
 Useful commands:
 
 ```bash
+python3 scripts/collect_interviews.py doctor
+python3 scripts/collect_interviews.py search --query "AI Agent 大模型 面经 2026"
 agent-reach doctor --json
 mcporter call 'exa.web_search_exa(query: "site:nowcoder.com AI Agent 大模型 面经 2026", numResults: 10)'
 curl -s "https://r.jina.ai/https://example.com/page"
@@ -30,4 +32,3 @@ Quality rules:
 - Keep GitHub repos and blog compilations as reference material, not verified first-hand interviews.
 - For Xiaohongshu, use `source_url: null`, `source_note_id`, and `source_lookup` instead of public Markdown direct links.
 - Validate JSON and site build before proposing changes.
-

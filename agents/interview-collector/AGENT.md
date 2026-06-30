@@ -35,6 +35,7 @@ Do not bypass login walls, paywalls, anti-bot systems, or access controls. Do no
 ```bash
 # Health check
 agent-reach doctor --json
+python3 scripts/collect_interviews.py doctor
 
 # Exa search
 mcporter call 'exa.web_search_exa(query: "site:nowcoder.com AI Agent 大模型 面经 2026", numResults: 10)'
@@ -47,6 +48,16 @@ opencli xiaohongshu search "AI Agent 面经" -f yaml --window background
 
 # GitHub repository search
 gh search repos "AI Agent interview" --limit 10 --json fullName,description,stargazersCount,url,updatedAt
+
+# Repository-native collection flow
+python3 scripts/collect_interviews.py search \
+  --platform nowcoder \
+  --platform zhihu \
+  --platform blogs \
+  --platform github \
+  --query "AI Agent 大模型 面经 2026" \
+  --output data/interview_candidates.json \
+  --report data/interview_candidates.md
 ```
 
 ## Output schema
