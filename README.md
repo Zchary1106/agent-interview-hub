@@ -226,6 +226,32 @@ python3 scripts/collect_interviews.py search \
   --append
 ```
 
+配置 OpenCLI 的最小流程：
+
+```bash
+# 1. 安装 OpenCLI 命令行
+npm install -g @jackwener/opencli
+
+# 2. 安装浏览器桥接扩展
+# 打开 GitHub Releases，下载 opencli-extension-*.zip：
+# https://github.com/jackwener/opencli/releases
+# 解压后在 Chrome 打开 chrome://extensions/
+# 开启“开发者模式” → “加载已解压的扩展程序” → 选择解压目录
+
+# 3. 保持 Chrome 打开，并登录小红书网页版
+opencli doctor
+
+# 4. 验证小红书搜索
+opencli xiaohongshu search "AI Agent 面经" -f yaml --window background
+```
+
+也可以用 Agent-Reach 引导安装：
+
+```bash
+agent-reach install --channels opencli
+agent-reach doctor --json
+```
+
 ### 推荐阅读顺序
 
 1. 📖 先看 [学习路线图](Agent工程师学习路线图.md)，了解全局

@@ -71,6 +71,50 @@ python3 scripts/collect_interviews.py search \
 
 小红书依赖本机 OpenCLI 和浏览器登录态。脚本不会把不稳定的小红书直链写进公开 Markdown，而是保留 note id 和“站内搜索原标题”。
 
+#### 配置 OpenCLI
+
+```bash
+# 安装 OpenCLI 命令行
+npm install -g @jackwener/opencli
+
+# 或让 Agent-Reach 引导安装
+agent-reach install --channels opencli
+```
+
+然后安装浏览器桥接扩展：
+
+1. 打开 <https://github.com/jackwener/opencli/releases>
+2. 下载 `opencli-extension-*.zip`
+3. 解压到本地目录
+4. Chrome 打开 `chrome://extensions/`
+5. 开启“开发者模式”
+6. 点击“加载已解压的扩展程序”，选择解压目录
+7. 保持 Chrome 打开，并登录小红书网页版
+
+验证：
+
+```bash
+opencli doctor
+opencli xiaohongshu search "AI Agent 面经" -f yaml --window background
+```
+
+如果是通过 Agent-Reach 安装的，再额外检查 Agent-Reach 路由：
+
+```bash
+agent-reach doctor --json
+```
+
+如果 `opencli doctor` 显示 `Extension: not connected`，通常需要确认 Chrome 已打开、扩展已启用，必要时重启 daemon：
+
+```bash
+opencli daemon restart
+opencli doctor
+```
+
+建议使用专门的小号登录需要浏览器态的平台，不要使用主账号。
+
+#### 运行小红书搜索
+
 ```bash
 python3 scripts/collect_interviews.py search \
   --platform xiaohongshu \
