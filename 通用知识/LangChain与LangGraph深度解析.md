@@ -134,10 +134,7 @@ graph.add_conditional_edges("agent", router, {
 ```
 
 ### 2. Plan-and-Execute
-```
-用户输入 → Planner 生成计划 → Executor 逐步执行
-  └── 每步执行后 Replanner 评估是否需要调整计划
-```
+![Plan-and-Execute 模式：规划→执行→重规划](../diagrams/plan-and-execute.svg)
 
 ### 3. Reflection（自我反思）
 ```
