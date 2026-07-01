@@ -28,7 +28,7 @@
   <!-- Supervisor node -->
   <rect x="80" y="140" width="170" height="55" rx="10" fill="#f59e0b" filter="url(#shadow)"/>
   <text x="165" y="163" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="bold">👑 Supervisor</text>
-  <text x="165" y="183" text-anchor="middle" fill="#78350f" font-size="10">任务分配 & 结果汇总</text>
+  <text x="165" y="183" text-anchor="middle" fill="#78350f" font-size="10">任务分配 &amp; 结果汇总</text>
 
   <!-- Lines down to workers -->
   <line x1="115" y1="195" x2="80" y2="245" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>

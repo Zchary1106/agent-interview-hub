@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="760" height="470" fill="url(#bg)" rx="12"/>
+  <text x="380" y="38" text-anchor="middle" fill="#f59e0b" font-size="21" font-weight="bold">Agentic Coding 工具分层架构</text>
+  <text x="380" y="58" text-anchor="middle" fill="#94a3b8" font-size="12">从用户界面到安全策略的五层栈</text>
+
+  <rect x="120" y="78" width="520" height="62" rx="12" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="380" y="104" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">用户界面层</text>
+  <text x="380" y="124" text-anchor="middle" fill="#dbeafe" font-size="11">IDE / CLI / Web</text>
+
+  <rect x="120" y="150" width="520" height="62" rx="12" fill="#06b6d4" filter="url(#shadow)"/>
+  <text x="380" y="176" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">上下文引擎</text>
+  <text x="380" y="196" text-anchor="middle" fill="#cffafe" font-size="11">代码索引(AST/向量) · 项目结构 · 依赖图 · Git 历史</text>
+
+  <rect x="120" y="222" width="520" height="62" rx="12" fill="#10b981" filter="url(#shadow)"/>
+  <text x="380" y="248" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">推理与规划层</text>
+  <text x="380" y="268" text-anchor="middle" fill="#d1fae5" font-size="11">LLM 调用(Prompt) · 任务分解与规划 · 工具选择调度</text>
+
+  <rect x="120" y="294" width="520" height="62" rx="12" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="380" y="320" text-anchor="middle" fill="#1e293b" font-size="15" font-weight="bold">工具执行层</text>
+  <text x="380" y="340" text-anchor="middle" fill="#78350f" font-size="11">文件读写 · Shell · 代码搜索 · LSP · Git · 测试运行</text>
+
+  <rect x="120" y="366" width="520" height="62" rx="12" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="380" y="392" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">安全与策略层</text>
+  <text x="380" y="412" text-anchor="middle" fill="#ede9fe" font-size="11">Hooks/权限控制 · 沙箱执行环境 · 审计日志</text>
+</svg>
