@@ -13,13 +13,7 @@
 **定位**：最主流的 LLM 应用开发框架，模块化组件 + 预构建 Agent 架构。
 
 **核心架构（文字描述）**：
-```
-用户输入 → Prompt Template → LLM → Output Parser → 结果
-                ↑                        ↓
-             Memory ←──────────── Agent(ReAct Loop)
-                                       ↓
-                                 Tool 1 / Tool 2 / ...
-```
+![LangChain 核心架构](../diagrams/langchain-core-architecture.svg)
 采用"链式调用"架构。核心是 **LCEL（LangChain Expression Language）**，用管道操作符 `|` 将 Prompt、LLM、OutputParser 等组件串联成 Runnable 链。Agent 模式下，LLM 作为推理引擎进入 ReAct 循环，动态选择 Tool 执行。
 
 **关键 API / 概念**：
