@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/></marker>
+  </defs>
+  <rect width="900" height="360" fill="url(#bg)" rx="12"/>
+  <text x="450" y="38" text-anchor="middle" fill="#f59e0b" font-size="21" font-weight="bold">模型微调技术演进时间线</text>
+  <text x="450" y="58" text-anchor="middle" fill="#94a3b8" font-size="12">从全参微调到 LoRA/QLoRA，再到偏好对齐与推理模型时代</text>
+
+  <line x1="90" y1="190" x2="810" y2="190" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow)"/>
+  <g font-size="12" text-anchor="middle">
+    <rect x="45" y="118" width="120" height="68" rx="12" fill="#3b82f6" filter="url(#shadow)"/>
+    <text x="105" y="145" fill="#f8fafc" font-weight="bold">2018</text>
+    <text x="105" y="164" fill="#dbeafe">全参微调</text>
+    <text x="105" y="213" fill="#94a3b8">GPT-1</text>
+
+    <rect x="205" y="118" width="130" height="68" rx="12" fill="#06b6d4" filter="url(#shadow)"/>
+    <text x="270" y="145" fill="#f8fafc" font-weight="bold">2020</text>
+    <text x="270" y="164" fill="#cffafe">Adapter / Prefix</text>
+    <text x="270" y="213" fill="#94a3b8">GPT-2 时代</text>
+
+    <rect x="375" y="118" width="130" height="68" rx="12" fill="#10b981" filter="url(#shadow)"/>
+    <text x="440" y="145" fill="#f8fafc" font-weight="bold">2022</text>
+    <text x="440" y="164" fill="#d1fae5">LoRA / QLoRA</text>
+    <text x="440" y="213" fill="#94a3b8">LLaMA 时代</text>
+
+    <rect x="545" y="118" width="130" height="68" rx="12" fill="#8b5cf6" filter="url(#shadow)"/>
+    <text x="610" y="145" fill="#f8fafc" font-weight="bold">2023</text>
+    <text x="610" y="164" fill="#ede9fe">DPO / ORPO</text>
+    <text x="610" y="213" fill="#94a3b8">对齐时代</text>
+
+    <rect x="715" y="118" width="130" height="68" rx="12" fill="#ec4899" filter="url(#shadow)"/>
+    <text x="780" y="145" fill="#f8fafc" font-weight="bold">2024-2025</text>
+    <text x="780" y="164" fill="#fce7f3">GRPO / SimPO</text>
+    <text x="780" y="213" fill="#94a3b8">推理时代</text>
+  </g>
+  <text x="450" y="285" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="bold">核心趋势：更少可训练参数、更低显存、更强偏好对齐、更适配推理模型</text>
+</svg>
