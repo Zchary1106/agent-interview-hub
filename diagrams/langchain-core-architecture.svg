@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/></marker>
+  </defs>
+  <rect width="820" height="420" fill="url(#bg)" rx="12"/>
+  <text x="410" y="38" text-anchor="middle" fill="#f59e0b" font-size="21" font-weight="bold">LangChain 核心架构</text>
+  <text x="410" y="58" text-anchor="middle" fill="#94a3b8" font-size="12">LCEL 主链路 + Memory + Agent Tool Loop</text>
+
+  <rect x="45" y="135" width="130" height="56" rx="12" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="110" y="168" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">用户输入</text>
+  <rect x="225" y="135" width="150" height="56" rx="12" fill="#06b6d4" filter="url(#shadow)"/>
+  <text x="300" y="160" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">Prompt Template</text>
+  <text x="300" y="178" text-anchor="middle" fill="#cffafe" font-size="10">变量填充 / 格式约束</text>
+  <rect x="425" y="135" width="130" height="56" rx="12" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="490" y="168" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="bold">LLM</text>
+  <rect x="605" y="135" width="160" height="56" rx="12" fill="#10b981" filter="url(#shadow)"/>
+  <text x="685" y="160" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">Output Parser</text>
+  <text x="685" y="178" text-anchor="middle" fill="#d1fae5" font-size="10">结构化输出</text>
+  <rect x="620" y="230" width="130" height="48" rx="12" fill="#334155" filter="url(#shadow)"/>
+  <text x="685" y="259" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">结果</text>
+
+  <line x1="175" y1="163" x2="223" y2="163" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="375" y1="163" x2="423" y2="163" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="555" y1="163" x2="603" y2="163" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="685" y1="191" x2="685" y2="230" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="225" y="275" width="150" height="54" rx="12" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="300" y="298" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">Memory</text>
+  <text x="300" y="316" text-anchor="middle" fill="#ede9fe" font-size="10">会话/长期记忆</text>
+  <rect x="425" y="275" width="150" height="54" rx="12" fill="#ec4899" filter="url(#shadow)"/>
+  <text x="500" y="298" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">Agent</text>
+  <text x="500" y="316" text-anchor="middle" fill="#fce7f3" font-size="10">ReAct Loop</text>
+  <rect x="625" y="325" width="150" height="54" rx="12" fill="#10b981" filter="url(#shadow)"/>
+  <text x="700" y="348" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">Tools</text>
+  <text x="700" y="366" text-anchor="middle" fill="#d1fae5" font-size="10">Tool 1 / Tool 2 / ...</text>
+
+  <line x1="490" y1="191" x2="500" y2="275" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="500" y1="275" x2="500" y2="191" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <line x1="375" y1="302" x2="423" y2="302" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="575" y1="302" x2="625" y2="345" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="625" y1="365" x2="575" y2="322" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+</svg>
