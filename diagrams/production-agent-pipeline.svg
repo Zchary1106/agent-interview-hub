@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 760" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/></marker>
+  </defs>
+  <rect width="760" height="760" fill="url(#bg)" rx="12"/>
+  <text x="380" y="36" text-anchor="middle" fill="#f59e0b" font-size="20" font-weight="bold">生产级 Agent 应用全链路</text>
+  <text x="380" y="56" text-anchor="middle" fill="#94a3b8" font-size="12">网关 → 输入护栏 → 推理 → 输出护栏 → 可观测性</text>
+
+  <rect x="320" y="72" width="120" height="36" rx="10" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="380" y="95" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">用户请求</text>
+  <line x1="380" y1="108" x2="380" y2="128" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="120" y="130" width="520" height="50" rx="12" fill="#06b6d4" filter="url(#shadow)"/>
+  <text x="380" y="151" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">API Gateway</text>
+  <text x="380" y="169" text-anchor="middle" fill="#cffafe" font-size="11">认证鉴权 → 限流 → 请求日志</text>
+  <line x1="380" y1="180" x2="380" y2="200" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="202" width="600" height="76" rx="12" fill="#1e293b" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+  <text x="380" y="224" text-anchor="middle" fill="#10b981" font-size="13" font-weight="bold">输入过滤层 Input Guard</text>
+  <rect x="110" y="234" width="160" height="34" rx="8" fill="#10b981"/>
+  <text x="190" y="256" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">Prompt 注入检测</text>
+  <rect x="300" y="234" width="160" height="34" rx="8" fill="#10b981"/>
+  <text x="380" y="256" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">敏感信息脱敏</text>
+  <rect x="490" y="234" width="160" height="34" rx="8" fill="#10b981"/>
+  <text x="570" y="256" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">内容合规检查</text>
+  <line x1="380" y1="278" x2="380" y2="298" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="300" width="600" height="118" rx="12" fill="#1e293b" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+  <text x="380" y="322" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="bold">Agent 推理层</text>
+  <rect x="100" y="334" width="130" height="40" rx="8" fill="#f59e0b"/>
+  <text x="165" y="352" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="bold">记忆加载</text>
+  <text x="165" y="367" text-anchor="middle" fill="#78350f" font-size="9">短期+长期</text>
+  <rect x="250" y="334" width="130" height="40" rx="8" fill="#f59e0b"/>
+  <text x="315" y="352" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="bold">LLM 推理</text>
+  <text x="315" y="367" text-anchor="middle" fill="#78350f" font-size="9">思维链</text>
+  <rect x="400" y="334" width="130" height="40" rx="8" fill="#f59e0b"/>
+  <text x="465" y="352" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="bold">工具选择</text>
+  <text x="465" y="367" text-anchor="middle" fill="#78350f" font-size="9">Function Calling</text>
+  <rect x="550" y="334" width="120" height="40" rx="8" fill="#8b5cf6"/>
+  <text x="610" y="352" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">工具沙箱</text>
+  <text x="610" y="367" text-anchor="middle" fill="#ede9fe" font-size="9">隔离执行</text>
+  <line x1="230" y1="354" x2="248" y2="354" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="380" y1="354" x2="398" y2="354" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="530" y1="354" x2="548" y2="354" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="300" y="384" width="160" height="26" rx="8" fill="#334155"/>
+  <text x="380" y="402" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">结果整合生成</text>
+  <line x1="380" y1="418" x2="380" y2="438" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="80" y="440" width="600" height="76" rx="12" fill="#1e293b" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="380" y="462" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="bold">输出过滤层 Output Guard</text>
+  <rect x="110" y="472" width="160" height="34" rx="8" fill="#ef4444"/>
+  <text x="190" y="494" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">幻觉检测</text>
+  <rect x="300" y="472" width="160" height="34" rx="8" fill="#ef4444"/>
+  <text x="380" y="494" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">敏感信息过滤</text>
+  <rect x="490" y="472" width="160" height="34" rx="8" fill="#ef4444"/>
+  <text x="570" y="494" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">合规性审查</text>
+  <line x1="380" y1="516" x2="380" y2="536" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="120" y="538" width="520" height="56" rx="12" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="380" y="562" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">可观测性层</text>
+  <text x="380" y="581" text-anchor="middle" fill="#ede9fe" font-size="11">Tracing(LangSmith) + Metrics(Prometheus) + Logs(ELK)</text>
+  <line x1="380" y1="594" x2="380" y2="614" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="320" y="616" width="120" height="36" rx="10" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="380" y="639" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold">用户响应</text>
+</svg>

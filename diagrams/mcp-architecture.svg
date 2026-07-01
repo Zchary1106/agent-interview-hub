@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="client" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="server" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="480" fill="url(#bg)" rx="12"/>
+
+  <text x="380" y="38" text-anchor="middle" fill="#f59e0b" font-size="22" font-weight="bold">MCP 四大核心组件</text>
+  <text x="380" y="58" text-anchor="middle" fill="#94a3b8" font-size="12">Host / Client / Server / Transport</text>
+
+  <!-- Host container -->
+  <rect x="50" y="80" width="660" height="190" rx="14" fill="#1e293b" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+  <text x="380" y="110" text-anchor="middle" fill="#f59e0b" font-size="17" font-weight="bold">MCP Host（宿主）</text>
+  <text x="380" y="130" text-anchor="middle" fill="#94a3b8" font-size="12">Claude Desktop / IDE / Agent Framework</text>
+
+  <!-- Client 1 -->
+  <rect x="110" y="155" width="200" height="80" rx="12" fill="url(#client)" filter="url(#shadow)"/>
+  <text x="210" y="190" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">MCP Client</text>
+  <text x="210" y="212" text-anchor="middle" fill="#dbeafe" font-size="12">实例 1</text>
+
+  <!-- Client 2 -->
+  <rect x="450" y="155" width="200" height="80" rx="12" fill="url(#client)" filter="url(#shadow)"/>
+  <text x="550" y="190" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">MCP Client</text>
+  <text x="550" y="212" text-anchor="middle" fill="#dbeafe" font-size="12">实例 2</text>
+
+  <!-- Transport lines -->
+  <line x1="210" y1="270" x2="210" y2="370" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="550" y1="270" x2="550" y2="370" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="250" y="300" width="260" height="40" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="380" y="318" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">Transport（传输层）</text>
+  <text x="380" y="333" text-anchor="middle" fill="#94a3b8" font-size="11">stdio / SSE / HTTP</text>
+
+  <!-- Server 1 -->
+  <rect x="110" y="375" width="200" height="80" rx="12" fill="url(#server)" filter="url(#shadow)"/>
+  <text x="210" y="410" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">MCP Server</text>
+  <text x="210" y="432" text-anchor="middle" fill="#d1fae5" font-size="12">GitHub</text>
+
+  <!-- Server 2 -->
+  <rect x="450" y="375" width="200" height="80" rx="12" fill="url(#server)" filter="url(#shadow)"/>
+  <text x="550" y="410" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">MCP Server</text>
+  <text x="550" y="432" text-anchor="middle" fill="#d1fae5" font-size="12">Database</text>
+</svg>

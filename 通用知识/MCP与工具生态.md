@@ -10,24 +10,7 @@ MCP（Model Context Protocol）是由 Anthropic 于 2024 年底开源的一套**
 
 在 MCP 出现之前，每个 AI 应用都需要为每个外部服务编写定制化的集成代码，形成 M×N 的集成困境：
 
-```
-传统模式（M×N 集成）：
-┌──────────┐     ┌──────────────┐
-│ App 1    │────→│ GitHub API   │  每个 App 都要写
-│ App 2    │────→│ Slack API    │  每个 API 的
-│ App 3    │────→│ Database     │  集成代码
-│ ...      │────→│ ...          │
-└──────────┘     └──────────────┘
-  M 个应用   ×   N 个服务 = M×N 集成
-
-MCP 模式（M+N 集成）：
-┌──────────┐     ┌─────┐     ┌──────────────┐
-│ App 1    │────→│     │────→│ GitHub Server│
-│ App 2    │────→│ MCP │────→│ Slack Server │
-│ App 3    │────→│     │────→│ DB Server    │
-└──────────┘     └─────┘     └──────────────┘
-  M 个应用   +   N 个服务 = M+N 集成
-```
+![MCP 集成复杂度对比](../diagrams/mcp-integration-comparison.svg)
 
 类比：MCP 之于 AI 工具调用，就像 USB 之于外设连接——一个标准接口解决所有设备的兼容问题。
 
@@ -43,23 +26,7 @@ MCP 模式（M+N 集成）：
 
 ### 四大核心组件
 
-```
-┌─────────────────────────────────────────────────┐
-│                   MCP Host                       │
-│  (Claude Desktop / IDE / Agent Framework)        │
-│                                                  │
-│  ┌──────────────┐    ┌──────────────┐           │
-│  │  MCP Client  │    │  MCP Client  │           │
-│  │  (实例 1)    │    │  (实例 2)    │           │
-│  └──────┬───────┘    └──────┬───────┘           │
-└─────────┼───────────────────┼───────────────────┘
-          │ Transport         │ Transport
-          │ (stdio/SSE/HTTP)  │
-    ┌─────┴──────┐     ┌─────┴──────┐
-    │ MCP Server │     │ MCP Server │
-    │ (GitHub)   │     │ (Database) │
-    └────────────┘     └────────────┘
-```
+![MCP 四大核心组件：Host / Client / Server / Transport](../diagrams/mcp-architecture.svg)
 
 **1. Host（宿主）**
 - 运行 LLM 的应用程序，如 Claude Desktop、Cursor、自定义 Agent 框架
