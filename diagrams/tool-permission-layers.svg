@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="sans-serif">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/></marker>
+  </defs>
+  <rect width="760" height="420" fill="url(#bg)" rx="12"/>
+  <text x="380" y="40" text-anchor="middle" fill="#f59e0b" font-size="21" font-weight="bold">工具调用权限控制 5 层</text>
+  <text x="380" y="60" text-anchor="middle" fill="#94a3b8" font-size="12">从用户认证到审计日志的纵深防御</text>
+
+  <rect x="180" y="86" width="400" height="54" rx="12" fill="#3b82f6" filter="url(#shadow)"/>
+  <text x="232" y="113" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">L1</text>
+  <text x="410" y="111" text-anchor="middle" fill="#f8fafc" font-size="13">用户认证</text>
+  <text x="410" y="128" text-anchor="middle" fill="#dbeafe" font-size="11">确认用户身份</text>
+
+  <rect x="180" y="150" width="400" height="54" rx="12" fill="#06b6d4" filter="url(#shadow)"/>
+  <text x="232" y="177" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">L2</text>
+  <text x="410" y="175" text-anchor="middle" fill="#f8fafc" font-size="13">工具授权</text>
+  <text x="410" y="192" text-anchor="middle" fill="#cffafe" font-size="11">用户可用哪些工具</text>
+
+  <rect x="180" y="214" width="400" height="54" rx="12" fill="#10b981" filter="url(#shadow)"/>
+  <text x="232" y="241" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">L3</text>
+  <text x="410" y="239" text-anchor="middle" fill="#f8fafc" font-size="13">参数约束</text>
+  <text x="410" y="256" text-anchor="middle" fill="#d1fae5" font-size="11">工具可操作哪些资源</text>
+
+  <rect x="180" y="278" width="400" height="54" rx="12" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="232" y="305" text-anchor="middle" fill="#1e293b" font-size="14" font-weight="bold">L4</text>
+  <text x="410" y="303" text-anchor="middle" fill="#1e293b" font-size="13">速率限制</text>
+  <text x="410" y="320" text-anchor="middle" fill="#78350f" font-size="11">单位时间调用频率</text>
+
+  <rect x="180" y="342" width="400" height="54" rx="12" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="232" y="369" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">L5</text>
+  <text x="410" y="367" text-anchor="middle" fill="#f8fafc" font-size="13">审计日志</text>
+  <text x="410" y="384" text-anchor="middle" fill="#ede9fe" font-size="11">所有调用可追溯</text>
+
+  <line x1="120" y1="100" x2="120" y2="386" stroke="#475569" stroke-width="2"/>
+  <text x="100" y="250" text-anchor="middle" fill="#94a3b8" font-size="12" transform="rotate(-90 100 250)">纵深防御逐层收紧</text>
+</svg>
