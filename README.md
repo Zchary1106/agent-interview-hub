@@ -74,43 +74,46 @@ AI Agent 工程师知识体系
 
 | # | 文档 | 简介 |
 |---|------|------|
-| 1 | [Agent 核心概念与设计模式](通用知识/Agent核心概念与设计模式.md) | ReAct、Plan-and-Execute、Multi-Agent 等核心范式 |
-| 2 | [Agent 框架全景](通用知识/Agent框架全景.md) | LangChain、AutoGen、CrewAI 等主流框架横评 |
-| 3 | [LangChain 与 LangGraph 深度解析](通用知识/LangChain与LangGraph深度解析.md) | 链式调用到图编排的演进与实战 |
-| 4 | [RAG 核心知识与面试题](通用知识/RAG核心知识与面试题.md) | 检索增强生成全链路：分块、检索、重排、生成 |
-| 5 | [Agentic RAG 与 GraphRAG 深度解析](通用知识/Agentic%20RAG与GraphRAG深度解析.md) | 从朴素 RAG 到 Agent 驱动的智能检索 |
-| 6 | [Context Engineering 上下文工程](通用知识/Context%20Engineering上下文工程.md) | 上下文窗口管理、压缩与优化策略（含 Anthropic 最新实践）🔄 |
-| 7 | [Agent 安全与评估体系](通用知识/Agent安全与评估体系.md) | Prompt 注入防御、幻觉检测、评估框架 |
-| 8 | [大模型推理优化与部署](通用知识/大模型推理优化与部署.md) | 量化、蒸馏、KV Cache、vLLM 等推理加速 |
-| 9 | [Function Calling 与 Tool Use 专题](通用知识/Function%20Calling与Tool%20Use专题.md) | 三大厂商实现对比、调用模式、安全防御 🆕 |
-| 10 | [MCP 与工具生态](通用知识/MCP与工具生态.md) | Model Context Protocol 架构、开发实战、企业应用 🆕 |
-| 11 | [Agentic Coding 与 AI 编程工具](通用知识/Agentic%20Coding与AI编程工具.md) | Claude Code / Cursor / Copilot 对比、Hooks、人机协作 🆕 |
+| 1 | [12 周 Agent 工程师进阶路线](通用知识/12周Agent工程师进阶路线.md) | 以周为单位交付 RAG、Agent、MCP、生产化作品集 |
+| 2 | [Agent 核心概念与设计模式](通用知识/Agent核心概念与设计模式.md) | ReAct、Plan-and-Execute、Multi-Agent 等核心范式 |
+| 3 | [Agent 框架全景](通用知识/Agent框架全景.md) | LangChain、AutoGen、CrewAI 等主流框架横评 |
+| 4 | [LangChain 与 LangGraph 深度解析](通用知识/LangChain与LangGraph深度解析.md) | 链式调用到图编排的演进与实战 |
+| 5 | [RAG 核心知识与面试题](通用知识/RAG核心知识与面试题.md) | 检索增强生成全链路：分块、检索、重排、生成 |
+| 6 | [Agentic RAG 与 GraphRAG 深度解析](通用知识/Agentic%20RAG与GraphRAG深度解析.md) | 从朴素 RAG 到 Agent 驱动的智能检索 |
+| 7 | [Context Engineering 上下文工程](通用知识/Context%20Engineering上下文工程.md) | 上下文窗口管理、压缩与优化策略（含 Anthropic 最新实践）🔄 |
+| 8 | [Agent 安全与评估体系](通用知识/Agent安全与评估体系.md) | Prompt 注入防御、幻觉检测、评估框架 |
+| 9 | [大模型推理优化与部署](通用知识/大模型推理优化与部署.md) | 量化、蒸馏、KV Cache、vLLM 等推理加速 |
+| 10 | [Function Calling 与 Tool Use 专题](通用知识/Function%20Calling与Tool%20Use专题.md) | 三大厂商实现对比、调用模式、安全防御 🆕 |
+| 11 | [MCP 与工具生态](通用知识/MCP与工具生态.md) | Model Context Protocol 架构、开发实战、企业应用 🆕 |
+| 12 | [Agentic Coding 与 AI 编程工具](通用知识/Agentic%20Coding与AI编程工具.md) | Claude Code / Cursor / Copilot 对比、Hooks、人机协作 🆕 |
 
 ### 📝 面试题库
 
 | # | 文档 | 简介 |
 |---|------|------|
-| 12 | [最新 AI Agent 面经索引（2026）](通用知识/最新AI-Agent面经索引.md) | 牛客、小红书、知乎、CSDN、GitHub 等公开来源的最新面经入口 |
-| 13 | [核心概念详解与参考答案](通用知识/核心概念详解与参考答案.md) | 高频概念题精讲与标准答案 |
-| 14 | [八股文完整答案集](通用知识/八股文完整答案集.md) | 69 道八股题，全部附详细解答 |
-| 15 | [八股文题库 - DataWhale 开源](通用知识/八股文题库-DataWhale开源.md) | DataWhale 社区精选题库 |
-| 16 | [高频拷打题 - 牛客热帖](通用知识/高频拷打题-牛客热帖.md) | 牛客论坛高赞面试拷打合集 |
-| 17 | [技术知识点汇总](通用知识/技术知识点汇总.md) | 速查手册：关键知识点一网打尽 |
-| 18 | [其他公司面经 - 快手携程等](通用知识/其他公司面经-快手携程等.md) | 快手、携程等公司面经补充 |
+| 13 | [最新 AI Agent 面经索引（2026）](通用知识/最新AI-Agent面经索引.md) | 牛客、小红书、知乎、CSDN、GitHub 等公开来源的最新面经入口 |
+| 14 | [核心概念详解与参考答案](通用知识/核心概念详解与参考答案.md) | 高频概念题精讲与标准答案 |
+| 15 | [八股文完整答案集](通用知识/八股文完整答案集.md) | 69 道八股题，全部附详细解答 |
+| 16 | [八股文题库 - DataWhale 开源](通用知识/八股文题库-DataWhale开源.md) | DataWhale 社区精选题库 |
+| 17 | [高频拷打题 - 牛客热帖](通用知识/高频拷打题-牛客热帖.md) | 牛客论坛高赞面试拷打合集 |
+| 18 | [技术知识点汇总](通用知识/技术知识点汇总.md) | 速查手册：关键知识点一网打尽 |
+| 19 | [其他公司面经 - 快手携程等](通用知识/其他公司面经-快手携程等.md) | 快手、携程等公司面经补充 |
 
 ### 🌐 进阶面试题
 
 | # | 文档 | 简介 |
 |---|------|------|
-| 19 | [Agent 核心概念面试题 - 进阶篇](通用知识/Agent核心概念面试题-进阶篇.md) | 核心概念高频问答进阶版 |
-| 20 | [系统设计面试题 - 进阶篇](通用知识/系统设计面试题-进阶篇.md) | 系统设计题与参考答案进阶版 |
-| 21 | [AI 协作与工程化面试题 - 进阶篇](通用知识/AI协作与工程化面试题-进阶篇.md) | AI 协作工程化问答进阶版 |
+| 20 | [Agent 核心概念面试题 - 进阶篇](通用知识/Agent核心概念面试题-进阶篇.md) | 核心概念高频问答进阶版 |
+| 21 | [系统设计面试题 - 进阶篇](通用知识/系统设计面试题-进阶篇.md) | 系统设计题与参考答案进阶版 |
+| 22 | [AI 协作与工程化面试题 - 进阶篇](通用知识/AI协作与工程化面试题-进阶篇.md) | AI 协作工程化问答进阶版 |
 
 ---
 
 ## 🎯 实操考题（限时挑战）
 
 > 来自 [agent-interview-prep](https://github.com/Zchary1106/agent-interview-prep) 项目，模拟真实面试场景的限时编程题
+
+> 🗺️ 使用 Obsidian 的同学可以打开 [Agent 工程师知识地图](Agent工程师知识地图.canvas)，从长期路线、核心知识、项目实战和公司面经四条线复习。
 
 | # | 题目 | 难度 | 限时 |
 |---|------|:----:|:----:|
