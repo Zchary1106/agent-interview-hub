@@ -1,0 +1,169 @@
+{
+  "nodes": [
+    {
+      "id": "center",
+      "type": "text",
+      "text": "# AI Agent 工程师知识地图\n面试冲刺 + 项目实战 + 长期成长",
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 120,
+      "color": "1"
+    },
+    {
+      "id": "roadmap",
+      "type": "file",
+      "file": "通用知识/12周Agent工程师进阶路线.md",
+      "x": -520,
+      "y": -260,
+      "width": 340,
+      "height": 120,
+      "color": "2"
+    },
+    {
+      "id": "core",
+      "type": "text",
+      "text": "## 核心知识\n- Agent 设计模式\n- Agent 框架\n- LangChain / LangGraph\n- RAG / Agentic RAG\n- Context Engineering\n- MCP / Tool Use",
+      "x": -520,
+      "y": -60,
+      "width": 340,
+      "height": 220,
+      "color": "3"
+    },
+    {
+      "id": "interviews",
+      "type": "file",
+      "file": "通用知识/最新AI-Agent面经索引.md",
+      "x": -520,
+      "y": 240,
+      "width": 340,
+      "height": 120,
+      "color": "4"
+    },
+    {
+      "id": "projects",
+      "type": "text",
+      "text": "## 项目实战\n1. RAG 知识问答系统\n2. 多 Agent 协作系统\n3. 生产级 Agent 应用\n\n每个项目都有：验收标准 / 评分表 / GitHub 参考",
+      "x": 500,
+      "y": -260,
+      "width": 360,
+      "height": 220,
+      "color": "5"
+    },
+    {
+      "id": "rag-project",
+      "type": "file",
+      "file": "项目实战/01-RAG知识问答系统.md",
+      "x": 520,
+      "y": 40,
+      "width": 320,
+      "height": 100,
+      "color": "3"
+    },
+    {
+      "id": "multi-agent-project",
+      "type": "file",
+      "file": "项目实战/02-多Agent协作系统.md",
+      "x": 520,
+      "y": 190,
+      "width": 320,
+      "height": 100,
+      "color": "2"
+    },
+    {
+      "id": "production-project",
+      "type": "file",
+      "file": "项目实战/03-生产级Agent应用.md",
+      "x": 520,
+      "y": 340,
+      "width": 320,
+      "height": 100,
+      "color": "1"
+    },
+    {
+      "id": "companies",
+      "type": "text",
+      "text": "## 公司面经\n字节 / 阿里 / 腾讯 / 百度 / 美团 / 小红书 / 快手 / 蚂蚁 / 华为 / 海外 AI 公司",
+      "x": -20,
+      "y": 280,
+      "width": 380,
+      "height": 150,
+      "color": "6"
+    },
+    {
+      "id": "practice",
+      "type": "text",
+      "text": "## 实操考题\n限时构建：文档问答 / 多 Agent / ReAct / 全栈开发 / 调试 / Code Review Agent",
+      "x": 0,
+      "y": -300,
+      "width": 380,
+      "height": 150,
+      "color": "4"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "center",
+      "fromSide": "left",
+      "toNode": "roadmap",
+      "toSide": "right"
+    },
+    {
+      "id": "e2",
+      "fromNode": "center",
+      "fromSide": "left",
+      "toNode": "core",
+      "toSide": "right"
+    },
+    {
+      "id": "e3",
+      "fromNode": "center",
+      "fromSide": "left",
+      "toNode": "interviews",
+      "toSide": "right"
+    },
+    {
+      "id": "e4",
+      "fromNode": "center",
+      "fromSide": "right",
+      "toNode": "projects",
+      "toSide": "left"
+    },
+    {
+      "id": "e5",
+      "fromNode": "projects",
+      "fromSide": "bottom",
+      "toNode": "rag-project",
+      "toSide": "top"
+    },
+    {
+      "id": "e6",
+      "fromNode": "projects",
+      "fromSide": "bottom",
+      "toNode": "multi-agent-project",
+      "toSide": "top"
+    },
+    {
+      "id": "e7",
+      "fromNode": "projects",
+      "fromSide": "bottom",
+      "toNode": "production-project",
+      "toSide": "top"
+    },
+    {
+      "id": "e8",
+      "fromNode": "center",
+      "fromSide": "bottom",
+      "toNode": "companies",
+      "toSide": "top"
+    },
+    {
+      "id": "e9",
+      "fromNode": "center",
+      "fromSide": "top",
+      "toNode": "practice",
+      "toSide": "bottom"
+    }
+  ]
+}
