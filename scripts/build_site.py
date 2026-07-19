@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 DIAGRAMS_DIR = ROOT / "diagrams"
 DATA_DIR = ROOT / "data"
+INTERVIEW_ALGORITHMS_DIR = ROOT / "面试算法题"
 
 ROOT_DOCS = ["Agent工程师学习路线图.md"]
 
@@ -359,6 +360,16 @@ def copy_data_assets() -> None:
             shutil.copy2(path, target / path.name)
 
 
+def copy_interview_algorithm_page() -> None:
+    if not INTERVIEW_ALGORITHMS_DIR.is_dir():
+        return
+
+    shutil.copytree(
+        INTERVIEW_ALGORITHMS_DIR,
+        DIST / INTERVIEW_ALGORITHMS_DIR.name,
+    )
+
+
 def build_md_link_map(docs: list[Doc]) -> dict[str, str]:
     return {doc.rel_path: doc.section_id for doc in docs}
 
@@ -448,6 +459,7 @@ def render_sidebar(groups: OrderedDict[str, list[Doc]]) -> str:
         <div class="nav-section">
           <button class="nav-item nav-item-strong active" type="button" data-target="welcome">首页</button>
           <a class="nav-item nav-link" href="interview-questions.html">交互式面试题库</a>
+          <a class="nav-item nav-link" href="面试算法题/">面试算法题图谱</a>
           <button class="nav-item" type="button" data-target="diagrams">架构图</button>
         </div>
         """
@@ -617,6 +629,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
             <div class="quick-links">
               <button type="button" data-target="diagrams">查看架构图</button>
               <a href="interview-questions.html">打开交互式题库（{question_company_count} 类）</a>
+              <a href="面试算法题/">打开面试算法题图谱</a>
               <a href="https://github.com/Zchary1106/agent-interview-hub" target="_blank" rel="noopener">GitHub 仓库</a>
             </div>
           </div>
@@ -973,6 +986,7 @@ def build() -> None:
         shutil.copytree(DIAGRAMS_DIR, DIST / "diagrams")
 
     copy_data_assets()
+    copy_interview_algorithm_page()
 
 
     (DIST / "index.html").write_text(render_index(groups), encoding="utf-8")
