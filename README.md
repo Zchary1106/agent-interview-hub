@@ -11,7 +11,7 @@
 
 **300+ 面试题（全部带答案）· 14 家公司岗位要求与面经（含 Anthropic 等海外顶级 AI 公司）· 6 道实操考题 · 16 周完整学习路线图**
 
-[📖 在线阅读](https://zchary1106.github.io/agent-interview-hub/) · [⭐ Star 支持](https://github.com/Zchary1106/agent-interview-hub) · [🐛 提交面经](https://github.com/Zchary1106/agent-interview-hub/issues)
+[📖 在线阅读](https://zchary1106.github.io/agent-interview-hub/index.html) · [⭐ Star 支持](https://github.com/Zchary1106/agent-interview-hub) · [🐛 提交面经](https://github.com/Zchary1106/agent-interview-hub/issues)
 
 </div>
 
@@ -158,7 +158,7 @@ AI Agent 工程师知识体系
 
 访问 GitHub Pages 站点，移动端友好：
 
-👉 **https://zchary1106.github.io/agent-interview-hub/**
+👉 **https://zchary1106.github.io/agent-interview-hub/index.html**
 
 ### 本地阅读
 
