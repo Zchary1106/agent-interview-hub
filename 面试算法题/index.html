@@ -411,8 +411,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 12px;
       margin-top: auto;
+    }
+
+    .card-actions {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 10px;
     }
 
     .tags {
@@ -446,6 +454,18 @@
       border-color: rgba(105, 230, 214, 0.24);
       color: var(--cyan);
       background: rgba(105, 230, 214, 0.07);
+    }
+
+    .source-link {
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .source-link:hover {
+      color: white;
+      text-decoration: underline;
     }
 
     .code-toggle {
@@ -745,7 +765,7 @@
         <span class="brand-mark" aria-hidden="true">⌁</span>
         <span>Agent Interview Map</span>
       </div>
-      <span class="date-badge">更新至 2026-07-18</span>
+      <span class="date-badge">更新至 2026-07-27</span>
     </nav>
 
     <section class="hero">
@@ -765,15 +785,15 @@
 
     <section class="stats" aria-label="数据概览">
       <article class="stat">
-        <strong class="stat-value">11</strong>
+        <strong class="stat-value">15</strong>
         <span class="stat-label">可回溯公开面经</span>
       </article>
       <article class="stat">
-        <strong class="stat-value">5</strong>
+        <strong class="stat-value">6</strong>
         <span class="stat-label">互联网公司组</span>
       </article>
       <article class="stat">
-        <strong class="stat-value">10</strong>
+        <strong class="stat-value">14</strong>
         <span class="stat-label">明确算法 / 编程题</span>
       </article>
       <article class="stat">
@@ -803,23 +823,27 @@
     <section class="insights" aria-label="趋势与准备建议">
       <article class="insight-panel">
         <h3>题型分布</h3>
-        <p>按 10 道明确算法题归类；同一道题只计入一个主类别。</p>
+        <p>按 14 道明确算法题归类；同一道题只计入一个主类别。</p>
         <div class="bars">
           <div>
-            <div class="bar-head"><span>DP / 贪心 / 回溯</span><span>4</span></div>
+            <div class="bar-head"><span>DP / 贪心 / 回溯</span><span>6</span></div>
             <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
           </div>
           <div>
             <div class="bar-head"><span>网格 / 图搜索</span><span>3</span></div>
-            <div class="bar-track"><div class="bar-fill" style="width: 75%"></div></div>
-          </div>
-          <div>
-            <div class="bar-head"><span>链表</span><span>2</span></div>
             <div class="bar-track"><div class="bar-fill" style="width: 50%"></div></div>
           </div>
           <div>
+            <div class="bar-head"><span>链表</span><span>3</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 50%"></div></div>
+          </div>
+          <div>
+            <div class="bar-head"><span>堆 / 选择</span><span>1</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 17%"></div></div>
+          </div>
+          <div>
             <div class="bar-head"><span>数值计算</span><span>1</span></div>
-            <div class="bar-track"><div class="bar-fill" style="width: 25%"></div></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 17%"></div></div>
           </div>
         </div>
       </article>
@@ -830,7 +854,7 @@
         <ol class="prep-list">
           <li class="prep-item">
             <span class="prep-index">01</span>
-            <div><strong>必刷原题</strong><span>LC 19、23、40、152、200、695，以及 LC 376 的恢复序列变形。</span></div>
+            <div><strong>必刷原题</strong><span>LC 19、23、40、46、152、200、206、215、221、695，以及 LC 376 的恢复序列变形。</span></div>
           </li>
           <li class="prep-item">
             <span class="prep-index">02</span>
@@ -855,7 +879,7 @@
     </aside>
 
     <footer>
-      <span>整理日期：2026-07-18</span>
+      <span>整理日期：2026-07-27</span>
       <span>Java 解法用于面试复习，默认隐藏并按需展开</span>
     </footer>
   </main>
@@ -893,6 +917,17 @@
         tags: ["动态规划", "数组", "LC 152"]
       },
       {
+        id: "maximal-square",
+        company: "阿里",
+        date: "2025-11-03",
+        role: "淘天 · Agent",
+        match: "Agent 直岗",
+        question: "最大正方形",
+        detail: "原帖三选二中的一道。DP 递推每个右下角的最大边长；LC 200 已由现有条目覆盖，对应 LeetCode 221。",
+        tags: ["动态规划", "矩阵", "LC 221"],
+        sourceUrl: "https://www.nowcoder.com/feed/main/detail/485fbcf14893475a8dbb137064ea34f5"
+      },
+      {
         id: "agent-hitl",
         company: "阿里",
         date: "2026-03-25",
@@ -903,6 +938,29 @@
         tags: ["HITL", "权限控制", "现场编码"]
       },
       {
+        id: "kth-largest",
+        company: "字节",
+        date: "2026-05-06",
+        role: "大模型应用算法 · 27 届实习",
+        match: "相邻 AI 岗",
+        question: "第 K 大元素",
+        detail: "原帖仅披露题名。可用大小为 k 的小顶堆或快速选择；代码采用同考点代表题 LeetCode 215。",
+        tags: ["堆/选择", "快速选择", "LC 215 代表题"],
+        representative: true,
+        sourceUrl: "https://www.nowcoder.com/feed/main/detail/c40d154b3b3847269da3c9fd9e381a72"
+      },
+      {
+        id: "reverse-linked-list",
+        company: "字节",
+        date: "2026-05-03",
+        role: "AI 应用开发 · 暑期实习一面",
+        match: "相邻 AI 岗",
+        question: "反转链表",
+        detail: "经典链表指针题，考察原地迭代、递归写法与空链表边界；对应 LeetCode 206。",
+        tags: ["链表", "原地反转", "LC 206"],
+        sourceUrl: "https://www.nowcoder.com/feed/main/detail/acac7511340840a98a74f478d6b38f87?sourceSSR=dynamic"
+      },
+      {
         id: "monotonic-stack",
         company: "字节",
         date: "2026-04-23",
@@ -910,7 +968,8 @@
         match: "相邻 AI 岗",
         question: "贪心 + 单调栈",
         detail: "完整题面未披露。代码采用同考点代表题“移掉 K 位数字”，不作为原题还原。",
-        tags: ["贪心", "单调栈", "代表题"]
+        tags: ["贪心", "单调栈", "代表题"],
+        representative: true
       },
       {
         id: "combination-sum-ii",
@@ -971,6 +1030,17 @@
         question: "岛屿最大面积",
         detail: "用 DFS 或 BFS 统计每个连通分量面积，维护最大值；对应 LeetCode 695。",
         tags: ["网格", "DFS/BFS", "LC 695"]
+      },
+      {
+        id: "permutations",
+        company: "快手",
+        date: "2026-03-21",
+        role: "AI Agent 开发 · 二面",
+        match: "Agent 直岗",
+        question: "全排列",
+        detail: "回溯时维护路径与已选状态，注意复制答案、撤销选择和重复元素变形；对应 LeetCode 46。",
+        tags: ["回溯", "DFS", "LC 46"],
+        sourceUrl: "https://www.nowcoder.com/feed/main/detail/f78abe9951f74a8381a17d3876576213"
       }
     ];
 
@@ -1075,6 +1145,35 @@ class Solution {
     }
 }`,
 
+      "maximal-square": String.raw`class Solution {
+    public int maximalSquare(char[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+
+        int columns = matrix[0].length;
+        int[] dp = new int[columns + 1];
+        int largestSide = 0;
+
+        for (char[] row : matrix) {
+            int previousDiagonal = 0;
+            for (int column = 1; column <= columns; column++) {
+                int upper = dp[column];
+                if (row[column - 1] == '1') {
+                    dp[column] = Math.min(
+                            Math.min(dp[column], dp[column - 1]),
+                            previousDiagonal) + 1;
+                    largestSide = Math.max(largestSide, dp[column]);
+                } else {
+                    dp[column] = 0;
+                }
+                previousDiagonal = upper;
+            }
+        }
+        return largestSide * largestSide;
+    }
+}`,
+
       "agent-hitl": String.raw`import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -1132,6 +1231,79 @@ class AgentToolExecutor {
     }
 }`,
 
+      "kth-largest": String.raw`import java.util.concurrent.ThreadLocalRandom;
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || k <= 0 || k > nums.length) {
+            throw new IllegalArgumentException("Invalid nums or k");
+        }
+
+        int targetIndex = nums.length - k;
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int pivotIndex = partition(nums, left, right);
+            if (pivotIndex == targetIndex) {
+                return nums[pivotIndex];
+            }
+            if (pivotIndex < targetIndex) {
+                left = pivotIndex + 1;
+            } else {
+                right = pivotIndex - 1;
+            }
+        }
+        throw new IllegalStateException("Quickselect did not find the target");
+    }
+
+    private int partition(int[] nums, int left, int right) {
+        int randomIndex = ThreadLocalRandom.current().nextInt(left, right + 1);
+        swap(nums, randomIndex, right);
+        int pivot = nums[right];
+        int nextSmaller = left;
+
+        for (int index = left; index < right; index++) {
+            if (nums[index] <= pivot) {
+                swap(nums, nextSmaller, index);
+                nextSmaller++;
+            }
+        }
+        swap(nums, nextSmaller, right);
+        return nextSmaller;
+    }
+
+    private void swap(int[] nums, int first, int second) {
+        int temporary = nums[first];
+        nums[first] = nums[second];
+        nums[second] = temporary;
+    }
+}`,
+
+      "reverse-linked-list": String.raw`class Solution {
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public ListNode reverseList(ListNode head) {
+        ListNode previous = null;
+        ListNode current = head;
+
+        while (current != null) {
+            ListNode next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        return previous;
+    }
+}`,
+
       "monotonic-stack": String.raw`import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -1165,6 +1337,43 @@ class Solution {
             answer.append(digit);
         }
         return answer.length() == 0 ? "0" : answer.toString();
+    }
+}`,
+
+      "permutations": String.raw`import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        if (nums == null) {
+            throw new IllegalArgumentException("nums must not be null");
+        }
+
+        List<List<Integer>> answer = new ArrayList<>();
+        backtrack(nums, new boolean[nums.length], new ArrayList<>(), answer);
+        return answer;
+    }
+
+    private void backtrack(
+            int[] nums,
+            boolean[] used,
+            List<Integer> path,
+            List<List<Integer>> answer) {
+        if (path.size() == nums.length) {
+            answer.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int index = 0; index < nums.length; index++) {
+            if (used[index]) {
+                continue;
+            }
+            used[index] = true;
+            path.add(nums[index]);
+            backtrack(nums, used, path, answer);
+            path.remove(path.size() - 1);
+            used[index] = false;
+        }
     }
 }`,
 
@@ -1409,7 +1618,8 @@ class Solution {
       "字节": ["#7aa2ff", "rgba(122, 162, 255, 0.78)"],
       "拼多多": ["#ff879e", "rgba(255, 135, 158, 0.75)"],
       "美团": ["#ffc76b", "rgba(255, 199, 107, 0.74)"],
-      "腾讯": ["#69e6d6", "rgba(105, 230, 214, 0.74)"]
+      "腾讯": ["#69e6d6", "rgba(105, 230, 214, 0.74)"],
+      "快手": ["#ffad5b", "rgba(255, 173, 91, 0.74)"]
     };
 
     const cards = document.querySelector("#cards");
@@ -1466,6 +1676,9 @@ class Solution {
       cards.innerHTML = filtered.map(item => {
         const [color, glow] = companyTheme[item.company];
         const directClass = item.match === "Agent 直岗" ? " direct" : "";
+        const codeHeading = item.representative
+                ? "同考点代表实现，非原题还原"
+                : "Java 参考实现";
         return `
           <article class="card" style="--company-color:${color};--company-glow:${glow}">
             <div class="card-top">
@@ -1478,19 +1691,24 @@ class Solution {
             <p class="detail">${item.detail}</p>
             <div class="card-footer">
               <div class="tags">${item.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}</div>
-              <button
-                class="code-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="code-${item.id}"
-              >
-                <span class="toggle-label">查看 Java</span>
-                <span class="code-toggle-icon" aria-hidden="true">⌄</span>
-              </button>
+              <div class="card-actions">
+                ${item.sourceUrl
+                  ? `<a class="source-link" href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">原帖</a>`
+                  : ""}
+                <button
+                  class="code-toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="code-${item.id}"
+                >
+                  <span class="toggle-label">查看 Java</span>
+                  <span class="code-toggle-icon" aria-hidden="true">⌄</span>
+                </button>
+              </div>
             </div>
             <div class="code-panel" id="code-${item.id}" hidden>
               <div class="code-panel-head">
-                <span>${item.id === "monotonic-stack" ? "同考点代表实现，非原题还原" : "Java 参考实现"}</span>
+                <span>${codeHeading}</span>
                 <span>Java</span>
               </div>
               <pre><code>${escapeHtml(solutions[item.id])}</code></pre>
