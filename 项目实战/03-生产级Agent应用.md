@@ -1301,3 +1301,57 @@ spec:
 | 成本控制 | 三层限额 + 模型自动选择，API 成本降低 60% |
 | 部署 | Docker + K8s + Istio 灰度发布，4 步渐进放量 |
 | 工具安全 | 权限分级 + 参数校验 + 沙箱隔离 + 人工审批 |
+
+---
+
+## 八、项目验收标准与评分表
+
+### 最低可交付版本（60 分）
+
+| 验收项 | 标准 |
+|---|---|
+| API 服务 | 提供 FastAPI / Node API，支持请求响应 |
+| 工具注册 | 有统一 Tool Registry，工具 schema 清晰 |
+| 基础安全 | 禁止危险工具调用，至少支持只读工具 |
+| 错误处理 | LLM 或工具失败时有明确错误返回 |
+| 部署说明 | README 包含本地启动和 Docker 启动 |
+
+### 进阶可答辩版本（80 分）
+
+| 验收项 | 标准 |
+|---|---|
+| 输入护栏 | Prompt 注入检测、敏感信息脱敏或内容分类 |
+| 输出护栏 | 幻觉检测、敏感信息过滤、合规审查 |
+| 可观测性 | 接入 trace、日志、指标，能定位每步耗时 |
+| 降级策略 | LLM 不可用时回退到缓存、规则或转人工 |
+| 成本控制 | 支持模型路由、token 预算、语义缓存或限流 |
+
+### 面试亮点版本（100 分）
+
+| 验收项 | 标准 |
+|---|---|
+| 审计链路 | 每次 tool call 记录参数、结果、操作者和风险级别 |
+| 沙箱执行 | 代码执行、文件操作或外部 API 调用有隔离环境 |
+| 红队测试 | 提供 10+ 条 prompt injection / 越权测试样例 |
+| SLO 指标 | 定义 p95 延迟、任务成功率、错误率、成本上限 |
+| 灰度发布 | 支持配置化开关、版本回滚或 A/B 测试 |
+
+### 评分表
+
+| 维度 | 权重 | 面试官关注点 |
+|---|---:|---|
+| 生产架构完整性 | 25% | API、队列、缓存、数据库、模型服务是否闭环 |
+| 安全与权限 | 25% | 是否能防 Prompt 注入和危险工具误调用 |
+| 可观测性 | 20% | 能否 replay、debug、告警和归因 |
+| 稳定性与降级 | 15% | LLM/API 不稳定时如何保证体验 |
+| 成本与性能 | 15% | 延迟、token、缓存、模型路由是否有量化 |
+
+### GitHub 项目参考
+
+| 项目 | 用途 |
+|---|---|
+| [openai/openai-agents-python](https://github.com/openai/openai-agents-python) | 学 guardrails、handoff、tracing |
+| [langfuse/langfuse](https://github.com/langfuse/langfuse) | 学 LLM 可观测性、trace、评估 |
+| [open-telemetry/opentelemetry-python](https://github.com/open-telemetry/opentelemetry-python) | 学标准化 tracing / metrics |
+| [guardrails-ai/guardrails](https://github.com/guardrails-ai/guardrails) | 学输出校验和护栏 |
+| [e2b-dev/E2B](https://github.com/e2b-dev/E2B) | 学代码执行沙箱和隔离环境 |

@@ -33,6 +33,7 @@ ROOT_DOCS = ["Agent工程师学习路线图.md"]
 
 GENERAL_ORDER = [
     "最新AI-Agent面经索引.md",
+    "12周Agent工程师进阶路线.md",
     "Agent核心概念与设计模式.md",
     "Agent框架全景.md",
     "LangChain与LangGraph深度解析.md",
@@ -419,6 +420,11 @@ def rewrite_markdown_links(markup: str, doc: Doc, md_link_map: dict[str, str]) -
 
     markup = re.sub(r'href="([^"]+)"', rewrite_href, markup)
     return re.sub(r'src="([^"]+)"', rewrite_src, markup)
+
+
+def copy_canvas_assets() -> None:
+    for path in ROOT.glob("*.canvas"):
+        shutil.copy2(path, DIST / path.name)
 
 
 def render_markdown_doc(doc: Doc, md_link_map: dict[str, str]) -> str:
@@ -986,8 +992,8 @@ def build() -> None:
         shutil.copytree(DIAGRAMS_DIR, DIST / "diagrams")
 
     copy_data_assets()
+    copy_canvas_assets()
     copy_interview_algorithm_page()
-
 
     (DIST / "index.html").write_text(render_index(groups), encoding="utf-8")
     (DIST / "interview-questions.html").write_text(render_interview_questions(), encoding="utf-8")
