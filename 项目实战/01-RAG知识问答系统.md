@@ -624,3 +624,57 @@ class RAGEvaluator:
 | 成本控制 | 查询分级（大小模型分流），API 成本降低 60% |
 | 生产化 | K8s 部署、缓存、降级、限流，日均 5000+ QPS |
 | 多模态 | 表格 Markdown 化 + 图片 VLM 描述，覆盖 90%+ 文档类型 |
+
+---
+
+## 八、项目验收标准与评分表
+
+### 最低可交付版本（60 分）
+
+| 验收项 | 标准 |
+|---|---|
+| 文档入库 | 支持至少 20 个 Markdown/PDF/HTML 文档，保留来源元数据 |
+| 基础检索 | 支持向量检索，能返回 TopK 文档片段 |
+| 答案生成 | 回答中包含引用来源，不允许无来源编造 |
+| 基础入口 | 提供 CLI、Web 或 HTTP API 任一种可用入口 |
+| README | 说明数据准备、启动方式、示例问题和已知限制 |
+
+### 进阶可答辩版本（80 分）
+
+| 验收项 | 标准 |
+|---|---|
+| 混合检索 | Dense + BM25 双路召回，并说明融合策略 |
+| Rerank | 接入 reranker，对比 rerank 前后的 TopK 命中率 |
+| 评估集 | 至少 30 条人工问题，统计 Recall@K、Faithfulness、幻觉率 |
+| 多格式文档 | 对 PDF 表格、标题层级、代码块或图片 OCR 有处理策略 |
+| 可观测性 | 记录 query、召回片段、rerank 分数、最终引用 |
+
+### 面试亮点版本（100 分）
+
+| 验收项 | 标准 |
+|---|---|
+| 可量化优化 | 有明确指标提升，例如 Recall@5、延迟、成本、幻觉率 |
+| 失败复盘 | 至少 5 个 bad case，能归因到分块、召回、重排或生成层 |
+| 热更新 | 新文档入库后无需重启服务即可被检索 |
+| 安全边界 | 支持权限过滤、敏感信息脱敏或拒答机制 |
+| 生产部署 | Docker 化，提供本地或云端部署说明 |
+
+### 评分表
+
+| 维度 | 权重 | 面试官关注点 |
+|---|---:|---|
+| RAG 链路完整性 | 25% | 数据处理、检索、重排、生成是否闭环 |
+| 评估与指标 | 25% | 是否能证明系统变好，而不是凭感觉 |
+| 工程化 | 20% | API、部署、日志、缓存、热更新 |
+| 复杂文档处理 | 15% | 表格、PDF、长文档、多格式输入 |
+| 答辩表达 | 15% | 能否讲清 trade-off 和失败案例 |
+
+### GitHub 项目参考
+
+| 项目 | 用途 |
+|---|---|
+| [langchain-ai/rag-from-scratch](https://github.com/langchain-ai/rag-from-scratch) | 学 RAG 分块、检索、生成基本套路 |
+| [run-llama/llama_index](https://github.com/run-llama/llama_index) | 学文档索引、数据连接器和 query engine |
+| [explodinggradients/ragas](https://github.com/explodinggradients/ragas) | 学 RAG 自动评估指标 |
+| [milvus-io/milvus](https://github.com/milvus-io/milvus) | 学生产级向量数据库能力 |
+| [chroma-core/chroma](https://github.com/chroma-core/chroma) | 学本地快速原型向量库 |

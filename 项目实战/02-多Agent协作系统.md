@@ -802,3 +802,57 @@ def supervisor_node(state: AgentState) -> dict:
 | 健壮性 | 三层错误处理 + 迭代上限 + 成本上限 |
 | 可观测 | LangSmith Tracing + 结构化日志 + 可视化回放 |
 | 成本 | 模型分级 + 实时追踪 + 上限控制，平均 $0.15/任务 |
+
+---
+
+## 七、项目验收标准与评分表
+
+### 最低可交付版本（60 分）
+
+| 验收项 | 标准 |
+|---|---|
+| Agent 分工 | 至少包含 Supervisor + 2 个 Worker Agent |
+| 状态管理 | 使用结构化 State 保存任务、消息和各 Agent 输出 |
+| 路由逻辑 | Supervisor 能根据状态决定下一步执行者 |
+| 终止条件 | 支持最大轮次、任务完成、错误终止 |
+| 示例任务 | 能完成一个端到端复杂任务，例如“调研 + 写代码 + 输出报告” |
+
+### 进阶可答辩版本（80 分）
+
+| 验收项 | 标准 |
+|---|---|
+| LangGraph 状态图 | 使用 Node / Edge / Conditional Edge 实现流程 |
+| 错误处理 | Agent 失败后能重试、跳过或终止 |
+| 成本控制 | 记录 token 和成本，并支持 cost_limit |
+| Human-in-the-loop | 关键节点可人工审批或修改 |
+| 可观测性 | 输出每轮调度、Agent 输入输出和状态变化 |
+
+### 面试亮点版本（100 分）
+
+| 验收项 | 标准 |
+|---|---|
+| 并行探索 | 支持多个 Agent 并行处理子任务并合并结果 |
+| 任务规划 | Supervisor 能先生成 plan，再动态 replan |
+| 防循环机制 | 能识别重复状态、重复工具调用或无进展循环 |
+| 质量评估 | 对最终报告做事实核查、引用检查或 reviewer 评分 |
+| 产品化 Demo | 提供 Web/CLI 可视化运行轨迹 |
+
+### 评分表
+
+| 维度 | 权重 | 面试官关注点 |
+|---|---:|---|
+| 多 Agent 设计合理性 | 30% | 为什么要多 Agent，边界是否清晰 |
+| 状态与控制流 | 25% | State、路由、checkpoint、终止条件是否可靠 |
+| 错误与成本控制 | 20% | 是否能防止失控、循环和成本爆炸 |
+| 可观测性 | 15% | 能否 replay 每一步决策 |
+| 答辩表达 | 10% | 能否讲清多 Agent 的 trade-off |
+
+### GitHub 项目参考
+
+| 项目 | 用途 |
+|---|---|
+| [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) | 学 StateGraph、checkpoint、human-in-the-loop |
+| [microsoft/autogen](https://github.com/microsoft/autogen) | 学多 Agent 对话和代码执行沙箱 |
+| [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 学角色/任务/Crew 抽象 |
+| [openai/openai-agents-python](https://github.com/openai/openai-agents-python) | 学 handoff、guardrails、tracing |
+| [NirDiamant/GenAI_Agents](https://github.com/NirDiamant/GenAI_Agents) | 学不同 Agent 模式的代码实现 |
