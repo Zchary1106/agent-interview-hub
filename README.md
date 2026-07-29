@@ -11,7 +11,7 @@
 
 **300+ 面试题（全部带答案）· 14 家公司岗位要求与面经（含 Anthropic 等海外顶级 AI 公司）· 6 道实操考题 · 16 周完整学习路线图**
 
-[📖 在线阅读](https://zchary1106.github.io/agent-interview-hub/) · [⭐ Star 支持](https://github.com/Zchary1106/agent-interview-hub) · [🐛 提交面经](https://github.com/Zchary1106/agent-interview-hub/issues)
+[📖 在线阅读](https://zchary1106.github.io/agent-interview-hub/index.html) · [⭐ Star 支持](https://github.com/Zchary1106/agent-interview-hub) · [🐛 提交面经](https://github.com/Zchary1106/agent-interview-hub/issues)
 
 </div>
 
@@ -106,6 +106,7 @@ AI Agent 工程师知识体系
 | 20 | [Agent 核心概念面试题 - 进阶篇](通用知识/Agent核心概念面试题-进阶篇.md) | 核心概念高频问答进阶版 |
 | 21 | [系统设计面试题 - 进阶篇](通用知识/系统设计面试题-进阶篇.md) | 系统设计题与参考答案进阶版 |
 | 22 | [AI 协作与工程化面试题 - 进阶篇](通用知识/AI协作与工程化面试题-进阶篇.md) | AI 协作工程化问答进阶版 |
+| 23 | [交互式面试算法题图谱](https://zchary1106.github.io/agent-interview-hub/%E9%9D%A2%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/) | 近期公开 Agent / 大模型面经算法题，附可折叠 Java 解法 |
 
 ---
 
@@ -160,7 +161,7 @@ AI Agent 工程师知识体系
 
 访问 GitHub Pages 站点，移动端友好：
 
-👉 **https://zchary1106.github.io/agent-interview-hub/**
+👉 **https://zchary1106.github.io/agent-interview-hub/index.html**
 
 ### 本地阅读
 
