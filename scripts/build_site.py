@@ -29,7 +29,6 @@ DIAGRAMS_DIR = ROOT / "diagrams"
 DATA_DIR = ROOT / "data"
 INTERVIEW_ALGORITHMS_DIR = ROOT / "面试算法题"
 LEGACY_DIR = ROOT / "legacy"
-DESIGN_PREVIEW = ROOT / "design-preview.html"
 
 ROOT_DOCS = ["Agent工程师学习路线图.md"]
 
@@ -1069,12 +1068,6 @@ def copy_legacy_pages() -> None:
         shutil.copy2(LEGACY_DIR / name, DIST / name)
 
 
-def copy_design_preview() -> None:
-    if not DESIGN_PREVIEW.is_file():
-        raise FileNotFoundError(f"Missing design preview: {DESIGN_PREVIEW}")
-    shutil.copy2(DESIGN_PREVIEW, DIST / DESIGN_PREVIEW.name)
-
-
 def build() -> None:
     groups = collect_docs()
     if DIST.exists():
@@ -1088,7 +1081,6 @@ def build() -> None:
     copy_canvas_assets()
     copy_interview_algorithm_page()
     copy_legacy_pages()
-    copy_design_preview()
 
     new_index = render_index(groups).replace(
         'href="interview-questions.html"', 'href="new-interview-questions.html"'
