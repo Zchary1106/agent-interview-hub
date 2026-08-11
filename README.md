@@ -163,6 +163,8 @@ AI Agent 工程师知识体系
 
 👉 **https://zchary1106.github.io/agent-interview-hub/index.html**
 
+默认显示经典版；可在首页右下角切换到[新版知识库](https://zchary1106.github.io/agent-interview-hub/new.html)。
+
 ### 本地阅读
 
 ```bash

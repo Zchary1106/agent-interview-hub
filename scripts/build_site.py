@@ -28,6 +28,7 @@ DIST = ROOT / "dist"
 DIAGRAMS_DIR = ROOT / "diagrams"
 DATA_DIR = ROOT / "data"
 INTERVIEW_ALGORITHMS_DIR = ROOT / "面试算法题"
+LEGACY_DIR = ROOT / "legacy"
 
 ROOT_DOCS = ["Agent工程师学习路线图.md"]
 
@@ -634,6 +635,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
             </div>
             <div class="quick-links">
               <button type="button" data-target="diagrams">查看架构图</button>
+              <a href="index.html">返回经典版</a>
               <a href="interview-questions.html">打开交互式题库（{question_company_count} 类）</a>
               <a href="面试算法题/">打开面试算法题图谱</a>
               <a href="https://github.com/Zchary1106/agent-interview-hub" target="_blank" rel="noopener">GitHub 仓库</a>
@@ -982,6 +984,18 @@ def render_interview_questions() -> str:
 """
 
 
+def copy_legacy_pages() -> None:
+    legacy_pages = ("index.html", "interview-questions.html")
+    missing = [name for name in legacy_pages if not (LEGACY_DIR / name).is_file()]
+    if missing:
+        raise FileNotFoundError(
+            f"Missing legacy page source files: {', '.join(missing)}"
+        )
+
+    for name in legacy_pages:
+        shutil.copy2(LEGACY_DIR / name, DIST / name)
+
+
 def build() -> None:
     groups = collect_docs()
     if DIST.exists():
@@ -994,9 +1008,18 @@ def build() -> None:
     copy_data_assets()
     copy_canvas_assets()
     copy_interview_algorithm_page()
+    copy_legacy_pages()
 
-    (DIST / "index.html").write_text(render_index(groups), encoding="utf-8")
-    (DIST / "interview-questions.html").write_text(render_interview_questions(), encoding="utf-8")
+    new_index = render_index(groups).replace(
+        'href="interview-questions.html"', 'href="new-interview-questions.html"'
+    )
+    new_questions = render_interview_questions().replace(
+        'href="index.html"', 'href="new.html"'
+    )
+    (DIST / "new.html").write_text(new_index, encoding="utf-8")
+    (DIST / "new-interview-questions.html").write_text(
+        new_questions, encoding="utf-8"
+    )
 
     doc_count = sum(len(docs) for docs in groups.values())
     question_count = sum(len(company.get("questions", [])) for company in load_questions())

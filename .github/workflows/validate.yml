@@ -40,4 +40,6 @@ jobs:
         run: |
           test -f dist/index.html
           test -f dist/interview-questions.html
+          test -f dist/new.html
+          test -f dist/new-interview-questions.html
           test -f dist/data/interviews.json
