@@ -19,6 +19,7 @@
   --green: #10b981;
   --red: #ef4444;
   --sidebar-w: 280px;
+  --message-h: 44px;
   --transition: 0.3s ease;
 }
 [data-theme="light"] {
@@ -36,13 +37,14 @@ body {
   color: var(--text);
   line-height: 1.7;
   overflow-x: hidden;
+  padding-top: var(--message-h);
 }
 code, pre { font-family: 'JetBrains Mono', monospace; }
 
 /* Sidebar */
 .sidebar {
   position: fixed;
-  left: 0; top: 0; bottom: 0;
+  left: 0; top: var(--message-h); bottom: 0;
   width: var(--sidebar-w);
   background: var(--bg2);
   border-right: 1px solid var(--bg3);
@@ -118,7 +120,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 }
 .topbar {
   position: sticky;
-  top: 0;
+  top: var(--message-h);
   background: var(--bg);
   border-bottom: 1px solid var(--bg3);
   padding: 12px 24px;
@@ -405,48 +407,54 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   .hamburger { display: block; }
   .diagram-gallery { grid-template-columns: 1fr; }
   .topbar-actions button:not(.theme-toggle) { display: none; }
-  .overlay { display: none; position: fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.5); z-index:99; }
+  .overlay { display: none; position: fixed; top:var(--message-h);left:0;right:0;bottom:0; background:rgba(0,0,0,0.5); z-index:99; }
   .overlay.open { display: block; }
 }
 </style>
 <style>
-.version-switcher {
+.version-message {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  inset: 0 0 auto;
   z-index: 200;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  min-height: 42px;
-  padding: 10px 14px;
-  border: 1px solid rgba(251, 191, 36, 0.7);
-  border-radius: 8px;
+  justify-content: center;
+  gap: 14px;
+  height: var(--message-h);
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(251, 191, 36, 0.35);
   background: #1e293b;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.4);
-  color: #fbbf24;
+  color: #e2e8f0;
   font-size: 13px;
-  font-weight: 600;
+}
+.version-message strong {
+  color: #fbbf24;
+}
+.version-message a {
+  color: #fbbf24;
+  font-weight: 700;
   text-decoration: none;
-  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
 }
-.version-switcher:hover {
-  background: #334155;
-  transform: translateY(-2px);
+.version-message a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
-.version-switcher:focus-visible {
+.version-message a:focus-visible {
   outline: 3px solid #fbbf24;
   outline-offset: 3px;
 }
 @media (max-width: 640px) {
-  .version-switcher {
-    right: 16px;
-    bottom: 16px;
-  }
+  .version-message { justify-content: space-between; gap: 8px; padding: 0 12px; font-size: 12px; }
+  .version-message-detail { display: none; }
 }
 </style>
 </head>
 <body>
-<a class="version-switcher" href="new.html">试用新版知识库 →</a>
+<div class="version-message" role="status">
+  <span><strong>新版已上线</strong><span class="version-message-detail">，提供更清晰的备考路径和阅读体验</span></span>
+  <a href="new.html">切换到新版 →</a>
+</div>
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">

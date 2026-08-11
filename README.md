@@ -164,7 +164,7 @@ AI Agent 工程师知识体系
 - **经典版（原页面）**：https://zchary1106.github.io/agent-interview-hub/index.html
 - **新版（备考路径版）**：https://zchary1106.github.io/agent-interview-hub/new.html
 
-经典版保持原有页面和地址不变；新版使用新的求职准备布局。
+经典版保持原有内容和默认地址，并在页面顶部提示切换新版；新版使用新的求职准备布局。
 
 ### 本地阅读
 
