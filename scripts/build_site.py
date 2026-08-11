@@ -442,6 +442,7 @@ def render_markdown_doc(doc: Doc, md_link_map: dict[str, str]) -> str:
     return f"""
     <section class="content-section" id="{html.escape(doc.section_id, quote=True)}" data-title="{html.escape(doc.title, quote=True)}">
       <div class="section-header">
+        <button class="back-home" type="button" data-target="welcome">返回备考首页</button>
         <p class="eyebrow">{html.escape(doc.group)}</p>
         <h2>{html.escape(doc.title)}</h2>
         <a class="source-link" href="{html.escape(source_url, quote=True)}" target="_blank" rel="noopener">查看源文件</a>
@@ -519,16 +520,41 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     latest_target = by_path.get("通用知识/最新AI-Agent面经索引.md", "welcome")
     core_target = by_path.get("通用知识/Agent核心概念与设计模式.md", "welcome")
     project_target = by_path.get("项目实战/01-RAG知识问答系统.md", "welcome")
-    company_cards = "\n".join(
-        f"""
-        <button class="company-route" type="button" data-target="{html.escape(company_docs[0].section_id, quote=True)}">
-          <span>{COMPANY_ICONS.get(company, "🏢")}</span>
-          <strong>{html.escape(company)}</strong>
-          <small>{len(company_docs)} 篇岗位与面经资料</small>
-        </button>
-        """
+    company_docs_map = {
+        company: [doc for doc in docs if doc.path.parent.name == company]
         for company in COMPANY_ORDER
-        if (company_docs := [doc for doc in docs if doc.path.parent.name == company])
+    }
+    company_count = sum(bool(company_docs) for company_docs in company_docs_map.values())
+
+    def render_company_routes(companies: list[str]) -> str:
+        return "\n".join(
+            f"""
+            <button class="company-route" type="button" data-target="{html.escape(company_docs_map[company][0].section_id, quote=True)}">
+              <strong>{html.escape(company)}</strong>
+              <small>{len(company_docs_map[company])} 篇资料</small>
+              <span aria-hidden="true">→</span>
+            </button>
+            """
+            for company in companies
+            if company_docs_map.get(company)
+        )
+
+    domestic_company_cards = render_company_routes(
+        COMPANY_ORDER[:9] + ["商汤科技"]
+    )
+    global_company_cards = render_company_routes(
+        ["OpenAI", "Anthropic", "谷歌", "微软", "初创公司"]
+    )
+    library_groups = "\n".join(
+        f"""
+        <section class="library-group">
+          <h3>{html.escape(group)}</h3>
+          <div class="library-links">
+            {"".join(f'<button type="button" data-target="{html.escape(doc.section_id, quote=True)}">{html.escape(doc.title)}</button>' for doc in group_docs)}
+          </div>
+        </section>
+        """
+        for group, group_docs in groups.items()
     )
 
     return f"""<!doctype html>
@@ -539,159 +565,380 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
   <title>AI Agent 面试知识库</title>
   <style>
     :root {{
-      --bg: #0f172a;
-      --panel: #111827;
-      --panel-2: #1e293b;
-      --border: #334155;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #f59e0b;
-      --accent-2: #fbbf24;
-      --green: #10b981;
-      --sidebar-width: 300px;
-    }}
-    [data-theme="light"] {{
-      --bg: #f8fafc;
+      --bg: #f6f7f5;
       --panel: #ffffff;
-      --panel-2: #f1f5f9;
-      --border: #cbd5e1;
-      --text: #0f172a;
-      --muted: #475569;
+      --panel-2: #eef1ed;
+      --border: #dce1dc;
+      --text: #20262b;
+      --muted: #687169;
+      --accent: #356b54;
+      --accent-soft: #e5efe9;
+      --accent-ink: #ffffff;
+      --code: #20262b;
+      --shadow: rgba(34, 45, 38, 0.08);
+      --sidebar-width: 340px;
+    }}
+    [data-theme="dark"] {{
+      --bg: #171b19;
+      --panel: #202522;
+      --panel-2: #2a302c;
+      --border: #3a423d;
+      --text: #eef1ee;
+      --muted: #a3aca5;
+      --accent: #82b49c;
+      --accent-soft: #293c32;
+      --accent-ink: #142219;
+      --code: #101311;
+      --shadow: rgba(0, 0, 0, 0.24);
     }}
     * {{ box-sizing: border-box; }}
-    body {{ margin: 0; background: var(--bg); color: var(--text); font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
-    a {{ color: var(--accent-2); }}
-    .layout {{ display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); min-height: 100vh; }}
-    .sidebar {{ position: sticky; top: 0; height: 100vh; overflow: auto; background: var(--panel); border-right: 1px solid var(--border); padding-bottom: 24px; }}
-    .brand {{ padding: 22px 20px; border-bottom: 1px solid var(--border); }}
-    .brand h1 {{ margin: 0; color: var(--accent); font-size: 20px; }}
-    .brand p {{ margin: 4px 0 0; color: var(--muted); font-size: 13px; }}
-    .nav-section {{ padding: 8px 0; border-bottom: 1px solid rgba(148, 163, 184, 0.12); }}
-    .nav-category-title {{ color: var(--accent); font-weight: 700; font-size: 13px; padding: 10px 20px 6px; }}
-    .nav-item {{ display: block; width: 100%; border: 0; background: transparent; color: var(--muted); text-align: left; padding: 7px 20px 7px 32px; font: inherit; font-size: 13px; cursor: pointer; text-decoration: none; border-left: 3px solid transparent; }}
-    .nav-item:hover, .nav-item.active {{ color: var(--accent-2); background: rgba(245, 158, 11, 0.12); border-left-color: var(--accent); }}
-    .nav-item-strong {{ font-weight: 700; padding-left: 20px; color: var(--text); }}
-    .nav-link {{ padding-left: 20px; }}
+    html {{ scroll-behavior: smooth; }}
+    body {{
+      margin: 0;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }}
+    a {{ color: var(--accent); }}
+    button, input {{ font: inherit; }}
+    button:active, a:active {{ transform: translateY(1px); }}
+    :focus-visible {{ outline: 3px solid var(--accent); outline-offset: 3px; }}
+    .layout {{ min-height: 100dvh; }}
+    .sidebar-backdrop {{
+      position: fixed;
+      inset: 0;
+      z-index: 25;
+      background: rgba(12, 16, 20, 0.38);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }}
+    .sidebar-backdrop.open {{ opacity: 1; pointer-events: auto; }}
+    .sidebar {{
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 30;
+      width: min(90vw, var(--sidebar-width));
+      overflow: auto;
+      padding-bottom: 28px;
+      border-right: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: 24px 0 70px var(--shadow);
+      transform: translateX(-105%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }}
+    .sidebar.open {{ transform: translateX(0); }}
+    .brand {{ padding: 28px 24px 20px; border-bottom: 1px solid var(--border); }}
+    .brand h1 {{ margin: 0; font-size: 20px; letter-spacing: -0.04em; }}
+    .brand p {{ margin: 5px 0 0; color: var(--muted); font-size: 12px; }}
+    .nav-section {{ padding: 12px 10px; border-bottom: 1px solid var(--border); }}
+    .nav-category-title {{ padding: 10px 12px 7px; color: var(--accent); font-size: 12px; font-weight: 700; }}
+    .nav-item {{
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 12px 8px 18px;
+      background: transparent;
+      color: var(--muted);
+      text-align: left;
+      text-decoration: none;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease;
+    }}
+    .nav-item:hover, .nav-item.active {{ background: var(--accent-soft); color: var(--text); }}
+    .nav-item-strong {{ color: var(--text); font-weight: 700; }}
     .main {{ min-width: 0; }}
-    .topbar {{ position: sticky; top: 0; z-index: 10; display: flex; gap: 12px; align-items: center; padding: 12px 24px; border-bottom: 1px solid var(--border); background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(12px); }}
-    [data-theme="light"] .topbar {{ background: rgba(248, 250, 252, 0.88); }}
-    .menu-btn {{ display: none; }}
-    .search {{ flex: 1; max-width: 620px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; color: var(--text); background: var(--panel); }}
-    .topbar button {{ border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; color: var(--text); background: var(--panel-2); cursor: pointer; }}
-    .content {{ max-width: 1080px; margin: 0 auto; padding: 28px; }}
+    .topbar {{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: auto auto minmax(220px, 620px) 1fr auto auto auto auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 70px;
+      padding: 10px clamp(16px, 3vw, 40px);
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(16px);
+    }}
+    .topbar button, .topbar-link {{
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      background: var(--panel);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }}
+    .topbar button:hover, .topbar-link:hover {{ border-color: var(--accent); background: var(--accent-soft); }}
+    .menu-btn {{ font-weight: 700; }}
+    .brand-button {{ border-color: transparent !important; background: transparent !important; color: var(--text) !important; font-weight: 700; letter-spacing: -0.025em; }}
+    .search {{
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 13px;
+      background: var(--panel);
+      color: var(--text);
+    }}
+    .search::placeholder {{ color: var(--muted); }}
+    .topbar-spacer {{ min-width: 0; }}
+    .reader-tool {{ color: var(--muted) !important; font-size: 13px; }}
+    .content {{ width: min(1240px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 88px; }}
     .content-section {{ display: none; }}
-    .content-section.active {{ display: block; }}
-    .hero {{ padding: 36px; border: 1px solid var(--border); border-radius: 22px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(59, 130, 246, 0.08)); }}
-    .hero h2 {{ margin: 0 0 10px; color: var(--accent); font-size: 32px; }}
-    .stats {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 22px 0; }}
-    .stat {{ padding: 16px; border: 1px solid var(--border); border-radius: 16px; background: var(--panel); }}
-    .stat b {{ display: block; color: var(--accent-2); font-size: 28px; }}
-    .quick-links {{ display: flex; flex-wrap: wrap; gap: 10px; }}
-    .quick-links a, .quick-links button {{ border: 1px solid var(--border); border-radius: 999px; padding: 8px 14px; color: var(--text); background: var(--panel); text-decoration: none; cursor: pointer; }}
-    .prep-intro {{ max-width: 760px; }}
-    .prep-intro p {{ color: var(--muted); font-size: 17px; }}
-    .prep-kicker {{ margin: 0 0 10px; color: var(--accent-2); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; }}
-    .start-grid {{ display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 12px; margin: 30px 0; }}
-    .start-card {{ display: flex; min-height: 180px; flex-direction: column; align-items: flex-start; gap: 10px; padding: 22px; border: 1px solid var(--border); border-radius: 16px; background: var(--panel); color: var(--text); text-align: left; text-decoration: none; transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease; }}
-    .start-card:hover {{ border-color: var(--accent); background: var(--panel-2); transform: translateY(-3px); }}
-    .start-card:focus-visible, .company-route:focus-visible {{ outline: 3px solid var(--accent-2); outline-offset: 3px; }}
-    .start-card strong {{ font-size: 20px; }}
-    .start-card span {{ color: var(--muted); }}
-    .start-card em {{ margin-top: auto; color: var(--accent-2); font-size: 14px; font-style: normal; }}
-    .section-lead {{ margin: 44px 0 14px; }}
-    .section-lead h3 {{ margin: 0; font-size: 22px; }}
-    .section-lead p {{ margin: 4px 0 0; color: var(--muted); }}
-    .review-order {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }}
-    .review-step {{ display: block; min-height: 132px; padding: 18px; border: 0; border-right: 1px solid var(--border); background: var(--panel); color: var(--text); text-align: left; cursor: pointer; text-decoration: none; transition: background 0.2s ease; }}
+    .content-section.active {{ display: block; animation: section-in 0.35s cubic-bezier(0.16, 1, 0.3, 1); }}
+    @keyframes section-in {{ from {{ opacity: 0; transform: translateY(10px); }} to {{ opacity: 1; transform: translateY(0); }} }}
+    .home-hero {{
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: clamp(36px, 6vw, 72px);
+      align-items: end;
+      min-height: 440px;
+      padding: 64px 0 52px;
+      border-bottom: 1px solid var(--border);
+    }}
+    .prep-kicker {{ margin: 0 0 14px; color: var(--accent); font-size: 14px; font-weight: 700; letter-spacing: 0; }}
+    .hero-copy h1 {{ max-width: 13ch; margin: 0; font-size: clamp(38px, 5vw, 58px); line-height: 1.08; letter-spacing: -0.045em; text-wrap: balance; }}
+    .hero-copy > p:not(.prep-kicker) {{ max-width: 38ch; margin: 20px 0 0; color: var(--muted); font-size: 17px; }}
+    .hero-actions {{ display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 30px; }}
+    .primary-action {{
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 17px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 700;
+      cursor: pointer;
+    }}
+    .text-action {{ border: 0; padding: 10px 0; background: transparent; color: var(--accent); font-weight: 700; cursor: pointer; }}
+    .prep-note {{ align-self: center; padding: 24px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); }}
+    .prep-note h2 {{ margin: 0 0 18px; font-size: 20px; letter-spacing: -0.03em; }}
+    .prep-note ol {{ margin: 0; padding: 0; list-style: none; counter-reset: prep; }}
+    .prep-note li {{ display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border); color: var(--muted); }}
+    .prep-note li::before {{ counter-increment: prep; content: counter(prep, decimal-leading-zero); color: var(--accent); font: 700 12px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; }}
+    .metric-strip {{ display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }}
+    .metric {{ padding: 22px 0; }}
+    .metric + .metric {{ padding-left: 28px; border-left: 1px solid var(--border); }}
+    .metric b {{ display: block; font: 750 30px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent); }}
+    .metric span {{ display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }}
+    .journey-section {{ padding-top: 72px; }}
+    .section-lead {{ max-width: 620px; margin: 0 0 24px; }}
+    .section-lead h2, .section-lead h3 {{ margin: 0; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.12; letter-spacing: -0.04em; }}
+    .section-lead p {{ margin: 12px 0 0; color: var(--muted); }}
+    .path-grid {{ display: block; border-bottom: 1px solid var(--border); }}
+    .path-card {{
+      display: grid;
+      grid-template-columns: minmax(150px, .35fr) minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
+      min-height: 112px;
+      border: 0;
+      border-top: 1px solid var(--border);
+      border-radius: 0;
+      padding: 22px 8px;
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, padding 0.2s ease;
+    }}
+    .path-card:hover {{ padding-left: 20px; background: var(--accent-soft); }}
+    .path-card.featured {{ min-height: 128px; background: transparent; color: var(--text); }}
+    .path-card small, .path-card.featured small {{ color: var(--muted); }}
+    .path-card strong {{ max-width: none; margin: 0; font-size: clamp(20px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.035em; }}
+    .path-card span {{ margin: 0; color: var(--accent); font-weight: 800; }}
+    .review-order {{ display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }}
+    .review-step {{
+      display: block;
+      min-height: 150px;
+      border: 0;
+      border-right: 1px solid var(--border);
+      padding: 22px;
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.18s ease;
+    }}
     .review-step:last-child {{ border-right: 0; }}
-    .review-step:hover {{ background: var(--panel-2); }}
-    .review-step b {{ display: block; color: var(--accent); font-variant-numeric: tabular-nums; }}
-    .review-step span {{ display: block; margin-top: 8px; font-weight: 700; }}
+    .review-step:hover {{ background: var(--accent-soft); }}
+    .review-step b {{ display: block; color: var(--accent); font: 700 13px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }}
+    .review-step span {{ display: block; margin: 18px 0 5px; font-weight: 750; }}
     .review-step small {{ color: var(--muted); }}
-    .company-routes {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }}
-    .company-route {{ display: grid; grid-template-columns: auto 1fr; gap: 0 9px; align-items: center; padding: 14px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--text); text-align: left; cursor: pointer; }}
-    .company-route:hover {{ border-color: var(--border); background: var(--panel); }}
-    .company-route span {{ grid-row: span 2; font-size: 20px; }}
+    .company-board {{ display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }}
+    .company-cluster {{ padding: 24px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); }}
+    .company-cluster h3 {{ margin: 0 0 18px; color: var(--text); font-size: 17px; }}
+    .company-routes {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+    .company-route {{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1px 12px;
+      padding: 13px 0;
+      border: 0;
+      border-bottom: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+    }}
+    .company-route strong {{ font-size: 14px; }}
     .company-route small {{ color: var(--muted); }}
-    .home-links {{ margin-top: 30px; }}
-    .section-header {{ display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px; margin-bottom: 18px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }}
-    .section-header h2 {{ width: 100%; margin: 0; color: var(--accent); font-size: 28px; }}
+    .company-route span {{ grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--accent); }}
+    .company-route:hover strong {{ color: var(--accent); }}
+    .library-grid {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 54px; }}
+    .library-group {{ padding-top: 18px; border-top: 1px solid var(--border); }}
+    .library-group h3 {{ margin: 0 0 12px; color: var(--accent); font-size: 15px; }}
+    .library-links {{ display: flex; flex-wrap: wrap; gap: 7px 12px; }}
+    .library-links button {{ border: 0; padding: 0; background: transparent; color: var(--muted); font: inherit; font-size: 14px; text-align: left; cursor: pointer; }}
+    .library-links button:hover {{ color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; }}
+    .home-links {{ display: flex; flex-wrap: wrap; gap: 18px; margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--border); }}
+    .home-links a, .home-links button {{ border: 0; padding: 0; background: transparent; color: var(--muted); text-decoration: none; cursor: pointer; }}
+    .home-links a:hover, .home-links button:hover {{ color: var(--accent); }}
+    .content-section:not(#welcome) {{
+      width: min(100%, 980px);
+      margin: 24px auto 0;
+      padding: clamp(28px, 5vw, 60px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      box-shadow: 0 14px 42px var(--shadow);
+    }}
+    .section-header {{ display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; margin-bottom: 34px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }}
+    .back-home {{ grid-column: 1 / -1; justify-self: start; border: 0; padding: 0; background: transparent; color: var(--accent); font-weight: 700; cursor: pointer; }}
+    .section-header h2 {{ grid-column: 1 / -1; max-width: 22ch; margin: 4px 0 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.045em; text-wrap: balance; }}
     .eyebrow {{ margin: 0; color: var(--muted); font-size: 13px; }}
-    .source-link {{ font-size: 13px; }}
-    .markdown-body {{ min-width: 0; overflow-wrap: anywhere; }}
-    .markdown-body h1, .markdown-body h2 {{ color: var(--accent); }}
-    .markdown-body h3 {{ color: var(--accent-2); }}
-    .markdown-body pre {{ overflow: auto; padding: 16px; border-radius: 12px; background: #020617; }}
+    .source-link {{ color: var(--muted); font-size: 13px; }}
+    .markdown-body {{ max-width: 76ch; min-width: 0; margin: 0 auto; overflow-wrap: anywhere; }}
+    .markdown-body h1, .markdown-body h2 {{ margin-top: 1.8em; color: var(--text); letter-spacing: -0.035em; }}
+    .markdown-body h3 {{ margin-top: 1.6em; color: var(--accent); }}
+    .markdown-body p, .markdown-body li {{ color: color-mix(in srgb, var(--text) 88%, var(--muted)); }}
+    .markdown-body pre {{ overflow: auto; padding: 18px; border-radius: 10px; background: var(--code); color: #edf0f2; }}
     .markdown-body code {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }}
-    .markdown-body :not(pre) > code {{ padding: 2px 5px; border-radius: 6px; background: var(--panel-2); }}
+    .markdown-body :not(pre) > code {{ padding: 2px 5px; border-radius: 5px; background: var(--panel-2); }}
     .markdown-body table {{ display: block; width: 100%; overflow: auto; border-collapse: collapse; }}
-    .markdown-body th, .markdown-body td {{ border: 1px solid var(--border); padding: 8px 10px; vertical-align: top; }}
-    .markdown-body blockquote {{ margin-left: 0; padding: 8px 16px; border-left: 4px solid var(--accent); background: rgba(245, 158, 11, 0.08); color: var(--muted); }}
+    .markdown-body th, .markdown-body td {{ border: 1px solid var(--border); padding: 9px 11px; vertical-align: top; }}
+    .markdown-body blockquote {{ margin-left: 0; padding: 10px 18px; border-left: 4px solid var(--accent); background: var(--accent-soft); color: var(--muted); }}
     .diagram-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }}
-    .diagram-card {{ display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 1px solid var(--border); border-radius: 16px; background: var(--panel); text-decoration: none; color: var(--text); }}
-    .diagram-card img {{ width: 100%; aspect-ratio: 16 / 10; object-fit: contain; border-radius: 12px; background: #020617; }}
-    .search-result {{ width: 100%; margin: 8px 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: var(--panel); text-align: left; cursor: pointer; }}
-    mark {{ background: rgba(245, 158, 11, 0.35); color: var(--text); }}
-    @media (max-width: 860px) {{
-      .layout {{ display: block; }}
-      .sidebar {{ position: fixed; inset: 0 auto 0 0; width: min(86vw, var(--sidebar-width)); transform: translateX(-100%); transition: transform 0.2s ease; z-index: 20; }}
-      .sidebar.open {{ transform: translateX(0); }}
-      .menu-btn {{ display: inline-block; }}
-      .topbar {{ padding: 10px 12px; }}
-      .content {{ padding: 18px; }}
-      .stats {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
-      .start-grid, .review-order {{ grid-template-columns: 1fr; }}
+    .diagram-card {{ display: flex; flex-direction: column; gap: 10px; padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); text-decoration: none; color: var(--text); }}
+    .diagram-card img {{ width: 100%; aspect-ratio: 16 / 10; object-fit: contain; border-radius: 7px; background: var(--code); }}
+    .search-result {{ width: 100%; margin: 8px 0; padding: 14px; border: 1px solid var(--border); border-radius: 8px; color: var(--text); background: var(--bg); text-align: left; cursor: pointer; }}
+    .search-result:hover {{ border-color: var(--accent); }}
+    mark {{ background: var(--accent-soft); color: var(--text); }}
+    @media (max-width: 1040px) {{
+      .topbar {{ grid-template-columns: auto auto minmax(160px, 1fr) auto auto; }}
+      .topbar-spacer, .reader-tool {{ display: none; }}
+      .home-hero {{ grid-template-columns: 1fr; min-height: auto; }}
+      .prep-note {{ max-width: 620px; }}
+      .company-board {{ grid-template-columns: 1fr; }}
+    }}
+    @media (max-width: 720px) {{
+      .topbar {{ grid-template-columns: auto 1fr auto; }}
+      .brand-button, .topbar-link {{ display: none; }}
+      .content {{ width: min(100% - 28px, 1240px); padding-top: 10px; }}
+      .home-hero {{ padding-top: 52px; }}
+      .hero-copy h1 {{ font-size: clamp(44px, 14vw, 62px); }}
+      .metric-strip {{ grid-template-columns: 1fr; }}
+      .metric + .metric {{ padding-left: 0; border-left: 0; border-top: 1px solid var(--border); }}
+      .review-order, .library-grid {{ grid-template-columns: 1fr; }}
+      .path-card, .path-card.featured {{ grid-template-columns: 1fr; gap: 10px; min-height: 0; padding: 22px 0; }}
+      .path-card:hover {{ padding-left: 12px; }}
       .review-step {{ border-right: 0; border-bottom: 1px solid var(--border); }}
       .review-step:last-child {{ border-bottom: 0; }}
+      .company-routes {{ grid-template-columns: 1fr; }}
+      .content-section:not(#welcome) {{ margin-top: 14px; border-radius: 12px; }}
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      *, *::before, *::after {{ scroll-behavior: auto !important; animation: none !important; transition: none !important; }}
     }}
   </style>
 </head>
-<body>
+<body data-theme="dark">
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
   <div class="layout">
     <aside class="sidebar" id="sidebar">
       <div class="brand">
-        <h1>🤖 Agent Interview Hub</h1>
-        <p>由 Markdown 自动构建的 AI Agent 面试知识库</p>
+        <h1>Agent Interview Hub</h1>
+        <p>学习路线、公司面经、题库与项目准备</p>
       </div>
       <nav>{sidebar}</nav>
     </aside>
     <main class="main">
       <div class="topbar">
-        <button class="menu-btn" type="button" id="menuBtn">☰</button>
+        <button class="menu-btn" type="button" id="menuBtn">资料目录</button>
+        <button class="brand-button" type="button" data-target="welcome">Agent Interview Hub</button>
         <input class="search" id="searchInput" type="search" placeholder="搜索知识点、公司、题目..." autocomplete="off">
-        <button type="button" id="expandBtn">展开</button>
-        <button type="button" id="collapseBtn">折叠</button>
-        <button type="button" id="themeBtn">🌙</button>
+        <span class="topbar-spacer"></span>
+        <button class="reader-tool" type="button" id="expandBtn">全部展开</button>
+        <button class="reader-tool" type="button" id="collapseBtn">全部收起</button>
+        <a class="topbar-link" href="interview-questions.html">进入题库</a>
+        <button type="button" id="themeBtn"><span class="theme-label">浅色</span></button>
       </div>
       <div class="content">
         <section class="content-section active" id="welcome" data-title="首页">
-          <div class="hero">
-            <div class="prep-intro">
-              <p class="prep-kicker">AGENT INTERVIEW PREP</p>
-              <h2>先确定下一步，再开始刷资料</h2>
-              <p>无论你在补基础、冲刺面试，还是准备一家具体公司，都从下面一条路径进入。资料库和搜索始终在左侧，避免在 75 篇文档里盲目翻找。</p>
+          <div class="home-hero">
+            <div class="hero-copy">
+              <p class="prep-kicker">AI Agent 面试准备</p>
+              <h1>从目标岗位开始，按顺序准备下一场面试。</h1>
+              <p>先看岗位和面经，再补知识、练题、整理项目表达。</p>
+              <div class="hero-actions">
+                <button class="primary-action" type="button" data-target="{html.escape(latest_target, quote=True)}">开始一轮准备</button>
+                <button class="text-action" type="button" data-target="{html.escape(learning_target, quote=True)}">查看完整路线 →</button>
+              </div>
             </div>
-            <div class="start-grid">
-              <button class="start-card" type="button" data-target="{html.escape(learning_target, quote=True)}">
-                <strong>我刚开始准备</strong>
-                <span>从 LLM、RAG、Agent 到项目表达，按学习路线建立完整框架。</span>
-                <em>查看学习路线 →</em>
-              </button>
-              <a class="start-card" href="interview-questions.html">
-                <strong>我在冲刺面试</strong>
-                <span>先用高频题定位短板，再展开参考答案和思考逻辑。</span>
-                <em>进入题库 →</em>
-              </a>
-              <button class="start-card" type="button" data-target="{html.escape(latest_target, quote=True)}">
-                <strong>我有目标公司</strong>
-                <span>从近期公开面经、岗位要求和公司题目开始准备。</span>
-                <em>查看最新面经 →</em>
-              </button>
-            </div>
+            <aside class="prep-note">
+              <h2>如果明天面试</h2>
+              <ol>
+                <li>确认岗位要求和近期面经</li>
+                <li>限时回答 5 道高频问题</li>
+                <li>完整讲述 1 个项目</li>
+                <li>准备追问与反问</li>
+              </ol>
+            </aside>
+          </div>
 
+          <div class="metric-strip">
+            <div class="metric"><b>{len(docs)}</b><span>篇现有资料</span></div>
+            <div class="metric"><b>{company_count}</b><span>家公司与岗位类别</span></div>
+            <div class="metric"><b>{question_count}</b><span>道可交互练习题</span></div>
+          </div>
+
+          <section class="journey-section">
             <div class="section-lead">
-              <h3>今天怎么复习</h3>
-              <p>每次按一条完整链路走，不要同时打开十篇资料。</p>
+              <h2>按你离面试的时间进入</h2>
+              <p>不要从资料目录第一篇开始。先选择最符合当前状态的路径。</p>
+            </div>
+            <div class="path-grid">
+              <button class="path-card featured" type="button" data-target="{html.escape(learning_target, quote=True)}">
+                <small>尚未开始投递</small>
+                <strong>先建立 Agent 工程师的完整知识框架</strong>
+                <span>进入学习路线 →</span>
+              </button>
+              <a class="path-card" href="interview-questions.html">
+                <small>1-2 周内有面试</small>
+                <strong>用题库定位短板</strong>
+                <span>开始限时自测 →</span>
+              </a>
+              <button class="path-card" type="button" data-target="{html.escape(latest_target, quote=True)}">
+                <small>已经拿到面试邀约</small>
+                <strong>围绕目标公司准备</strong>
+                <span>查看近期面经 →</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="journey-section">
+            <div class="section-lead">
+              <h2>完成一轮有效准备</h2>
+              <p>按这个顺序走完，比同时打开十篇资料更有效。</p>
             </div>
             <div class="review-order">
               <button class="review-step" type="button" data-target="{html.escape(latest_target, quote=True)}"><b>01</b><span>校准岗位</span><small>先看近期面经与目标公司要求</small></button>
@@ -699,25 +946,45 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
               <a class="review-step" href="interview-questions.html"><b>03</b><span>限时自测</span><small>按公司筛选题目并记录卡点</small></a>
               <button class="review-step" type="button" data-target="{html.escape(project_target, quote=True)}"><b>04</b><span>准备项目表达</span><small>把项目讲成可追问的系统设计</small></button>
             </div>
+          </section>
 
+          <section class="journey-section">
             <div class="section-lead">
-              <h3>按目标公司进入</h3>
-              <p>每个入口汇总该公司的岗位要求、面试题与公开面经。</p>
+              <h2>先准备目标公司</h2>
+              <p>岗位要求、面试问题和公开面经放在同一个入口里。</p>
             </div>
-            <div class="company-routes">{company_cards}</div>
+            <div class="company-board">
+              <div class="company-cluster">
+                <h3>国内公司</h3>
+                <div class="company-routes">{domestic_company_cards}</div>
+              </div>
+              <div class="company-cluster">
+                <h3>海外与初创公司</h3>
+                <div class="company-routes">{global_company_cards}</div>
+              </div>
+            </div>
+          </section>
 
-            <div class="quick-links home-links">
-              <button type="button" data-target="diagrams">查看架构图</button>
-              <a href="index.html">返回经典版</a>
-              <a href="面试算法题/">打开算法题图谱</a>
-              <a href="https://github.com/Zchary1106/agent-interview-hub" target="_blank" rel="noopener">GitHub 仓库</a>
+          <section class="journey-section">
+            <div class="section-lead">
+              <h2>需要时，再深入资料库</h2>
+              <p>现有内容全部保留。点击标题进入沉浸式单篇阅读。</p>
             </div>
+            <div class="library-grid">{library_groups}</div>
+          </section>
+
+          <div class="home-links">
+            <button type="button" data-target="diagrams">查看架构图</button>
+            <a href="index.html">返回经典版</a>
+            <a href="面试算法题/">打开算法题图谱</a>
+            <a href="https://github.com/Zchary1106/agent-interview-hub" target="_blank" rel="noopener">GitHub 仓库</a>
           </div>
         </section>
 
         <section class="content-section" id="diagrams" data-title="架构图">
           <div class="section-header">
-            <p class="eyebrow">📊 Diagrams</p>
+            <button class="back-home" type="button" data-target="welcome">返回备考首页</button>
+            <p class="eyebrow">架构图</p>
             <h2>架构图</h2>
           </div>
           <div class="diagram-grid">{diagram_gallery}</div>
@@ -725,7 +992,8 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
 
         <section class="content-section" id="search-results" data-title="搜索结果">
           <div class="section-header">
-            <p class="eyebrow">🔎 Search</p>
+            <button class="back-home" type="button" data-target="welcome">返回备考首页</button>
+            <p class="eyebrow">搜索</p>
             <h2>搜索结果</h2>
           </div>
           <div id="searchResults"></div>
@@ -746,6 +1014,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       navItems.forEach(item => item.classList.toggle('active', item.dataset.target === target.id));
       currentSection = target.id;
       document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarBackdrop').classList.remove('open');
       window.scrollTo({{ top: 0, behavior: 'auto' }});
       if (updateHash && target.id !== 'welcome') {{
         history.replaceState(null, '', '#' + encodeURIComponent(target.id));
@@ -805,15 +1074,22 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     }});
 
     document.getElementById('searchInput').addEventListener('input', event => renderSearch(event.target.value));
-    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+    document.getElementById('menuBtn').addEventListener('click', () => {{
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sidebarBackdrop').classList.toggle('open');
+    }});
+    document.getElementById('sidebarBackdrop').addEventListener('click', () => {{
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarBackdrop').classList.remove('open');
+    }});
     document.getElementById('themeBtn').addEventListener('click', event => {{
-      const light = document.body.getAttribute('data-theme') === 'light';
-      if (light) {{
+      const dark = document.body.getAttribute('data-theme') === 'dark';
+      if (dark) {{
         document.body.removeAttribute('data-theme');
-        event.currentTarget.textContent = '🌙';
+        event.currentTarget.innerHTML = '<span class="theme-label">深色</span>';
       }} else {{
-        document.body.setAttribute('data-theme', 'light');
-        event.currentTarget.textContent = '☀️';
+        document.body.setAttribute('data-theme', 'dark');
+        event.currentTarget.innerHTML = '<span class="theme-label">浅色</span>';
       }}
     }});
     document.getElementById('expandBtn').addEventListener('click', () => document.querySelectorAll('details').forEach(detail => detail.open = true));
