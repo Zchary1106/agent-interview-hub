@@ -264,13 +264,13 @@ git push origin feat/add-xxx-interview
 
 ---
 
-## 📈 Star History
+## Star History
 
-<a href="https://star-history.com/#Zchary1106/agent-interview-hub&Date">
+<a href="https://www.star-history.com/?repos=Zchary1106%2Fagent-interview-hub&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Zchary1106/agent-interview-hub&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Zchary1106/agent-interview-hub&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Zchary1106/agent-interview-hub&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Zchary1106/agent-interview-hub&type=date&theme=dark&legend=top-left&sealed_token=DfBi-7mZKgMVl-BeniZrCE4YK80OxR9fwmi1922GzQnfZOHWGOe2DUGMzE8YxITxnzk0TVDUg-3VYolGAmqeUToB3b2qPRJtGfyxc36h8oOzxCImLmYPQQQ6HQEdA7KfyzP7blHww6t0vmBDWyk-GsQf3rLTW5nRIy6Dqw7Y86eqv_xvqS4N4dlOOPFZ" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Zchary1106/agent-interview-hub&type=date&legend=top-left&sealed_token=DfBi-7mZKgMVl-BeniZrCE4YK80OxR9fwmi1922GzQnfZOHWGOe2DUGMzE8YxITxnzk0TVDUg-3VYolGAmqeUToB3b2qPRJtGfyxc36h8oOzxCImLmYPQQQ6HQEdA7KfyzP7blHww6t0vmBDWyk-GsQf3rLTW5nRIy6Dqw7Y86eqv_xvqS4N4dlOOPFZ" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Zchary1106/agent-interview-hub&type=date&legend=top-left&sealed_token=DfBi-7mZKgMVl-BeniZrCE4YK80OxR9fwmi1922GzQnfZOHWGOe2DUGMzE8YxITxnzk0TVDUg-3VYolGAmqeUToB3b2qPRJtGfyxc36h8oOzxCImLmYPQQQ6HQEdA7KfyzP7blHww6t0vmBDWyk-GsQf3rLTW5nRIy6Dqw7Y86eqv_xvqS4N4dlOOPFZ" />
  </picture>
 </a>
 
