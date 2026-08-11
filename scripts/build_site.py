@@ -511,13 +511,25 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     md_link_map = build_md_link_map(docs)
     questions = load_questions()
     question_count = sum(len(company.get("questions", [])) for company in questions)
-    question_company_count = len(questions)
-    company_count = sum(1 for name in COMPANY_ORDER if (ROOT / name).exists())
-    diagram_count = len(list(DIAGRAMS_DIR.glob("*.svg"))) if DIAGRAMS_DIR.exists() else 0
-
     sections = "\n".join(render_markdown_doc(doc, md_link_map) for doc in docs)
     sidebar = render_sidebar(groups)
     diagram_gallery = render_diagram_gallery()
+    by_path = {doc.rel_path: doc.section_id for doc in docs}
+    learning_target = by_path.get("Agent工程师学习路线图.md", "welcome")
+    latest_target = by_path.get("通用知识/最新AI-Agent面经索引.md", "welcome")
+    core_target = by_path.get("通用知识/Agent核心概念与设计模式.md", "welcome")
+    project_target = by_path.get("项目实战/01-RAG知识问答系统.md", "welcome")
+    company_cards = "\n".join(
+        f"""
+        <button class="company-route" type="button" data-target="{html.escape(company_docs[0].section_id, quote=True)}">
+          <span>{COMPANY_ICONS.get(company, "🏢")}</span>
+          <strong>{html.escape(company)}</strong>
+          <small>{len(company_docs)} 篇岗位与面经资料</small>
+        </button>
+        """
+        for company in COMPANY_ORDER
+        if (company_docs := [doc for doc in docs if doc.path.parent.name == company])
+    )
 
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -576,6 +588,32 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     .stat b {{ display: block; color: var(--accent-2); font-size: 28px; }}
     .quick-links {{ display: flex; flex-wrap: wrap; gap: 10px; }}
     .quick-links a, .quick-links button {{ border: 1px solid var(--border); border-radius: 999px; padding: 8px 14px; color: var(--text); background: var(--panel); text-decoration: none; cursor: pointer; }}
+    .prep-intro {{ max-width: 760px; }}
+    .prep-intro p {{ color: var(--muted); font-size: 17px; }}
+    .prep-kicker {{ margin: 0 0 10px; color: var(--accent-2); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; }}
+    .start-grid {{ display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 12px; margin: 30px 0; }}
+    .start-card {{ display: flex; min-height: 180px; flex-direction: column; align-items: flex-start; gap: 10px; padding: 22px; border: 1px solid var(--border); border-radius: 16px; background: var(--panel); color: var(--text); text-align: left; text-decoration: none; transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease; }}
+    .start-card:hover {{ border-color: var(--accent); background: var(--panel-2); transform: translateY(-3px); }}
+    .start-card:focus-visible, .company-route:focus-visible {{ outline: 3px solid var(--accent-2); outline-offset: 3px; }}
+    .start-card strong {{ font-size: 20px; }}
+    .start-card span {{ color: var(--muted); }}
+    .start-card em {{ margin-top: auto; color: var(--accent-2); font-size: 14px; font-style: normal; }}
+    .section-lead {{ margin: 44px 0 14px; }}
+    .section-lead h3 {{ margin: 0; font-size: 22px; }}
+    .section-lead p {{ margin: 4px 0 0; color: var(--muted); }}
+    .review-order {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }}
+    .review-step {{ display: block; min-height: 132px; padding: 18px; border: 0; border-right: 1px solid var(--border); background: var(--panel); color: var(--text); text-align: left; cursor: pointer; text-decoration: none; transition: background 0.2s ease; }}
+    .review-step:last-child {{ border-right: 0; }}
+    .review-step:hover {{ background: var(--panel-2); }}
+    .review-step b {{ display: block; color: var(--accent); font-variant-numeric: tabular-nums; }}
+    .review-step span {{ display: block; margin-top: 8px; font-weight: 700; }}
+    .review-step small {{ color: var(--muted); }}
+    .company-routes {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }}
+    .company-route {{ display: grid; grid-template-columns: auto 1fr; gap: 0 9px; align-items: center; padding: 14px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--text); text-align: left; cursor: pointer; }}
+    .company-route:hover {{ border-color: var(--border); background: var(--panel); }}
+    .company-route span {{ grid-row: span 2; font-size: 20px; }}
+    .company-route small {{ color: var(--muted); }}
+    .home-links {{ margin-top: 30px; }}
     .section-header {{ display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px; margin-bottom: 18px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }}
     .section-header h2 {{ width: 100%; margin: 0; color: var(--accent); font-size: 28px; }}
     .eyebrow {{ margin: 0; color: var(--muted); font-size: 13px; }}
@@ -602,6 +640,9 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       .topbar {{ padding: 10px 12px; }}
       .content {{ padding: 18px; }}
       .stats {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+      .start-grid, .review-order {{ grid-template-columns: 1fr; }}
+      .review-step {{ border-right: 0; border-bottom: 1px solid var(--border); }}
+      .review-step:last-child {{ border-bottom: 0; }}
     }}
   </style>
 </head>
@@ -625,19 +666,50 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       <div class="content">
         <section class="content-section active" id="welcome" data-title="首页">
           <div class="hero">
-            <h2>AI Agent 工程师面试知识库</h2>
-            <p>覆盖通用知识、项目实战、公司面经与交互式面试题库。页面由 <code>scripts/build_site.py</code> 从仓库内容自动生成。</p>
-            <div class="stats">
-              <div class="stat"><b>{len(docs)}</b><span>篇文档</span></div>
-              <div class="stat"><b>{company_count}</b><span>家公司/类别</span></div>
-              <div class="stat"><b>{question_count}</b><span>道交互题</span></div>
-              <div class="stat"><b>{diagram_count}</b><span>张架构图</span></div>
+            <div class="prep-intro">
+              <p class="prep-kicker">AGENT INTERVIEW PREP</p>
+              <h2>先确定下一步，再开始刷资料</h2>
+              <p>无论你在补基础、冲刺面试，还是准备一家具体公司，都从下面一条路径进入。资料库和搜索始终在左侧，避免在 75 篇文档里盲目翻找。</p>
             </div>
-            <div class="quick-links">
+            <div class="start-grid">
+              <button class="start-card" type="button" data-target="{html.escape(learning_target, quote=True)}">
+                <strong>我刚开始准备</strong>
+                <span>从 LLM、RAG、Agent 到项目表达，按学习路线建立完整框架。</span>
+                <em>查看学习路线 →</em>
+              </button>
+              <a class="start-card" href="interview-questions.html">
+                <strong>我在冲刺面试</strong>
+                <span>先用高频题定位短板，再展开参考答案和思考逻辑。</span>
+                <em>进入题库 →</em>
+              </a>
+              <button class="start-card" type="button" data-target="{html.escape(latest_target, quote=True)}">
+                <strong>我有目标公司</strong>
+                <span>从近期公开面经、岗位要求和公司题目开始准备。</span>
+                <em>查看最新面经 →</em>
+              </button>
+            </div>
+
+            <div class="section-lead">
+              <h3>今天怎么复习</h3>
+              <p>每次按一条完整链路走，不要同时打开十篇资料。</p>
+            </div>
+            <div class="review-order">
+              <button class="review-step" type="button" data-target="{html.escape(latest_target, quote=True)}"><b>01</b><span>校准岗位</span><small>先看近期面经与目标公司要求</small></button>
+              <button class="review-step" type="button" data-target="{html.escape(core_target, quote=True)}"><b>02</b><span>补核心概念</span><small>用 Agent、RAG、工具调用打底</small></button>
+              <a class="review-step" href="interview-questions.html"><b>03</b><span>限时自测</span><small>按公司筛选题目并记录卡点</small></a>
+              <button class="review-step" type="button" data-target="{html.escape(project_target, quote=True)}"><b>04</b><span>准备项目表达</span><small>把项目讲成可追问的系统设计</small></button>
+            </div>
+
+            <div class="section-lead">
+              <h3>按目标公司进入</h3>
+              <p>每个入口汇总该公司的岗位要求、面试题与公开面经。</p>
+            </div>
+            <div class="company-routes">{company_cards}</div>
+
+            <div class="quick-links home-links">
               <button type="button" data-target="diagrams">查看架构图</button>
               <a href="index.html">返回经典版</a>
-              <a href="interview-questions.html">打开交互式题库（{question_company_count} 类）</a>
-              <a href="面试算法题/">打开面试算法题图谱</a>
+              <a href="面试算法题/">打开算法题图谱</a>
               <a href="https://github.com/Zchary1106/agent-interview-hub" target="_blank" rel="noopener">GitHub 仓库</a>
             </div>
           </div>
