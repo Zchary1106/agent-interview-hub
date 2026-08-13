@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-29",
+  "generated_at": "2026-08-13",
   "description": "Curated high-quality AI Agent, LLM, and RAG interview-experience/source candidates collected from public web sources. Entries are summaries with source links or source lookup hints, not copied source content.",
   "criteria": {
-    "minimum_score": 5,
+    "minimum_score": 4,
     "license_note": "Use entries as citations and summarized leads. Do not copy long platform content into repository documents."
   },
   "items": [
@@ -765,6 +765,184 @@
         "Failure Diagnosis"
       ],
       "summary": "英文 RAG 100+ Q&A，适合补充高级 RAG 题和英文参考。"
+    },
+    {
+      "id": "nowcoder-xiaohongshu-agentic-fullstack-2026-08",
+      "platform": "牛客",
+      "title": "小红书大模型平台 Agentic 全栈研发练习生一面凉经",
+      "company": "小红书",
+      "published_at": "2026-08-07",
+      "source_url": "https://www.nowcoder.com/feed/main/detail/e5e9311a623940eead6ec98c65e7f9e8",
+      "score": 5,
+      "topics": [
+        "Agent Architecture",
+        "Harness",
+        "Skill",
+        "LangGraph",
+        "RAG",
+        "Scalability"
+      ],
+      "summary": "一手凉经，集中追问 Agent 编排、Skill/Tool、模型一致性、十几万次日请求扩容、SQLite 选型和 LangGraph/自研框架取舍。"
+    },
+    {
+      "id": "nowcoder-mihoyo-agent-first-round-2026-08",
+      "platform": "牛客",
+      "title": "米哈游 AI Agent 开发提前批一面面经分享",
+      "company": "米哈游",
+      "published_at": "2026-08-09",
+      "source_url": "https://www.nowcoder.com/discuss/916476300372500480",
+      "score": 4,
+      "topics": [
+        "AI Coding",
+        "Hallucination",
+        "MCP",
+        "Skill",
+        "Memory",
+        "Agent Evaluation"
+      ],
+      "summary": "近期答题解析型面经，覆盖 AI coding 质量门禁、幻觉治理、Skill/MCP、Agent 项目深挖和现场编码。"
+    },
+    {
+      "id": "nowcoder-taotian-agent-social-first-round-2026-07",
+      "platform": "牛客",
+      "title": "淘天 Agent 社招一面面经分享",
+      "company": "阿里/淘天",
+      "published_at": "2026-07-22",
+      "source_url": "https://www.nowcoder.com/discuss/909920471301226496",
+      "score": 4,
+      "topics": [
+        "Multi-task Learning",
+        "DPO",
+        "GRPO",
+        "Memory",
+        "Skill",
+        "Trajectory Reward"
+      ],
+      "summary": "近期社招答题解析，偏算法与训练，重点涉及多任务冲突、DPO/GRPO、Agent 定义、Memory 和多步工具轨迹奖励。"
+    },
+    {
+      "id": "nowcoder-bytedance-ant-tencent-agent-intern-2026-07",
+      "platform": "牛客",
+      "title": "字节、蚂蚁、腾讯 Agent 实习面经",
+      "company": "字节跳动/蚂蚁/腾讯",
+      "published_at": "2026-07-07",
+      "source_url": "https://www.nowcoder.com/discuss/904029765160497152",
+      "score": 5,
+      "topics": [
+        "Transformer",
+        "RAG",
+        "LoRA",
+        "Model Training",
+        "Algorithms"
+      ],
+      "summary": "一手多公司凉经，展示字节偏基础与项目、腾讯调剂岗位偏算法、蚂蚁偏微调与 RAG 的考察差异。"
+    },
+    {
+      "id": "blanked-openai-anthropic-interviews-2026-08",
+      "platform": "Blanked",
+      "title": "28 份 OpenAI 与 Anthropic 面试经历对比",
+      "company": "OpenAI/Anthropic",
+      "published_at": "2026-08-06",
+      "source_url": "https://www.blanked.work/blog/openai-vs-anthropic-interviews",
+      "score": 5,
+      "topics": [
+        "System Design",
+        "Reliability",
+        "Safety",
+        "Production Engineering",
+        "Behavioral"
+      ],
+      "summary": "基于 28 份公开候选人经历的研究：OpenAI 更频繁追问规模、失败模式与可靠性，Anthropic 更强调安全判断和不确定条件下的决策。"
+    },
+    {
+      "id": "nowcoder-alibaba-taotian-agent-intern-2026-04",
+      "platform": "牛客",
+      "title": "阿里淘天 Agent 开发日常实习一面",
+      "company": "阿里/淘天",
+      "published_at": "2026-04-15",
+      "source_url": "https://www.nowcoder.com/feed/main/detail/566fa6594dcc446a82bd203f139c45c2",
+      "score": 5,
+      "topics": [
+        "State Machine",
+        "Workflow",
+        "MCP",
+        "Skill",
+        "Context Engineering",
+        "AI Coding"
+      ],
+      "summary": "一手实习面经，强烈关注 Agent/Workflow 边界、动态上下文、RAG 分块、ReAct/CoT 取舍和 AI coding 完整交付。"
+    },
+    {
+      "id": "nowcoder-bytedance-agent-90min-2026-04",
+      "platform": "牛客",
+      "title": "字节 Agent 开发一面 90 分钟凉经",
+      "company": "字节跳动",
+      "published_at": "2026-04-09",
+      "source_url": "https://www.nowcoder.com/feed/main/detail/91c5394e57c14927841d7a86bfe427c2",
+      "score": 5,
+      "topics": [
+        "Code Agent",
+        "Context Engineering",
+        "Skill",
+        "RAG",
+        "Self-Attention",
+        "Algorithms"
+      ],
+      "summary": "一手 90 分钟面经，项目追问覆盖代码 Agent、覆盖率与插桩、查询改写、上下文工程、Skills、LLM 原理和语言基础。"
+    },
+    {
+      "id": "nowcoder-tencent-agent-app-2026-04",
+      "platform": "牛客",
+      "title": "腾讯 AI Agent 应用开发一面凉经",
+      "company": "腾讯",
+      "published_at": "2026-04-04",
+      "source_url": "https://www.nowcoder.com/feed/main/detail/28edcddf0c204c08b6562a3e6e6b73ae",
+      "score": 5,
+      "topics": [
+        "Coding Agent",
+        "SubAgent",
+        "Context Engineering",
+        "GRPO",
+        "QLoRA",
+        "Python"
+      ],
+      "summary": "一手凉经，围绕自研 Coding Agent 与 Claude Code 的差异持续追问，并延伸到 SubAgent、后训练和 Python 基础。"
+    },
+    {
+      "id": "nowcoder-bytedance-agent-intern-2026-03",
+      "platform": "牛客",
+      "title": "字节 Agent 开发实习一面",
+      "company": "字节跳动",
+      "published_at": "2026-03-18",
+      "source_url": "https://www.nowcoder.com/feed/main/detail/6506d4b4addf447c8e2c135b5088cdc8",
+      "score": 5,
+      "topics": [
+        "Agent Framework",
+        "Memory",
+        "Context Compression",
+        "RAG",
+        "MCP",
+        "A2A"
+      ],
+      "summary": "一手实习面经，集中覆盖 Memory、上下文压缩、RAG、MCP、Skill 渐进式披露、OpenClaw 与 A2A。"
+    },
+    {
+      "id": "nowcoder-alibaba-taotian-agent-campus-2026-02",
+      "platform": "牛客",
+      "title": "阿里淘天大模型 Agent 校招面经",
+      "company": "阿里/淘天",
+      "published_at": "2026-02-27",
+      "source_url": "https://www.nowcoder.com/feed/main/detail/78d6c8c30f1741e6b0a1a02d7b4bbfab",
+      "score": 5,
+      "topics": [
+        "Attention",
+        "SFT",
+        "RAG Evaluation",
+        "DPO",
+        "GRPO",
+        "Tool Orchestration"
+      ],
+      "summary": "一手校招面经，覆盖 Attention、SFT 与后训练、RAG 评估、Agent 多步规划、工具调度和延迟优化。"
     }
   ]
 }

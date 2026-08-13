@@ -8,11 +8,22 @@
 |---|---:|---|
 | 小红书 | 13 | 时效强，覆盖字节、腾讯、美团、快手、阿里、百度、小红书等一面/二面 |
 | GitHub | 10 | 高质量题库和学习资料，适合作为系统复习资料 |
-| 牛客 | 8 | 国内大厂面经密度高，适合补充真实面试流程和追问 |
+| 牛客 | 17 | 国内大厂面经密度高，适合补充真实面试流程和追问 |
 | CSDN / 博客园 / 掘金 | 8 | 适合作为 Agent/RAG 高频题和专题归纳来源 |
 | 知乎 | 2 | 适合作为大模型算法实习和海外 AI 面试补充 |
+| 海外研究 | 1 | 汇总 OpenAI / Anthropic 公开候选人经历，适合做流程与考察重点对比 |
 
 > 注：小红书搜索结果链接依赖登录态和平台签名，公开静态站直链容易失效。因此本文只保留小红书原标题，阅读时请在小红书站内搜索对应标题。
+
+## 2026-08 最新补充
+
+| 日期 | 公司 | 来源 | 标题 | 核心考点 |
+|---|---|---|---|---|
+| 2026-08-07 | 小红书 | 牛客 | [大模型平台 Agentic 全栈研发练习生一面凉经](https://www.nowcoder.com/feed/main/detail/e5e9311a623940eead6ec98c65e7f9e8) | Harness、编排层、Skill/Tool、LangGraph、模型一致性、扩容 |
+| 2026-08-09 | 米哈游 | 牛客 | [AI Agent 开发提前批一面面经分享](https://www.nowcoder.com/discuss/916476300372500480) | AI coding、幻觉治理、Skill/MCP、项目深挖、Agent 评估 |
+| 2026-07-22 | 阿里淘天 | 牛客 | [Agent 社招一面面经分享](https://www.nowcoder.com/discuss/909920471301226496) | 多任务冲突、DPO/GRPO、Memory、Skill、多步轨迹奖励 |
+| 2026-07-07 | 字节/蚂蚁/腾讯 | 牛客 | [Agent 实习面经](https://www.nowcoder.com/discuss/904029765160497152) | Transformer、RAG、LoRA、训练参数、算法与场景题 |
+| 2026-08-06 | OpenAI/Anthropic | Blanked | [28 份公开面试经历对比](https://www.blanked.work/blog/openai-vs-anthropic-interviews) | OpenAI 的规模/可靠性，Anthropic 的安全/价值判断 |
 
 ## P0：优先阅读的真实面经
 
@@ -28,6 +39,8 @@
 | 博客园 | [字节 AI Agent 二面（飞连）面试题与参考解答](https://www.cnblogs.com/tuaran/p/20164742) | Tool Calling、bad case、Memory、RAG优化、Agentic RAG |
 | CSDN | [字节跳动大模型实习面经：从 Agent 记忆到 RAG 优化](https://gitcode.csdn.net/6a2ccdca10ee7a33f27c07bf.html) | 长短期记忆、Query Rewrite、Hybrid Retrieval、RRF、Rerank、HyDE |
 | CSDN | [双非本｜字节跳动飞书团队 RAG 面经](https://devpress.csdn.net/v1/article/detail/151567056) | BGE-M3、Qwen3-Embedding、LoRA、多路召回、父子文档 |
+| 牛客 | [字节 Agent 开发一面 90 分钟凉经](https://www.nowcoder.com/feed/main/detail/91c5394e57c14927841d7a86bfe427c2) | 代码 Agent、覆盖率/插桩、查询改写、上下文工程、Skills |
+| 牛客 | [字节 Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/6506d4b4addf447c9a3ae73570c5d00b6) | Memory、上下文压缩、MCP、Skill、OpenClaw、A2A |
 
 ### 腾讯
 
@@ -37,6 +50,7 @@
 | 小红书 | 腾讯 Agent二面凉经带答案（小红书站内搜索原标题） | Agent 二面深挖 |
 | 小红书 | 腾讯 ai 应用开发 一面（小红书站内搜索原标题） | AI 应用开发一面 |
 | 牛客 | [大模型、Agent面经总结【04/28】腾讯 / 百度 总结](https://www.nowcoder.com/discuss/878600528970735616) | Agent编排、RAG热更新、失败重试、金融安全、LoRA/DPO |
+| 牛客 | [腾讯 AI Agent 应用开发一面凉经](https://www.nowcoder.com/feed/main/detail/28edcddf0c204c08b6562a3e6e6b73ae) | Coding Agent、SubAgent、上下文管理、GRPO/QLoRA、AI 工具边界 |
 
 ### 阿里 / 蚂蚁 / 淘天
 
@@ -47,6 +61,9 @@
 | 牛客 | [5月20日，蚂蚁智能体与大模型应用 一面](https://www.nowcoder.com/discuss/888874988554448896) | 幻觉治理、Skill、Spring AI、Claude Code、混合检索 |
 | 牛客 | [Agent 开发面经总结【04/24】阿里巴巴 / 蚂蚁 / 字节跳动 总结](https://www.nowcoder.com/discuss/877151327091027968) | Multi-Agent、RAG、MCP、Function Calling、LangChain/LangGraph |
 | 牛客 | [蚂蚁秋招时间线+面经](https://www.nowcoder.com/discuss/800426409796624384) | RAG vs Fine-tuning、Rerank、NDCG、Agent评测、MCP/A2A |
+| 牛客 | [淘天 Agent 社招一面面经分享](https://www.nowcoder.com/discuss/909920471301226496) | 多任务训练、DPO/GRPO、Memory、Skill、轨迹奖励 |
+| 牛客 | [淘天 Agent 开发日常实习一面](https://www.nowcoder.com/feed/main/detail/566fa6594dcc446a82bd203f139c45c2) | 状态机/Workflow、动态上下文、MCP/Skill、AI coding |
+| 牛客 | [淘天大模型 Agent 校招面经](https://www.nowcoder.com/feed/main/detail/78d6c8c30f1741e6b0a1a02d7b4bbfab) | SFT、RAG 评估、DPO/GRPO、工具调度、延迟优化 |
 
 ### 美团 / 快手 / 百度 / 京东 / 小红书
 
@@ -60,6 +77,8 @@
 | 百度 | 小红书 | 百度 大模型应用开发 一面面经（小红书站内搜索原标题） | 多模态RAG、表格切片、Memory总结、Function Call、语义缓存 |
 | 京东 | 牛客 | [京东 Agent开发 暑期一面](https://www.nowcoder.com/discuss/876932752833077248) | 电商RAG、意图识别、Redis向量检索、HNSW、幻觉兜底 |
 | 小红书 | 小红书 | 小红书 AI Agent开发一面（小红书站内搜索原标题） | 电商Agent、主从架构、Tool调用、RAG索引、Prompt调试 |
+| 小红书 | 牛客 | [大模型平台 Agentic 全栈研发练习生一面凉经](https://www.nowcoder.com/feed/main/detail/e5e9311a623940eead6ec98c65e7f9e8) | Harness、编排层、Skill、模型一致性、LangGraph、扩容 |
+| 米哈游 | 牛客 | [AI Agent 开发提前批一面面经分享](https://www.nowcoder.com/discuss/916476300372500480) | AI coding、幻觉治理、Skill/MCP、项目深挖、现场编码 |
 | 理想汽车 | 知乎 | [Li Auto Large Model Algorithm Intern experience](https://www.zhihu.com/en/article/680860432) | RAG、数据集规模、SFT、CoT/ToT、部署、vLLM |
 
 ## P1：专题题库与高频考点
