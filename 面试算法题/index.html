@@ -765,7 +765,7 @@
         <span class="brand-mark" aria-hidden="true">⌁</span>
         <span>Agent Interview Map</span>
       </div>
-      <span class="date-badge">更新至 2026-07-27</span>
+      <span class="date-badge">更新至 2026-08-15</span>
     </nav>
 
     <section class="hero">
@@ -779,7 +779,7 @@
       </div>
       <aside class="hero-note">
         <strong>核心发现：</strong>传统算法没有消失。当前样本最集中的是网格 DFS、链表、
-        DP/回溯；同时，Agent 直岗开始用可运行的工具权限、重试与回滚代码替代纯 LeetCode。
+        DP/回溯；本次补充滑动窗口、双指针、哈希、二分、堆与单调栈等 18 道高频必刷题。
       </aside>
     </section>
 
@@ -793,7 +793,7 @@
         <span class="stat-label">互联网公司组</span>
       </article>
       <article class="stat">
-        <strong class="stat-value">14</strong>
+        <strong class="stat-value">32</strong>
         <span class="stat-label">明确算法 / 编程题</span>
       </article>
       <article class="stat">
@@ -823,10 +823,18 @@
     <section class="insights" aria-label="趋势与准备建议">
       <article class="insight-panel">
         <h3>题型分布</h3>
-        <p>按 14 道明确算法题归类；同一道题只计入一个主类别。</p>
+        <p>按 32 道明确算法题归类；LC 23 与 LC 206 已存在，因此未重复添加。</p>
         <div class="bars">
           <div>
             <div class="bar-head"><span>DP / 贪心 / 回溯</span><span>6</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+          </div>
+          <div>
+            <div class="bar-head"><span>链表</span><span>4</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 67%"></div></div>
+          </div>
+          <div>
+            <div class="bar-head"><span>滑动窗口 / 双指针</span><span>6</span></div>
             <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
           </div>
           <div>
@@ -834,16 +842,20 @@
             <div class="bar-track"><div class="bar-fill" style="width: 50%"></div></div>
           </div>
           <div>
-            <div class="bar-head"><span>链表</span><span>3</span></div>
+            <div class="bar-head"><span>堆 / 选择</span><span>3</span></div>
             <div class="bar-track"><div class="bar-fill" style="width: 50%"></div></div>
           </div>
           <div>
-            <div class="bar-head"><span>堆 / 选择</span><span>1</span></div>
-            <div class="bar-track"><div class="bar-fill" style="width: 17%"></div></div>
+            <div class="bar-head"><span>栈 / 单调栈</span><span>3</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 50%"></div></div>
           </div>
           <div>
-            <div class="bar-head"><span>数值计算</span><span>1</span></div>
-            <div class="bar-track"><div class="bar-fill" style="width: 17%"></div></div>
+            <div class="bar-head"><span>哈希 / 前缀和</span><span>3</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 50%"></div></div>
+          </div>
+          <div>
+            <div class="bar-head"><span>二分 / 区间</span><span>3</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 50%"></div></div>
           </div>
         </div>
       </article>
@@ -854,7 +866,7 @@
         <ol class="prep-list">
           <li class="prep-item">
             <span class="prep-index">01</span>
-            <div><strong>必刷原题</strong><span>LC 19、23、40、46、152、200、206、215、221、695，以及 LC 376 的恢复序列变形。</span></div>
+            <div><strong>必刷原题</strong><span>优先覆盖五星题：LC 1、3、11、15、20、23、33、42、49、56、76、84、206、295、347、438、560、739。</span></div>
           </li>
           <li class="prep-item">
             <span class="prep-index">02</span>
@@ -879,7 +891,7 @@
     </aside>
 
     <footer>
-      <span>整理日期：2026-07-27</span>
+      <span>整理日期：2026-08-15</span>
       <span>Java 解法用于面试复习，默认隐藏并按需展开</span>
     </footer>
   </main>
@@ -1041,6 +1053,186 @@
         detail: "回溯时维护路径与已选状态，注意复制答案、撤销选择和重复元素变形；对应 LeetCode 46。",
         tags: ["回溯", "DFS", "LC 46"],
         sourceUrl: "https://www.nowcoder.com/feed/main/detail/f78abe9951f74a8381a17d3876576213"
+      },
+      {
+        id: "longest-substring-without-repeating",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "滑动窗口",
+        match: "高频必刷",
+        question: "3. 无重复字符的最长子串",
+        detail: "右指针扩展窗口，哈希表记录字符最近位置，左指针跳过重复字符；时间复杂度 O(n)。",
+        tags: ["滑动窗口", "Medium", "⭐⭐⭐⭐⭐", "LC 3"]
+      },
+      {
+        id: "minimum-window-substring",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "滑动窗口",
+        match: "高频必刷",
+        question: "76. 最小覆盖子串",
+        detail: "维护目标字符需求和当前窗口计数，满足全部字符后持续收缩左边界；对应 LeetCode 76。",
+        tags: ["滑动窗口", "Hard", "⭐⭐⭐⭐⭐", "LC 76"]
+      },
+      {
+        id: "find-all-anagrams",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "滑动窗口",
+        match: "高频必刷",
+        question: "438. 找到字符串中所有字母异位词",
+        detail: "使用固定长度窗口维护 26 个字母的频次差，在窗口长度等于目标串时判断是否匹配。",
+        tags: ["滑动窗口", "Medium", "⭐⭐⭐⭐⭐", "LC 438"]
+      },
+      {
+        id: "three-sum",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "双指针",
+        match: "高频必刷",
+        question: "15. 三数之和",
+        detail: "排序后固定第一个数，使用左右指针寻找另外两个数，并在各层跳过重复值。",
+        tags: ["双指针", "Medium", "⭐⭐⭐⭐⭐", "LC 15"]
+      },
+      {
+        id: "container-with-most-water",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "双指针",
+        match: "高频必刷",
+        question: "11. 盛最多水的容器",
+        detail: "从两端向中间移动较短的边，因为面积上限由较短边决定；时间复杂度 O(n)。",
+        tags: ["双指针", "Medium", "⭐⭐⭐⭐⭐", "LC 11"]
+      },
+      {
+        id: "trapping-rain-water",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "双指针",
+        match: "高频必刷",
+        question: "42. 接雨水",
+        detail: "双指针维护左右最高柱，较低一侧当前可接水量已确定；也可使用单调栈。",
+        tags: ["双指针", "Hard", "⭐⭐⭐⭐⭐", "LC 42"]
+      },
+      {
+        id: "two-sum",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "哈希",
+        match: "高频必刷",
+        question: "1. 两数之和",
+        detail: "遍历数组时用哈希表保存已见数值与下标，检查 target - nums[i] 是否存在。",
+        tags: ["哈希", "Easy", "⭐⭐⭐⭐⭐", "LC 1"]
+      },
+      {
+        id: "group-anagrams",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "哈希",
+        match: "高频必刷",
+        question: "49. 字母异位词分组",
+        detail: "使用排序后的字符串或字符频次数组作为哈希键，将字母组成相同的字符串分组。",
+        tags: ["哈希", "Medium", "⭐⭐⭐⭐⭐", "LC 49"]
+      },
+      {
+        id: "subarray-sum-equals-k",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "前缀和",
+        match: "高频必刷",
+        question: "560. 和为 K 的子数组",
+        detail: "若当前前缀和为 sum，则此前出现过的 sum-k 均能形成一个和为 k 的子数组。",
+        tags: ["前缀和", "Medium", "⭐⭐⭐⭐⭐", "LC 560"]
+      },
+      {
+        id: "merge-intervals",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "区间",
+        match: "高频必刷",
+        question: "56. 合并区间",
+        detail: "按区间起点排序，若当前起点不大于已合并区间终点则合并，否则开启新区间。",
+        tags: ["区间", "Medium", "⭐⭐⭐⭐⭐", "LC 56"]
+      },
+      {
+        id: "search-rotated-array",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "二分",
+        match: "高频必刷",
+        question: "33. 搜索旋转排序数组",
+        detail: "每轮二分至少有一半有序，根据目标是否落在有序半区决定下一次搜索范围。",
+        tags: ["二分", "Medium", "⭐⭐⭐⭐⭐", "LC 33"]
+      },
+      {
+        id: "find-min-rotated-array",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "二分",
+        match: "高频必刷",
+        question: "153. 寻找旋转排序数组中的最小值",
+        detail: "将中点与右端比较：中点更大说明最小值在右侧，否则最小值位于中点及其左侧。",
+        tags: ["二分", "Medium", "⭐⭐⭐⭐", "LC 153"]
+      },
+      {
+        id: "top-k-frequent",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "堆",
+        match: "高频必刷",
+        question: "347. 前 K 个高频元素",
+        detail: "哈希统计频次，再用大小为 k 的小顶堆保留频率最高的元素；也可桶排序。",
+        tags: ["堆", "Medium", "⭐⭐⭐⭐⭐", "LC 347"]
+      },
+      {
+        id: "median-finder",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "堆",
+        match: "高频必刷",
+        question: "295. 数据流的中位数",
+        detail: "大顶堆保存较小的一半，小顶堆保存较大的一半，维持元素数量差不超过 1。",
+        tags: ["堆", "Hard", "⭐⭐⭐⭐⭐", "LC 295"]
+      },
+      {
+        id: "linked-list-cycle-ii",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "链表",
+        match: "高频必刷",
+        question: "142. 环形链表 II",
+        detail: "快慢指针相遇后，一个指针回到头节点，两者同速前进，再次相遇处即为环入口。",
+        tags: ["链表", "Medium", "⭐⭐⭐⭐", "LC 142"]
+      },
+      {
+        id: "valid-parentheses",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "栈",
+        match: "高频必刷",
+        question: "20. 有效的括号",
+        detail: "遇到左括号入栈，遇到右括号检查栈顶是否为对应左括号，最后栈必须为空。",
+        tags: ["栈", "Easy", "⭐⭐⭐⭐⭐", "LC 20"]
+      },
+      {
+        id: "daily-temperatures",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "单调栈",
+        match: "高频必刷",
+        question: "739. 每日温度",
+        detail: "维护温度下标的递减栈，遇到更高温度时弹出栈顶并计算等待天数。",
+        tags: ["单调栈", "Medium", "⭐⭐⭐⭐⭐", "LC 739"]
+      },
+      {
+        id: "largest-rectangle-histogram",
+        company: "高频题库",
+        date: "2026-08-15",
+        role: "单调栈",
+        match: "高频必刷",
+        question: "84. 柱状图中最大的矩形",
+        detail: "使用递增栈确定每根柱子左右第一个更矮位置，弹栈时计算以该高度为最矮柱的面积。",
+        tags: ["单调栈", "Hard", "⭐⭐⭐⭐⭐", "LC 84"]
       }
     ];
 
@@ -1610,6 +1802,460 @@ class Solution {
                 + area(grid, row, col + 1)
                 + area(grid, row, col - 1);
     }
+}`,
+
+      "longest-substring-without-repeating": String.raw`import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> lastIndex = new HashMap<>();
+        int left = 0;
+        int answer = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char current = s.charAt(right);
+            if (lastIndex.containsKey(current)) {
+                left = Math.max(left, lastIndex.get(current) + 1);
+            }
+            lastIndex.put(current, right);
+            answer = Math.max(answer, right - left + 1);
+        }
+        return answer;
+    }
+}`,
+
+      "minimum-window-substring": String.raw`class Solution {
+    public String minWindow(String s, String t) {
+        if (t.length() > s.length()) {
+            return "";
+        }
+
+        int[] need = new int[128];
+        for (char c : t.toCharArray()) {
+            need[c]++;
+        }
+
+        int missing = t.length();
+        int left = 0;
+        int bestStart = 0;
+        int bestLength = Integer.MAX_VALUE;
+
+        for (int right = 0; right < s.length(); right++) {
+            char added = s.charAt(right);
+            if (need[added] > 0) {
+                missing--;
+            }
+            need[added]--;
+
+            while (missing == 0) {
+                int length = right - left + 1;
+                if (length < bestLength) {
+                    bestLength = length;
+                    bestStart = left;
+                }
+
+                char removed = s.charAt(left++);
+                need[removed]++;
+                if (need[removed] > 0) {
+                    missing++;
+                }
+            }
+        }
+        return bestLength == Integer.MAX_VALUE
+                ? ""
+                : s.substring(bestStart, bestStart + bestLength);
+    }
+}`,
+
+      "find-all-anagrams": String.raw`import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> answer = new ArrayList<>();
+        if (p.length() > s.length()) {
+            return answer;
+        }
+
+        int[] target = new int[26];
+        int[] window = new int[26];
+        for (char c : p.toCharArray()) {
+            target[c - 'a']++;
+        }
+
+        for (int right = 0; right < s.length(); right++) {
+            window[s.charAt(right) - 'a']++;
+            if (right >= p.length()) {
+                window[s.charAt(right - p.length()) - 'a']--;
+            }
+            if (right + 1 >= p.length() && Arrays.equals(target, window)) {
+                answer.add(right - p.length() + 1);
+            }
+        }
+        return answer;
+    }
+}`,
+
+      "three-sum": String.raw`import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> answer = new ArrayList<>();
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            if (nums[i] > 0) {
+                break;
+            }
+
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) {
+                    answer.add(List.of(nums[i], nums[left], nums[right]));
+                    int leftValue = nums[left];
+                    int rightValue = nums[right];
+                    while (left < right && nums[left] == leftValue) {
+                        left++;
+                    }
+                    while (left < right && nums[right] == rightValue) {
+                        right--;
+                    }
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        return answer;
+    }
+}`,
+
+      "container-with-most-water": String.raw`class Solution {
+    public int maxArea(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int answer = 0;
+
+        while (left < right) {
+            int width = right - left;
+            answer = Math.max(
+                    answer,
+                    width * Math.min(height[left], height[right]));
+            if (height[left] <= height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return answer;
+    }
+}`,
+
+      "trapping-rain-water": String.raw`class Solution {
+    public int trap(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int leftMaximum = 0;
+        int rightMaximum = 0;
+        int water = 0;
+
+        while (left < right) {
+            if (height[left] <= height[right]) {
+                leftMaximum = Math.max(leftMaximum, height[left]);
+                water += leftMaximum - height[left];
+                left++;
+            } else {
+                rightMaximum = Math.max(rightMaximum, height[right]);
+                water += rightMaximum - height[right];
+                right--;
+            }
+        }
+        return water;
+    }
+}`,
+
+      "two-sum": String.raw`import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> indexByValue = new HashMap<>();
+        for (int index = 0; index < nums.length; index++) {
+            int complement = target - nums[index];
+            if (indexByValue.containsKey(complement)) {
+                return new int[] {indexByValue.get(complement), index};
+            }
+            indexByValue.put(nums[index], index);
+        }
+        throw new IllegalArgumentException("No solution");
+    }
+}`,
+
+      "group-anagrams": String.raw`import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> groups = new HashMap<>();
+        for (String value : strs) {
+            char[] characters = value.toCharArray();
+            Arrays.sort(characters);
+            String key = new String(characters);
+            groups.computeIfAbsent(key, ignored -> new ArrayList<>()).add(value);
+        }
+        return new ArrayList<>(groups.values());
+    }
+}`,
+
+      "subarray-sum-equals-k": String.raw`import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> prefixFrequency = new HashMap<>();
+        prefixFrequency.put(0, 1);
+
+        int prefix = 0;
+        int answer = 0;
+        for (int value : nums) {
+            prefix += value;
+            answer += prefixFrequency.getOrDefault(prefix - k, 0);
+            prefixFrequency.merge(prefix, 1, Integer::sum);
+        }
+        return answer;
+    }
+}`,
+
+      "merge-intervals": String.raw`import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length <= 1) {
+            return intervals;
+        }
+
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        List<int[]> merged = new ArrayList<>();
+        int[] current = intervals[0].clone();
+
+        for (int index = 1; index < intervals.length; index++) {
+            if (intervals[index][0] <= current[1]) {
+                current[1] = Math.max(current[1], intervals[index][1]);
+            } else {
+                merged.add(current);
+                current = intervals[index].clone();
+            }
+        }
+        merged.add(current);
+        return merged.toArray(new int[merged.size()][]);
+    }
+}`,
+
+      "search-rotated-array": String.raw`class Solution {
+    public int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            if (nums[middle] == target) {
+                return middle;
+            }
+
+            if (nums[left] <= nums[middle]) {
+                if (nums[left] <= target && target < nums[middle]) {
+                    right = middle - 1;
+                } else {
+                    left = middle + 1;
+                }
+            } else if (nums[middle] < target && target <= nums[right]) {
+                left = middle + 1;
+            } else {
+                right = middle - 1;
+            }
+        }
+        return -1;
+    }
+}`,
+
+      "find-min-rotated-array": String.raw`class Solution {
+    public int findMin(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+            int middle = left + (right - left) / 2;
+            if (nums[middle] > nums[right]) {
+                left = middle + 1;
+            } else {
+                right = middle;
+            }
+        }
+        return nums[left];
+    }
+}`,
+
+      "top-k-frequent": String.raw`import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> frequency = new HashMap<>();
+        for (int value : nums) {
+            frequency.merge(value, 1, Integer::sum);
+        }
+
+        PriorityQueue<int[]> heap =
+                new PriorityQueue<>((a, b) -> Integer.compare(a[1], b[1]));
+        for (Map.Entry<Integer, Integer> entry : frequency.entrySet()) {
+            heap.offer(new int[] {entry.getKey(), entry.getValue()});
+            if (heap.size() > k) {
+                heap.poll();
+            }
+        }
+
+        int[] answer = new int[k];
+        for (int index = k - 1; index >= 0; index--) {
+            answer[index] = heap.poll()[0];
+        }
+        return answer;
+    }
+}`,
+
+      "median-finder": String.raw`import java.util.Collections;
+import java.util.PriorityQueue;
+
+class MedianFinder {
+    private final PriorityQueue<Integer> lower =
+            new PriorityQueue<>(Collections.reverseOrder());
+    private final PriorityQueue<Integer> upper = new PriorityQueue<>();
+
+    public void addNum(int num) {
+        if (lower.isEmpty() || num <= lower.peek()) {
+            lower.offer(num);
+        } else {
+            upper.offer(num);
+        }
+
+        if (lower.size() > upper.size() + 1) {
+            upper.offer(lower.poll());
+        } else if (upper.size() > lower.size()) {
+            lower.offer(upper.poll());
+        }
+    }
+
+    public double findMedian() {
+        if (lower.size() == upper.size()) {
+            return ((long) lower.peek() + upper.peek()) / 2.0;
+        }
+        return lower.peek();
+    }
+}`,
+
+      "linked-list-cycle-ii": String.raw`class Solution {
+    static class ListNode {
+        int val;
+        ListNode next;
+    }
+
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                ListNode finder = head;
+                while (finder != slow) {
+                    finder = finder.next;
+                    slow = slow.next;
+                }
+                return finder;
+            }
+        }
+        return null;
+    }
+}`,
+
+      "valid-parentheses": String.raw`import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Solution {
+    public boolean isValid(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (char current : s.toCharArray()) {
+            if (current == '(') {
+                stack.push(')');
+            } else if (current == '[') {
+                stack.push(']');
+            } else if (current == '{') {
+                stack.push('}');
+            } else if (stack.isEmpty() || stack.pop() != current) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+}`,
+
+      "daily-temperatures": String.raw`import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int[] answer = new int[temperatures.length];
+        Deque<Integer> decreasing = new ArrayDeque<>();
+
+        for (int index = 0; index < temperatures.length; index++) {
+            while (!decreasing.isEmpty()
+                    && temperatures[index] > temperatures[decreasing.peek()]) {
+                int previous = decreasing.pop();
+                answer[previous] = index - previous;
+            }
+            decreasing.push(index);
+        }
+        return answer;
+    }
+}`,
+
+      "largest-rectangle-histogram": String.raw`import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        Deque<Integer> increasing = new ArrayDeque<>();
+        int answer = 0;
+
+        for (int index = 0; index <= heights.length; index++) {
+            int currentHeight = index == heights.length ? 0 : heights[index];
+            while (!increasing.isEmpty()
+                    && currentHeight < heights[increasing.peek()]) {
+                int height = heights[increasing.pop()];
+                int leftBoundary = increasing.isEmpty() ? -1 : increasing.peek();
+                int width = index - leftBoundary - 1;
+                answer = Math.max(answer, height * width);
+            }
+            increasing.push(index);
+        }
+        return answer;
+    }
 }`
     };
 
@@ -1619,7 +2265,8 @@ class Solution {
       "拼多多": ["#ff879e", "rgba(255, 135, 158, 0.75)"],
       "美团": ["#ffc76b", "rgba(255, 199, 107, 0.74)"],
       "腾讯": ["#69e6d6", "rgba(105, 230, 214, 0.74)"],
-      "快手": ["#ffad5b", "rgba(255, 173, 91, 0.74)"]
+      "快手": ["#ffad5b", "rgba(255, 173, 91, 0.74)"],
+      "高频题库": ["#bd92ff", "rgba(189, 146, 255, 0.76)"]
     };
 
     const cards = document.querySelector("#cards");
