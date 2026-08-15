@@ -46,6 +46,7 @@ GENERAL_ORDER = [
     "Function Calling与Tool Use专题.md",
     "MCP与工具生态.md",
     "Agentic Coding与AI编程工具.md",
+    "Agent Harness与编码代理测评.md",
     "核心概念详解与参考答案.md",
     "八股文完整答案集.md",
     "八股文题库-DataWhale开源.md",
