@@ -593,18 +593,24 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       --shadow: rgba(0, 0, 0, 0.24);
     }}
     * {{ box-sizing: border-box; }}
-    html {{ scroll-behavior: smooth; }}
+    html {{
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }}
     body {{
       margin: 0;
       min-height: 100dvh;
+      overflow-x: hidden;
       background: var(--bg);
       color: var(--text);
       font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       transition: background-color 0.2s ease, color 0.2s ease;
     }}
+    body.drawer-open {{ overflow: hidden; }}
     a {{ color: var(--accent); }}
     button, input {{ font: inherit; }}
-    button:active, a:active {{ transform: translateY(1px); }}
+    button {{ touch-action: manipulation; }}
+    button:active, .topbar-link:active {{ transform: translateY(1px); }}
     :focus-visible {{ outline: 3px solid var(--accent); outline-offset: 3px; }}
     .layout {{ min-height: 100dvh; }}
     .sidebar-backdrop {{
@@ -623,6 +629,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       z-index: 30;
       width: min(90vw, var(--sidebar-width));
       overflow: auto;
+      overscroll-behavior: contain;
       padding-bottom: 28px;
       border-right: 1px solid var(--border);
       background: var(--panel);
@@ -632,8 +639,18 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     }}
     .sidebar.open {{ transform: translateX(0); }}
     .brand {{ padding: 28px 24px 20px; border-bottom: 1px solid var(--border); }}
+    .brand-heading {{ display: flex; align-items: center; justify-content: space-between; gap: 16px; }}
     .brand h1 {{ margin: 0; font-size: 20px; letter-spacing: -0.04em; }}
     .brand p {{ margin: 5px 0 0; color: var(--muted); font-size: 12px; }}
+    .sidebar-close {{
+      min-width: 44px;
+      min-height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel-2);
+      color: var(--text);
+      cursor: pointer;
+    }}
     .nav-section {{ padding: 12px 10px; border-bottom: 1px solid var(--border); }}
     .nav-category-title {{ padding: 10px 12px 7px; color: var(--accent); font-size: 12px; font-weight: 700; }}
     .nav-item {{
@@ -658,7 +675,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       top: 0;
       z-index: 20;
       display: grid;
-      grid-template-columns: auto auto minmax(220px, 620px) 1fr auto auto auto auto;
+      grid-template-columns: auto auto minmax(220px, 620px) 1fr auto auto;
       gap: 10px;
       align-items: center;
       min-height: 70px;
@@ -675,6 +692,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       color: var(--text);
       text-decoration: none;
       cursor: pointer;
+      touch-action: manipulation;
       white-space: nowrap;
       transition: border-color 0.18s ease, background 0.18s ease;
     }}
@@ -683,6 +701,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     .brand-button {{ border-color: transparent !important; background: transparent !important; color: var(--text) !important; font-weight: 700; letter-spacing: -0.025em; }}
     .search {{
       width: 100%;
+      min-width: 0;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 10px 13px;
@@ -691,7 +710,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     }}
     .search::placeholder {{ color: var(--muted); }}
     .topbar-spacer {{ min-width: 0; }}
-    .reader-tool {{ color: var(--muted) !important; font-size: 13px; }}
+    #themeBtn {{ display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; min-height: 44px; }}
     .content {{ width: min(1240px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 88px; }}
     .content-section {{ display: none; }}
     .content-section.active {{ display: block; animation: section-in 0.35s cubic-bezier(0.16, 1, 0.3, 1); }}
@@ -706,7 +725,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       border-bottom: 1px solid var(--border);
     }}
     .prep-kicker {{ margin: 0 0 14px; color: var(--accent); font-size: 14px; font-weight: 700; letter-spacing: 0; }}
-    .hero-copy h1 {{ max-width: 13ch; margin: 0; font-size: clamp(38px, 5vw, 58px); line-height: 1.08; letter-spacing: -0.045em; text-wrap: balance; }}
+    .hero-copy h1 {{ max-width: 13ch; margin: 0; overflow-wrap: anywhere; font-size: clamp(38px, 5vw, 58px); line-height: 1.08; letter-spacing: -0.045em; text-wrap: balance; }}
     .hero-copy > p:not(.prep-kicker) {{ max-width: 38ch; margin: 20px 0 0; color: var(--muted); font-size: 17px; }}
     .hero-actions {{ display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 30px; }}
     .primary-action {{
@@ -717,6 +736,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       color: var(--accent-ink);
       font-weight: 700;
       cursor: pointer;
+      touch-action: manipulation;
     }}
     .text-action {{ border: 0; padding: 10px 0; background: transparent; color: var(--accent); font-weight: 700; cursor: pointer; }}
     .prep-note {{ align-self: center; padding: 24px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); }}
@@ -750,6 +770,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       text-decoration: none;
       cursor: pointer;
       transition: background 0.2s ease, padding 0.2s ease;
+      touch-action: manipulation;
     }}
     .path-card:hover {{ padding-left: 20px; background: var(--accent-soft); }}
     .path-card.featured {{ min-height: 128px; background: transparent; color: var(--text); }}
@@ -769,6 +790,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       text-decoration: none;
       cursor: pointer;
       transition: background 0.18s ease;
+      touch-action: manipulation;
     }}
     .review-step:last-child {{ border-right: 0; }}
     .review-step:hover {{ background: var(--accent-soft); }}
@@ -790,6 +812,7 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       color: var(--text);
       text-align: left;
       cursor: pointer;
+      touch-action: manipulation;
     }}
     .company-route strong {{ font-size: 14px; }}
     .company-route small {{ color: var(--muted); }}
@@ -836,17 +859,29 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
     mark {{ background: var(--accent-soft); color: var(--text); }}
     @media (max-width: 1040px) {{
       .topbar {{ grid-template-columns: auto auto minmax(160px, 1fr) auto auto; }}
-      .topbar-spacer, .reader-tool {{ display: none; }}
+      .topbar-spacer {{ display: none; }}
       .home-hero {{ grid-template-columns: 1fr; min-height: auto; }}
       .prep-note {{ max-width: 620px; }}
       .company-board {{ grid-template-columns: 1fr; }}
     }}
     @media (max-width: 720px) {{
-      .topbar {{ grid-template-columns: auto 1fr auto; }}
+      .topbar {{
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 8px;
+        min-height: 64px;
+        padding: 9px max(12px, env(safe-area-inset-right)) 9px max(12px, env(safe-area-inset-left));
+      }}
       .brand-button, .topbar-link {{ display: none; }}
-      .content {{ width: min(100% - 28px, 1240px); padding-top: 10px; }}
-      .home-hero {{ padding-top: 52px; }}
-      .hero-copy h1 {{ font-size: clamp(44px, 14vw, 62px); }}
+      .menu-btn {{ min-height: 44px; padding-inline: 11px !important; }}
+      #themeBtn {{ padding-inline: 11px !important; }}
+      .theme-label {{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }}
+      .content {{ width: min(100% - 24px, 1240px); padding-top: 10px; padding-bottom: calc(64px + env(safe-area-inset-bottom)); }}
+      .home-hero {{ padding: 44px 0 46px; }}
+      .hero-copy h1 {{ max-width: 11ch; font-size: clamp(36px, 11vw, 48px); line-height: 1.06; }}
+      .hero-copy > p:not(.prep-kicker) {{ font-size: 16px; }}
+      .hero-actions {{ align-items: stretch; }}
+      .primary-action {{ min-height: 48px; }}
+      .text-action {{ min-height: 48px; padding-inline: 4px; }}
       .metric-strip {{ grid-template-columns: 1fr; }}
       .metric + .metric {{ padding-left: 0; border-left: 0; border-top: 1px solid var(--border); }}
       .review-order, .library-grid {{ grid-template-columns: 1fr; }}
@@ -855,7 +890,19 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       .review-step {{ border-right: 0; border-bottom: 1px solid var(--border); }}
       .review-step:last-child {{ border-bottom: 0; }}
       .company-routes {{ grid-template-columns: 1fr; }}
-      .content-section:not(#welcome) {{ margin-top: 14px; border-radius: 12px; }}
+      .company-cluster {{ padding: 20px 18px; }}
+      .content-section:not(#welcome) {{ margin-top: 14px; padding: 26px 18px 38px; border-radius: 12px; }}
+      .section-header {{ margin-bottom: 26px; padding-bottom: 20px; }}
+      .section-header h2 {{ max-width: 100%; font-size: clamp(28px, 9vw, 38px); overflow-wrap: anywhere; }}
+      .markdown-body pre {{ max-width: 100%; padding: 14px; font-size: 13px; }}
+      .diagram-grid {{ grid-template-columns: 1fr; }}
+      .search-result {{ min-height: 48px; }}
+    }}
+    @media (max-width: 390px) {{
+      .menu-btn {{ font-size: 14px; }}
+      .search {{ padding-inline: 10px; font-size: 14px; }}
+      .hero-actions {{ flex-direction: column; }}
+      .text-action {{ text-align: left; }}
     }}
     @media (prefers-reduced-motion: reduce) {{
       *, *::before, *::after {{ scroll-behavior: auto !important; animation: none !important; transition: none !important; }}
@@ -865,23 +912,27 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
 <body data-theme="dark">
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-hidden="true" inert>
       <div class="brand">
-        <h1>Agent Interview Hub</h1>
+        <div class="brand-heading">
+          <h1>Agent Interview Hub</h1>
+          <button class="sidebar-close" type="button" id="sidebarCloseBtn" aria-label="关闭资料目录">×</button>
+        </div>
         <p>学习路线、公司面经、题库与项目准备</p>
       </div>
       <nav>{sidebar}</nav>
     </aside>
     <main class="main">
       <div class="topbar">
-        <button class="menu-btn" type="button" id="menuBtn">资料目录</button>
+        <button class="menu-btn" type="button" id="menuBtn" aria-controls="sidebar" aria-expanded="false">资料目录</button>
         <button class="brand-button" type="button" data-target="welcome">Agent Interview Hub</button>
-        <input class="search" id="searchInput" type="search" placeholder="搜索知识点、公司、题目..." autocomplete="off">
+        <input class="search" id="searchInput" type="search" placeholder="搜索知识点、公司、题目..." autocomplete="off" aria-label="搜索知识库">
         <span class="topbar-spacer"></span>
-        <button class="reader-tool" type="button" id="expandBtn">全部展开</button>
-        <button class="reader-tool" type="button" id="collapseBtn">全部收起</button>
         <a class="topbar-link" href="interview-questions.html">进入题库</a>
-        <button type="button" id="themeBtn"><span class="theme-label">浅色</span></button>
+        <button type="button" id="themeBtn" aria-label="切换到浅色主题">
+          <span class="theme-icon" aria-hidden="true">☀</span>
+          <span class="theme-label">浅色</span>
+        </button>
       </div>
       <div class="content">
         <section class="content-section active" id="welcome" data-title="首页">
@@ -1006,28 +1057,52 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
   </div>
   <script>
     const sections = [...document.querySelectorAll('.content-section')];
-    const navItems = [...document.querySelectorAll('[data-target]')];
+    const navItems = [...document.querySelectorAll('.nav-item[data-target]')];
+    const sidebar = document.getElementById('sidebar');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+    const menuBtn = document.getElementById('menuBtn');
+    const searchInput = document.getElementById('searchInput');
+    const themeBtn = document.getElementById('themeBtn');
     let currentSection = 'welcome';
+    let lastContentSection = 'welcome';
+    let searchTimer = null;
+
+    function setSidebar(open) {{
+      sidebar.classList.toggle('open', open);
+      sidebarBackdrop.classList.toggle('open', open);
+      document.body.classList.toggle('drawer-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      sidebar.setAttribute('aria-hidden', String(!open));
+      sidebar.inert = !open;
+      if (!open && sidebar.contains(document.activeElement)) menuBtn.focus();
+    }}
 
     function showSection(id, updateHash = true) {{
       const target = document.getElementById(id) || document.getElementById('welcome');
+      const sectionChanged = currentSection !== target.id;
       sections.forEach(section => section.classList.toggle('active', section === target));
-      navItems.forEach(item => item.classList.toggle('active', item.dataset.target === target.id));
+      navItems.forEach(item => {{
+        const active = item.dataset.target === target.id;
+        item.classList.toggle('active', active);
+        if (active) item.setAttribute('aria-current', 'page');
+        else item.removeAttribute('aria-current');
+      }});
       currentSection = target.id;
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('sidebarBackdrop').classList.remove('open');
+      if (target.id !== 'search-results') lastContentSection = target.id;
+      setSidebar(false);
       window.scrollTo({{ top: 0, behavior: 'auto' }});
-      if (updateHash && target.id !== 'welcome') {{
-        history.replaceState(null, '', '#' + encodeURIComponent(target.id));
-      }} else if (updateHash) {{
-        history.replaceState(null, '', location.pathname);
+      if (updateHash && sectionChanged) {{
+        const nextUrl = target.id === 'welcome'
+          ? location.pathname + location.search
+          : '#' + encodeURIComponent(target.id);
+        history.pushState({{ section: target.id }}, '', nextUrl);
       }}
     }}
 
     function renderSearch(query) {{
       const normalized = query.trim().toLowerCase();
       if (normalized.length < 2) {{
-        if (currentSection === 'search-results') showSection('welcome');
+        if (currentSection === 'search-results') showSection(lastContentSection, false);
         return;
       }}
       const results = sections
@@ -1074,32 +1149,48 @@ def render_index(groups: OrderedDict[str, list[Doc]]) -> str:
       }}
     }});
 
-    document.getElementById('searchInput').addEventListener('input', event => renderSearch(event.target.value));
-    document.getElementById('menuBtn').addEventListener('click', () => {{
-      document.getElementById('sidebar').classList.toggle('open');
-      document.getElementById('sidebarBackdrop').classList.toggle('open');
+    searchInput.addEventListener('input', event => {{
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => renderSearch(event.target.value), 120);
     }});
-    document.getElementById('sidebarBackdrop').addEventListener('click', () => {{
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('sidebarBackdrop').classList.remove('open');
+    menuBtn.addEventListener('click', () => setSidebar(!sidebar.classList.contains('open')));
+    document.getElementById('sidebarCloseBtn').addEventListener('click', () => {{
+      setSidebar(false);
+      menuBtn.focus();
     }});
-    document.getElementById('themeBtn').addEventListener('click', event => {{
+    sidebarBackdrop.addEventListener('click', () => {{
+      setSidebar(false);
+      menuBtn.focus();
+    }});
+    themeBtn.addEventListener('click', () => {{
       const dark = document.body.getAttribute('data-theme') === 'dark';
       if (dark) {{
         document.body.removeAttribute('data-theme');
-        event.currentTarget.innerHTML = '<span class="theme-label">深色</span>';
+        themeBtn.querySelector('.theme-icon').textContent = '☾';
+        themeBtn.querySelector('.theme-label').textContent = '深色';
+        themeBtn.setAttribute('aria-label', '切换到深色主题');
       }} else {{
         document.body.setAttribute('data-theme', 'dark');
-        event.currentTarget.innerHTML = '<span class="theme-label">浅色</span>';
+        themeBtn.querySelector('.theme-icon').textContent = '☀';
+        themeBtn.querySelector('.theme-label').textContent = '浅色';
+        themeBtn.setAttribute('aria-label', '切换到浅色主题');
       }}
     }});
-    document.getElementById('expandBtn').addEventListener('click', () => document.querySelectorAll('details').forEach(detail => detail.open = true));
-    document.getElementById('collapseBtn').addEventListener('click', () => document.querySelectorAll('details').forEach(detail => detail.open = false));
     document.addEventListener('keydown', event => {{
-      if (event.key === '/' && document.activeElement !== document.getElementById('searchInput')) {{
-        event.preventDefault();
-        document.getElementById('searchInput').focus();
+      if (event.key === 'Escape' && sidebar.classList.contains('open')) {{
+        setSidebar(false);
+        menuBtn.focus();
       }}
+      if (event.key === '/' && document.activeElement !== searchInput) {{
+        event.preventDefault();
+        searchInput.focus();
+      }}
+    }});
+    window.addEventListener('popstate', () => {{
+      showSection(location.hash ? decodeURIComponent(location.hash.slice(1)) : 'welcome', false);
+    }});
+    window.addEventListener('resize', () => {{
+      if (window.innerWidth > 720 && sidebar.classList.contains('open')) setSidebar(false);
     }});
     if (location.hash) showSection(decodeURIComponent(location.hash.slice(1)), false);
   </script>

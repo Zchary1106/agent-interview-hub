@@ -31,6 +31,10 @@
   --text3: #94a3b8;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 body {
   font-family: 'Noto Sans SC', sans-serif;
   background: var(--bg);
@@ -39,6 +43,11 @@ body {
   overflow-x: hidden;
   padding-top: var(--message-h);
 }
+body.sidebar-open,
+body.modal-open { overflow: hidden; }
+button, input { font: inherit; }
+button { touch-action: manipulation; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 code, pre { font-family: 'JetBrains Mono', monospace; }
 
 /* Sidebar */
@@ -49,6 +58,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   background: var(--bg2);
   border-right: 1px solid var(--bg3);
   overflow-y: auto;
+  overscroll-behavior: contain;
   z-index: 100;
   transition: transform var(--transition);
   scrollbar-width: thin;
@@ -140,6 +150,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 }
 .search-box {
   flex: 1;
+  min-width: 0;
   max-width: 500px;
   position: relative;
 }
@@ -398,17 +409,48 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 
 /* Search results */
 .search-highlight { background: rgba(245,158,11,0.3); padding: 1px 3px; border-radius: 2px; }
+.search-result {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin: 6px 0;
+  padding: 12px 14px;
+  border: 1px solid var(--bg3);
+  border-radius: 8px;
+  background: var(--bg2);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.search-result:hover { border-color: var(--accent); color: var(--accent); }
 
 /* Mobile responsive */
 @media (max-width: 768px) {
-  .sidebar { transform: translateX(-100%); }
+  .sidebar { width: min(88vw, var(--sidebar-w)); transform: translateX(-105%); }
   .sidebar.open { transform: translateX(0); }
-  .main { margin-left: 0; }
+  .main { width: 100%; max-width: 100%; min-width: 0; margin-left: 0; }
   .hamburger { display: block; }
   .diagram-gallery { grid-template-columns: 1fr; }
   .topbar-actions button:not(.theme-toggle) { display: none; }
   .overlay { display: none; position: fixed; top:var(--message-h);left:0;right:0;bottom:0; background:rgba(0,0,0,0.5); z-index:99; }
   .overlay.open { display: block; }
+  .topbar { gap: 8px; padding: 10px max(12px, env(safe-area-inset-right)) 10px max(12px, env(safe-area-inset-left)); }
+  .hamburger, .theme-toggle { min-width: 44px; min-height: 44px; }
+  .search-box input { min-height: 44px; padding-left: 36px; }
+  .content { width: 100%; max-width: 100%; padding: 20px 16px calc(52px + env(safe-area-inset-bottom)); }
+  .section-header h2 { font-size: clamp(22px, 7vw, 28px); overflow-wrap: anywhere; }
+  .section-body h1 { font-size: 21px; }
+  .section-body h2 { font-size: 19px; }
+  .section-body pre { padding: 13px; font-size: 12px; }
+  .diagram-modal { padding: 10px; }
+  .modal-content { width: 100%; max-width: 100%; max-height: 90dvh; padding: 20px 14px; border-radius: 12px; }
+  .modal-content h3 { padding-right: 36px; font-size: 18px; }
+}
+@media (max-width: 420px) {
+  .topbar { align-items: center; }
+  .search-box input { font-size: 16px; }
+  .content { padding-inline: 14px; }
+  .section-body ul { padding-left: 20px; }
 }
 </style>
 <style>
@@ -456,7 +498,7 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   <a href="new.html">切换到新版 →</a>
 </div>
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-<aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar" aria-hidden="true" inert>
   <div class="sidebar-header">
     <h1>🤖 AI Agent 面试库</h1>
     <p>大厂面经 · 知识体系 · 架构图</p>
@@ -489,14 +531,14 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 
 <main class="main">
   <div class="topbar">
-    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <button class="hamburger" type="button" id="menuBtn" aria-label="打开导航目录" aria-controls="sidebar" aria-expanded="false" onclick="toggleSidebar()">☰</button>
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="搜索知识点..." oninput="handleSearch(this.value)">
     </div>
     <div class="topbar-actions">
       <button onclick="expandAll()">全部展开</button>
       <button onclick="collapseAll()">全部折叠</button>
-      <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      <button class="theme-toggle" type="button" aria-label="切换到浅色主题" onclick="toggleTheme()">🌙</button>
     </div>
   </div>
   
@@ -23303,42 +23345,67 @@ spec:
 <script>
 // State
 let currentSection = 'welcome';
-let allSections = document.querySelectorAll('.content-section');
+let lastContentSection = 'welcome';
+const allSections = document.querySelectorAll('.content-section');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const menuBtn = document.getElementById('menuBtn');
+const searchInput = document.getElementById('searchInput');
 
-function showSection(id) {
+function setSidebar(open) {
+  const drawerMode = window.innerWidth <= 768;
+  const drawerOpen = drawerMode && open;
+  const sidebarVisible = !drawerMode || drawerOpen;
+  sidebar.classList.toggle('open', drawerOpen);
+  overlay.classList.toggle('open', drawerOpen);
+  document.body.classList.toggle('sidebar-open', drawerOpen);
+  menuBtn.setAttribute('aria-expanded', String(drawerOpen));
+  menuBtn.setAttribute('aria-label', drawerOpen ? '关闭导航目录' : '打开导航目录');
+  sidebar.setAttribute('aria-hidden', String(!sidebarVisible));
+  sidebar.inert = !sidebarVisible;
+  if (!sidebarVisible && sidebar.contains(document.activeElement)) menuBtn.focus();
+}
+
+function showSection(id, updateHistory = true) {
   allSections.forEach(s => s.classList.remove('active'));
-  let target = document.getElementById('section-' + id);
-  if (target) target.classList.add('active');
-  else {
-    // Show welcome if not found
-    document.getElementById('section-welcome').classList.add('active');
-  }
-  // Update nav active state
+  const requestedTarget = document.getElementById('section-' + id);
+  const target = requestedTarget || document.getElementById('section-welcome');
+  const resolvedId = target.id.replace('section-', '');
+  const sectionChanged = currentSection !== resolvedId;
+  target.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => {
-    if (n.getAttribute('onclick')?.includes(id)) n.classList.add('active');
+    const handler = n.getAttribute('onclick') || '';
+    const match = handler.match(/^showSection\((['"])(.*)\1\)$/);
+    if (match && match[2] === resolvedId) n.classList.add('active');
   });
-  // Close sidebar on mobile
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
-  window.scrollTo(0, 0);
-  currentSection = id;
+  currentSection = resolvedId;
+  if (resolvedId !== 'search-results') lastContentSection = resolvedId;
+  setSidebar(false);
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  if (updateHistory && sectionChanged) {
+    const nextUrl = resolvedId === 'welcome'
+      ? location.pathname + location.search
+      : '#' + encodeURIComponent(resolvedId);
+    history.pushState({ section: resolvedId }, '', nextUrl);
+  }
 }
 
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('open');
+  setSidebar(!sidebar.classList.contains('open'));
 }
 
 function toggleTheme() {
-  let body = document.body;
-  let btn = document.querySelector('.theme-toggle');
+  const body = document.body;
+  const btn = document.querySelector('.theme-toggle');
   if (body.getAttribute('data-theme') === 'light') {
     body.removeAttribute('data-theme');
     btn.textContent = '🌙';
+    btn.setAttribute('aria-label', '切换到浅色主题');
   } else {
     body.setAttribute('data-theme', 'light');
     btn.textContent = '☀️';
+    btn.setAttribute('aria-label', '切换到深色主题');
   }
 }
 
@@ -23352,53 +23419,92 @@ function collapseAll() {
 }
 
 function openDiagramModal(key) {
-  document.getElementById('modal-' + key)?.classList.add('open');
+  const modal = document.getElementById('modal-' + key);
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+  modal.querySelector('.modal-close')?.focus();
 }
 
 function closeDiagramModal(key) {
   document.getElementById('modal-' + key)?.classList.remove('open');
+  if (!document.querySelector('.diagram-modal.open')) {
+    document.body.classList.remove('modal-open');
+  }
 }
 
 // Search
 function handleSearch(query) {
-  if (!query || query.length < 2) {
-    if (currentSection === 'search-results') showSection('welcome');
+  const q = query.trim().toLowerCase();
+  if (q.length < 2) {
+    if (currentSection === 'search-results') showSection(lastContentSection, false);
     return;
   }
   
-  let results = [];
-  let q = query.toLowerCase();
+  const results = [];
   
   document.querySelectorAll('.content-section[data-search]').forEach(section => {
-    let searchText = section.getAttribute('data-search').toLowerCase();
-    let title = section.querySelector('.section-header h2')?.textContent || '';
+    const searchText = section.getAttribute('data-search').toLowerCase();
+    const title = section.querySelector('.section-header h2')?.textContent || '';
     if (searchText.includes(q) || title.toLowerCase().includes(q)) {
-      let id = section.id.replace('section-', '');
+      const id = section.id.replace('section-', '');
       results.push({ title: title, id: id });
     }
   });
   
-  let resultsHtml = results.length === 0 
-    ? '<p>未找到相关内容</p>'
-    : results.map(r => `<div class="nav-item" style="padding:12px 16px;font-size:15px;margin:4px 0;background:var(--bg2);border-radius:8px;" onclick="showSection('${r.id}')">${r.title}</div>`).join('');
-  
-  document.getElementById('searchResults').innerHTML = `<p>找到 ${results.length} 个结果</p>` + resultsHtml;
-  showSection('search-results');
+  const box = document.getElementById('searchResults');
+  box.textContent = '';
+  const count = document.createElement('p');
+  count.textContent = `找到 ${results.length} 个结果`;
+  box.appendChild(count);
+  if (!results.length) {
+    const empty = document.createElement('p');
+    empty.textContent = '未找到相关内容';
+    box.appendChild(empty);
+  }
+  results.forEach(result => {
+    const button = document.createElement('button');
+    button.className = 'search-result';
+    button.type = 'button';
+    button.textContent = result.title;
+    button.addEventListener('click', () => showSection(result.id));
+    box.appendChild(button);
+  });
+  showSection('search-results', false);
 }
 
 // Keyboard shortcut
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    document.querySelectorAll('.diagram-modal.open').forEach(m => m.classList.remove('open'));
+    const openModals = document.querySelectorAll('.diagram-modal.open');
+    openModals.forEach(m => m.classList.remove('open'));
+    if (openModals.length) document.body.classList.remove('modal-open');
+    if (sidebar.classList.contains('open')) {
+      setSidebar(false);
+      menuBtn.focus();
+    }
   }
   if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
-    let input = document.getElementById('searchInput');
-    if (document.activeElement !== input) {
+    if (document.activeElement !== searchInput) {
       e.preventDefault();
-      input.focus();
+      searchInput.focus();
     }
   }
 });
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('diagram-modal')) {
+    e.target.classList.remove('open');
+    document.body.classList.remove('modal-open');
+  }
+});
+window.addEventListener('popstate', () => {
+  showSection(location.hash ? decodeURIComponent(location.hash.slice(1)) : 'welcome', false);
+});
+window.addEventListener('resize', () => {
+  setSidebar(false);
+});
+setSidebar(false);
+if (location.hash) showSection(decodeURIComponent(location.hash.slice(1)), false);
 </script>
 </body>
 </html>
