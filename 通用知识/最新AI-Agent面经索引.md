@@ -1,19 +1,32 @@
 # 最新 AI Agent / 大模型面经索引（2026）
 
-> 本文整理自公开网页搜索结果，用作面经入口和复习优先级索引。为避免搬运平台原文，本文只保留来源链接、摘要和考点标签。结构化数据见 [`data/interviews.json`](../data/interviews.json)。
+> 最近核对：2026-09-11。本文整理自公开网页搜索结果，用作面经入口和复习优先级索引。为避免搬运平台原文，本文只保留来源链接、摘要和考点标签。结构化数据见 [`data/interviews.json`](../data/interviews.json)。
 
 ## 采集概况
 
 | 来源 | 高质量候选 | 说明 |
 |---|---:|---|
 | 小红书 | 13 | 时效强，覆盖字节、腾讯、美团、快手、阿里、百度、小红书等一面/二面 |
-| GitHub | 10 | 高质量题库和学习资料，适合作为系统复习资料 |
-| 牛客 | 17 | 国内大厂面经密度高，适合补充真实面试流程和追问 |
+| GitHub | 14 | 高质量题库和学习资料，适合作为系统复习资料 |
+| 牛客 | 24 | 国内大厂面经密度高，适合补充真实面试流程和追问 |
 | CSDN / 博客园 / 掘金 | 8 | 适合作为 Agent/RAG 高频题和专题归纳来源 |
 | 知乎 | 2 | 适合作为大模型算法实习和海外 AI 面试补充 |
 | 海外研究 | 1 | 汇总 OpenAI / Anthropic 公开候选人经历，适合做流程与考察重点对比 |
 
 > 注：小红书搜索结果链接依赖登录态和平台签名，公开静态站直链容易失效。因此本文只保留小红书原标题，阅读时请在小红书站内搜索对应标题。
+
+## 2026-09 最新补充
+
+| 日期 | 公司 | 来源类型 | 标题 | 新增考点 |
+|---|---|---|---|---|
+| 2026-09-07 | 快手 | 一手复盘（中等置信） | [AI 全栈开发二面凉经（Agent 应用方向）](https://www.nowcoder.com/discuss/926274020192841728) | Agent 项目深挖、Skill、工具使用、全栈交付 |
+| 2026-09-04 | 字节跳动 | 一手复盘 | [9.3 Agent 开发一面面经](https://www.nowcoder.com/discuss/925342611194286080) | Harness、长任务延迟、工具可靠性、上下文压缩、结构化评分 |
+| 2026-09-03 | 快手 | 一手复盘 | [AI 应用开发 / Agent 开发一面](https://www.nowcoder.com/discuss/925163549431742464) | AI Coding 质量、工具结果缓存、长期偏好、隐私、并发基础 |
+| 2026-08-31 | 阿里 | 汇总题源 | [Agent 开发近期面经汇总](https://www.nowcoder.com/discuss/923740641878646784) | MCP Server 评测、Agent Trace、超长任务续跑、Skill 渐进加载、推理基础设施 |
+| 2026-08-28 | 字节跳动 | 汇总题源 | [Agent 开发近期面经汇总](https://www.nowcoder.com/discuss/922659050167226368) | Harness/Orchestrator、路径震荡、工具检索、Coding Agent 并发、首次成功率 |
+| 2026-08-24 | 字节跳动 | 一手复盘 | [Agent 开发一面（8.12）](https://www.nowcoder.com/discuss/921444774287003648) | RAG、AI Coding 质量、SSE/WebSocket、高并发、索引与线程安全 |
+
+本轮新增考点已整理成独立专题：[2026 AI Agent 工程化新考点](2026-Agent工程化新考点.md)。它只补充本仓库此前缺少或覆盖不足的 Runtime、可恢复执行、路径震荡、规模化工具路由、Trace 和生产级评测，不重复已有 RAG/MCP 基础。
 
 ## 2026-08 最新补充
 
@@ -107,17 +120,23 @@
 | [toBeBetterJavaer AI section](https://github.com/itwanger/toBeBetterJavaer/tree/master/docs/src/sidebar/itwanger/ai) | Agent 258题、大模型333题、RAG+Agent+MCP |
 | [wdndev/llm_interview_note](https://github.com/wdndev/llm_interview_note) | 中文 LLM 面试笔记 |
 | [RAG-Interview-Questions-and-Answers-Hub](https://github.com/KalyanKS-NLP/RAG-Interview-Questions-and-Answers-Hub) | 英文 RAG 100+ Q&A |
+| [Agent Engineering Handbook · 2026](https://github.com/EmberRavager/agent-interview) | Runtime、Durable Execution、Harness、Sandbox、HITL、Tracing 与 Evals |
+| [KeepKeen Agent 工程研究笔记](https://github.com/keepkeen/keepkeen.github.io) | 面经证据等级、岗位分型、Coding Agent 源码对比、Benchmark、失败分类与 Agentic RL |
+| [kaomian](https://github.com/smile-struggler/kaomian) | 高频题排序、项目拷打链、LeetCode 与 AI 模型手撕题；仅借鉴结构，不复制无许可内容 |
+| [AIGC-Interview-Book](https://github.com/WeThinkIn/AIGC-Interview-Book) | AgentOS、AgentOps、企业平台、自进化 Agent 与 Agentic RL；直接复用需遵守 GPL-3.0 |
 
 ## 复习优先级
 
 1. **先看公司面经**：字节、腾讯、阿里/蚂蚁、美团、快手、百度。
 2. **再刷 RAG 专项**：Chunk、混合检索、Rerank、RAGAS、语义缓存、表格/PDF。
 3. **补 Agent 工程化**：LangGraph、State/Checkpoint、Skills、MCP、Tool safety、Run trace。
-4. **最后补 LLM 基础**：LoRA/SFT/DPO、KV Cache、推理框架、量化、上下文压缩。
+4. **补 2026 新考点**：Runtime、恢复与幂等、路径震荡、工具检索、Verified Success、Coding Agent 并发冲突。
+5. **最后补 LLM 基础**：LoRA/SFT/DPO、KV Cache、推理框架、量化、上下文压缩。
 
 ## 入库原则
 
 - 只保留摘要、问题要点和来源链接，不大段复制原文。
-- 小红书和牛客优先作为真实面经来源。
+- 带明确日期、轮次和个人项目追问的一手复盘优先作为真实面经来源。
+- 汇总型文章只用于发现趋势，必须标记为 `aggregation`，不能包装成一手面经。
 - CSDN、掘金、知乎中推广内容较多，优先作为题目种子和专题归纳来源。
-- GitHub 资源单独作为外部资料索引。
+- GitHub 资源标记为 `reference`，单独作为外部资料索引。

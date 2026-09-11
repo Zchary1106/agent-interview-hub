@@ -185,18 +185,21 @@
 **学习重点**
 
 - Trace、Run replay、日志、指标、告警
-- Task success rate、tool accuracy、latency、cost、hallucination rate
+- Task success rate、first-pass success、verified success、recovery success
+- tool accuracy、路径震荡率、latency、cost、hallucination rate
 
 **必做任务**
 
 1. 给 Agent 加 trace id 和每步状态快照。
 2. 输出一次任务执行的 timeline。
-3. 构建 50 条回归测试集，统计任务成功率。
+3. 构建 50 条回归测试集，统计任务成功率和首次成功率。
+4. 注入一次工具超时和进程重启，验证能否从 checkpoint 恢复且不重复执行副作用。
 
 **验收标准**
 
 - 能回答“线上 bad case 怎么定位到是哪一层的问题”。
-- 能展示 trace、日志和评估数据。
+- 能展示 trace、日志、恢复证据和评估数据。
+- 能区分“模型自述完成”和“经过独立验证后完成”。
 
 ---
 
@@ -206,17 +209,22 @@
 
 - FastAPI 服务化、Docker、队列、缓存、限流、降级
 - 模型路由、语义缓存、上下文压缩、batching
+- Agent Runtime、任务状态机、租约、幂等键和补偿操作
+- 大规模工具注册表、权限过滤、候选检索和 Schema 版本化
 
 **必做任务**
 
 1. 把 Agent 包装成 HTTP API。
 2. 加 Redis 语义缓存和限流。
 3. 输出延迟、token 成本、缓存命中率三项指标。
+4. 将一个有副作用的工具改造成“幂等键 + 执行结果日志 + 安全重试”。
+5. 不把全部工具放进 Prompt，先从工具注册表检索 Top-K 候选再交给模型选择。
 
 **验收标准**
 
 - 能说明如何把 demo 变成可运行服务。
 - 能解释哪些请求走大模型，哪些走小模型或缓存。
+- 能解释 Agent、Orchestrator、Harness 和 Runtime 的责任边界。
 
 ---
 
@@ -278,4 +286,3 @@
 - 一份项目 README
 - 一份评估报告
 - 一份 10 分钟项目答辩稿
-

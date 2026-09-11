@@ -1,11 +1,253 @@
 {
-  "generated_at": "2026-08-13",
+  "generated_at": "2026-09-11",
   "description": "Curated high-quality AI Agent, LLM, and RAG interview-experience/source candidates collected from public web sources. Entries are summaries with source links or source lookup hints, not copied source content.",
   "criteria": {
     "minimum_score": 4,
-    "license_note": "Use entries as citations and summarized leads. Do not copy long platform content into repository documents."
+    "license_note": "Use entries as citations and summarized leads. Do not copy long platform content into repository documents.",
+    "source_types": {
+      "first_hand": "带明确面试过程或个人项目追问的一手复盘",
+      "aggregation": "多篇面经或多轮记录的二次整理，只用于发现趋势",
+      "reference": "题库、指南或工程资料，不标记为真实面经"
+    }
   },
   "items": [
+    {
+      "id": "github-keepkeen-agent-engineering-notes",
+      "platform": "GitHub",
+      "title": "KeepKeen Agent 面经、源码分析与论文证据库",
+      "company": null,
+      "published_at": "2026-09-08",
+      "source_url": "https://github.com/keepkeen/keepkeen.github.io",
+      "score": 5,
+      "source_type": "reference",
+      "confidence": "high",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "Evidence Ledger",
+        "Role Taxonomy",
+        "Coding Agent Source Analysis",
+        "Agent Benchmarks",
+        "Failure Taxonomy",
+        "Agentic RL"
+      ],
+      "summary": "持续更新的研究型资料，突出证据等级、版本边界、Coding Agent 源码对比、Agent 评测基准、多 Agent 失败分类和 Agentic RL。"
+    },
+    {
+      "id": "github-aigc-interview-book",
+      "platform": "GitHub",
+      "title": "AIGC-Interview-Book",
+      "company": null,
+      "published_at": "2026-09-08",
+      "source_url": "https://github.com/WeThinkIn/AIGC-Interview-Book",
+      "score": 5,
+      "source_type": "reference",
+      "confidence": "high",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "AgentOS",
+        "AgentOps",
+        "Harness Evaluation",
+        "Enterprise Agent Platform",
+        "Self-evolving Agent",
+        "Agentic RL"
+      ],
+      "summary": "大型 AIGC 面试知识库，其中 AgentOS、AgentOps、Harness 分层评测、企业平台和自进化 Agent 可作为进阶选题线索；直接复用需遵守 GPL-3.0。"
+    },
+    {
+      "id": "nowcoder-kuaishou-agent-fullstack-second-round-2026-09",
+      "platform": "牛客",
+      "title": "快手 AI 全栈开发二面凉经（Agent 应用方向）",
+      "company": "快手",
+      "published_at": "2026-09-07",
+      "source_url": "https://www.nowcoder.com/discuss/926274020192841728",
+      "score": 4,
+      "source_type": "first_hand",
+      "confidence": "medium",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "Agent Application",
+        "Project Deep Dive",
+        "Skill",
+        "Tool Use",
+        "Full-stack Engineering"
+      ],
+      "summary": "近期二面题源，面试整体偏 Agent 应用并持续深挖项目细节，适合补充 Skill、工具使用和端到端交付能力。"
+    },
+    {
+      "id": "nowcoder-bytedance-agent-first-round-2026-09-03",
+      "platform": "牛客",
+      "title": "字节跳动 9.3 Agent 开发一面面经",
+      "company": "字节跳动",
+      "published_at": "2026-09-04",
+      "source_url": "https://www.nowcoder.com/discuss/925342611194286080",
+      "score": 5,
+      "source_type": "first_hand",
+      "confidence": "high",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "Agent Harness",
+        "Long-running Task Latency",
+        "Tool Reliability",
+        "Context Compression",
+        "Structured Output",
+        "RAG",
+        "Algorithms"
+      ],
+      "summary": "一手一面记录，重点追问 Harness、长任务延迟异常排查、工具参数可靠性、上下文压缩信息损失和结构化评分输出。"
+    },
+    {
+      "id": "nowcoder-kuaishou-agent-first-round-2026-09-03",
+      "platform": "牛客",
+      "title": "快手 AI 应用开发 / Agent 开发一面",
+      "company": "快手",
+      "published_at": "2026-09-03",
+      "source_url": "https://www.nowcoder.com/discuss/925163549431742464",
+      "score": 5,
+      "source_type": "first_hand",
+      "confidence": "high",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "AI Coding Quality",
+        "Tool Result Cache",
+        "Long-term Preference",
+        "Data Privacy",
+        "Concurrency",
+        "Thread Pool"
+      ],
+      "summary": "一手一面记录，全程围绕实习项目与 AI 使用习惯，新增 AI 代码质量兜底、工具结果缓存、长期偏好存储和敏感信息保护等问题。"
+    },
+    {
+      "id": "nowcoder-alibaba-agent-roundup-2026-08-31",
+      "platform": "牛客",
+      "title": "阿里 Agent 开发近期面经汇总",
+      "company": "阿里巴巴",
+      "published_at": "2026-08-31",
+      "source_url": "https://www.nowcoder.com/discuss/923740641878646784",
+      "score": 4,
+      "source_type": "aggregation",
+      "confidence": "medium",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "MCP Evaluation",
+        "Agent Trace",
+        "LangGraph State",
+        "Checkpoint Recovery",
+        "Skill Progressive Disclosure",
+        "KV Cache",
+        "Continuous Batching"
+      ],
+      "summary": "近期汇总型题源，重点补充 MCP Server 评测、Agent 链路追踪、超长任务续跑、评测集构建和 Agent Infra/推理优化联动。"
+    },
+    {
+      "id": "nowcoder-bytedance-agent-roundup-2026-08-28",
+      "platform": "牛客",
+      "title": "字节跳动 Agent 开发近期面经汇总（含 7-8 月多轮）",
+      "company": "字节跳动",
+      "published_at": "2026-08-28",
+      "source_url": "https://www.nowcoder.com/discuss/922659050167226368",
+      "score": 4,
+      "source_type": "aggregation",
+      "confidence": "medium",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "Agent Harness",
+        "Orchestrator",
+        "Path Oscillation",
+        "Long Context",
+        "Tool Retrieval",
+        "Coding Agent",
+        "Concurrency",
+        "Agent Evaluation"
+      ],
+      "summary": "近期汇总型题源，新增 Harness/Orchestrator 边界、路径震荡、大规模工具路由、Coding Agent 并发冲突和生产评测等工程化考点。"
+    },
+    {
+      "id": "nowcoder-bytedance-agent-first-round-2026-08-12",
+      "platform": "牛客",
+      "title": "字节 Agent 开发一面（8.12）",
+      "company": "字节跳动",
+      "published_at": "2026-08-24",
+      "source_url": "https://www.nowcoder.com/discuss/921444774287003648",
+      "score": 5,
+      "source_type": "first_hand",
+      "confidence": "high",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "RAG",
+        "AI Coding Quality",
+        "SSE",
+        "WebSocket",
+        "Database Index",
+        "High Concurrency",
+        "Thread Safety"
+      ],
+      "summary": "一手一面记录，除 RAG 项目外还考察 AI Coding 质量控制、SSE/WebSocket、高并发热点榜单设计、数据库索引和线程安全。"
+    },
+    {
+      "id": "nowcoder-kuaishou-data-agent-first-round-2026-06-16",
+      "platform": "牛客",
+      "title": "快手 Data Agent 开发一面（06.16）",
+      "company": "快手",
+      "published_at": "2026-06-16",
+      "source_url": "https://www.nowcoder.com/discuss/904419777614049280",
+      "score": 5,
+      "source_type": "first_hand",
+      "confidence": "high",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "LLM vs Agent",
+        "ReAct",
+        "Agent Framework Design",
+        "Data Agent",
+        "Project Deep Dive"
+      ],
+      "summary": "一手 Data Agent 开发面经，从 LLM 与 Agent 边界、ReAct 执行流程一路追问到 Agent 框架模块设计。"
+    },
+    {
+      "id": "github-kaomian-question-bank",
+      "platform": "GitHub",
+      "title": "kaomian 高频面试题与手撕题库",
+      "company": null,
+      "published_at": "2026-04-19",
+      "source_url": "https://github.com/smile-struggler/kaomian",
+      "score": 4,
+      "source_type": "reference",
+      "confidence": "medium",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "Question Frequency",
+        "Top 100",
+        "Project Deep Dive",
+        "LeetCode",
+        "Model Coding"
+      ],
+      "summary": "以公开面试问题为基础的频次化题库，适合参考 Top100、项目连续追问和 AI 模型手撕题的组织方式；仓库未见明确许可证，不复制原文。"
+    },
+    {
+      "id": "github-agent-engineering-handbook-2026",
+      "platform": "GitHub",
+      "title": "Agent Engineering Handbook · 2026",
+      "company": null,
+      "published_at": null,
+      "source_url": "https://github.com/EmberRavager/agent-interview",
+      "score": 4,
+      "source_type": "reference",
+      "confidence": "medium",
+      "verified_at": "2026-09-11",
+      "topics": [
+        "Agent Loop",
+        "Context Engineering",
+        "MCP",
+        "Skills",
+        "Durable Execution",
+        "Harness",
+        "Sandbox",
+        "HITL",
+        "Tracing",
+        "Evals"
+      ],
+      "summary": "面向 2026 Agent 工程岗位的系统复习资料，覆盖 Runtime、可恢复执行、Harness、安全、Trace 和生产级评测。"
+    },
     {
       "id": "xhs-taotian-agent-2026-06-29",
       "platform": "小红书",
@@ -623,9 +865,16 @@
         "AI Agent Interview",
         "Project",
         "Resume",
-        "System Design"
+        "STAR",
+        "System Design",
+        "Python",
+        "Java",
+        "Go"
       ],
-      "summary": "AI Agent 面试全攻略，包含题库、项目、简历模板和系统设计，适合作为参考资料索引。"
+      "summary": "AI Agent 面试全攻略，包含题库、项目、简历模板和系统设计，适合作为参考资料索引。",
+      "source_type": "reference",
+      "confidence": "high",
+      "verified_at": "2026-09-11"
     },
     {
       "id": "github-llmforeverybody",
