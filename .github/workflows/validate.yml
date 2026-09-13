@@ -42,4 +42,6 @@ jobs:
           test -f dist/interview-questions.html
           test -f dist/new.html
           test -f dist/new-interview-questions.html
+          test -f dist/question-signals.html
           test -f dist/data/interviews.json
+          test -f dist/data/question_signals.json

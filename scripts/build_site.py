@@ -47,6 +47,14 @@ GENERAL_ORDER = [
     "MCP与工具生态.md",
     "Agentic Coding与AI编程工具.md",
     "Agent Harness与编码代理测评.md",
+    "2026-Agent工程化新考点.md",
+    "Agent-Harness评测与发布门禁.md",
+    "企业级Agent平台与AgentOS.md",
+    "自进化Agent与Skill生命周期.md",
+    "Agent高频题证据模型.md",
+    "跨公司Agent岗位能力矩阵.md",
+    "Agent项目深挖与压力面试.md",
+    "Agent项目简历与STAR表达.md",
     "核心概念详解与参考答案.md",
     "八股文完整答案集.md",
     "八股文题库-DataWhale开源.md",
@@ -462,12 +470,21 @@ def load_questions() -> list[dict]:
     return json.loads(read_text(data_path))
 
 
+def load_question_signals() -> list[dict]:
+    data_path = DATA_DIR / "question_signals.json"
+    if not data_path.exists():
+        return []
+    data = json.loads(read_text(data_path))
+    return data.get("items", [])
+
+
 def render_sidebar(groups: OrderedDict[str, list[Doc]]) -> str:
     items = [
         """
         <div class="nav-section">
           <button class="nav-item nav-item-strong active" type="button" data-target="welcome">首页</button>
           <a class="nav-item nav-link" href="interview-questions.html">交互式面试题库</a>
+          <a class="nav-item nav-link" href="question-signals.html">高频题信号榜</a>
           <a class="nav-item nav-link" href="面试算法题/">面试算法题图谱</a>
           <button class="nav-item" type="button" data-target="diagrams">架构图</button>
         </div>
@@ -1262,6 +1279,7 @@ def render_interview_questions() -> str:
         <div><b id="totalQuestions">0</b> 道面试题</div>
         <div><b id="visibleQuestions">0</b> 道匹配</div>
         <div><a href="index.html">返回知识库首页</a></div>
+        <div><a href="question-signals.html">查看高频题信号榜</a></div>
       </div>
       <input class="search" id="searchInput" type="search" placeholder="搜索题目、思考逻辑或参考答案..." autocomplete="off">
     </div>
@@ -1424,6 +1442,118 @@ def render_interview_questions() -> str:
 """
 
 
+def render_question_signals() -> str:
+    signals = sorted(
+        load_question_signals(),
+        key=lambda item: (item.get("source_count", 0), item.get("last_seen_at", "")),
+        reverse=True,
+    )
+    interviews_data = json.loads(read_text(DATA_DIR / "interviews.json"))
+    source_map = {
+        item["id"]: item
+        for item in interviews_data.get("items", [])
+        if isinstance(item, dict) and item.get("id")
+    }
+
+    cards = []
+    for rank, signal in enumerate(signals, start=1):
+        companies = " · ".join(signal.get("companies", []))
+        rounds = " · ".join(signal.get("rounds", []))
+        outline = "".join(
+            f"<li>{html.escape(value)}</li>"
+            for value in signal.get("answer_outline", [])
+        )
+        evaluation = "".join(
+            f"<li>{html.escape(value)}</li>"
+            for value in signal.get("evaluation_points", [])
+        )
+        sources = []
+        for source_id in signal.get("source_ids", []):
+            source = source_map.get(source_id, {})
+            label = html.escape(source.get("title", source_id))
+            url = source.get("source_url")
+            if url:
+                sources.append(
+                    f'<li><a href="{html.escape(url, quote=True)}" '
+                    f'target="_blank" rel="noopener">{label}</a></li>'
+                )
+            else:
+                sources.append(f"<li>{label}（站内搜索来源）</li>")
+
+        cards.append(
+            f"""
+            <article class="signal-card">
+              <div class="signal-rank">#{rank}</div>
+              <div class="signal-content">
+                <div class="badges">
+                  <span>{html.escape(signal.get("category", ""))}</span>
+                  <span>{signal.get("source_count", 0)} 个独立来源</span>
+                  <span>{html.escape(signal.get("confidence", ""))}</span>
+                  <span>最近 {html.escape(signal.get("last_seen_at", ""))}</span>
+                </div>
+                <h2>{html.escape(signal.get("question", ""))}</h2>
+                <p class="meta"><b>公司：</b>{html.escape(companies)}　<b>轮次：</b>{html.escape(rounds)}</p>
+                <div class="grid">
+                  <section><h3>回答骨架</h3><ol>{outline}</ol></section>
+                  <section><h3>评估要点</h3><ul>{evaluation}</ul></section>
+                </div>
+                <details><summary>查看证据来源</summary><ul>{''.join(sources)}</ul></details>
+              </div>
+            </article>
+            """
+        )
+
+    return f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Agent 高频题信号榜</title>
+  <style>
+    * {{ box-sizing: border-box; }}
+    body {{ margin: 0; background: #090b0d; color: #e7ede9; font: 15px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
+    a {{ color: #8be852; }}
+    header {{ border-bottom: 1px solid #26302a; background: #0d1110; padding: 34px 20px; }}
+    header div, main {{ max-width: 980px; margin: 0 auto; }}
+    h1 {{ margin: 0 0 8px; font-size: clamp(28px, 5vw, 44px); }}
+    header p {{ max-width: 760px; margin: 0; color: #a9b4ad; }}
+    nav {{ margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px; }}
+    nav a {{ border: 1px solid #344239; border-radius: 999px; padding: 7px 13px; text-decoration: none; }}
+    main {{ padding: 28px 20px 60px; }}
+    .summary {{ color: #a9b4ad; margin-bottom: 24px; }}
+    .signal-card {{ display: grid; grid-template-columns: 52px 1fr; gap: 14px; margin-bottom: 18px; padding: 22px; border: 1px solid #27312b; border-radius: 16px; background: #101512; }}
+    .signal-rank {{ color: #8be852; font-size: 22px; font-weight: 800; }}
+    h2 {{ margin: 8px 0; font-size: 21px; }}
+    h3 {{ margin: 0 0 8px; font-size: 15px; color: #8be852; }}
+    .badges {{ display: flex; flex-wrap: wrap; gap: 8px; }}
+    .badges span {{ padding: 3px 9px; border-radius: 999px; background: #1b251f; color: #bcd2c2; font-size: 12px; }}
+    .meta {{ color: #a9b4ad; }}
+    .grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }}
+    section {{ padding: 14px 16px; border-radius: 12px; background: #0b0f0d; }}
+    ol, ul {{ margin: 0; padding-left: 20px; }}
+    details {{ margin-top: 14px; }}
+    summary {{ cursor: pointer; color: #cbd7ce; }}
+    @media (max-width: 680px) {{
+      .signal-card {{ grid-template-columns: 1fr; padding: 17px; }}
+      .grid {{ grid-template-columns: 1fr; }}
+    }}
+  </style>
+</head>
+<body>
+  <header><div>
+    <h1>AI Agent 高频题信号榜</h1>
+    <p>按独立来源数量和最近出现时间排序。频次只代表本仓库已核验的公开样本，不代表公司的固定题库。</p>
+    <nav><a href="new.html">返回知识库</a><a href="new-interview-questions.html">进入交互题库</a><a href="data/question_signals.json">下载结构化数据</a></nav>
+  </div></header>
+  <main>
+    <p class="summary">当前收录 <b>{len(signals)}</b> 个高频问题信号；每条均关联原始来源、公司、轮次、回答骨架和评估要点。</p>
+    {''.join(cards)}
+  </main>
+</body>
+</html>
+"""
+
+
 def copy_legacy_pages() -> None:
     legacy_pages = ("index.html", "interview-questions.html")
     missing = [name for name in legacy_pages if not (LEGACY_DIR / name).is_file()]
@@ -1459,6 +1589,9 @@ def build() -> None:
     (DIST / "new.html").write_text(new_index, encoding="utf-8")
     (DIST / "new-interview-questions.html").write_text(
         new_questions, encoding="utf-8"
+    )
+    (DIST / "question-signals.html").write_text(
+        render_question_signals(), encoding="utf-8"
     )
 
     doc_count = sum(len(docs) for docs in groups.values())
