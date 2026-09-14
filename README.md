@@ -22,7 +22,7 @@
 专为**国内大厂 AI Agent 工程师**跳槽/求职打造的一站式面试知识库。
 
 - 🎯 **面向谁** — 准备跳槽阿里、字节、腾讯、百度等大厂 Agent 岗位的工程师
-- 📚 **包含什么** — 300+ 高频问题与参考答案、15 类公司/岗位资料、6 道限时实操考题、35 篇通用知识文档
+- 📚 **包含什么** — 300+ 高频问题与参考答案、15 类公司/岗位资料、6 道限时实操考题、38 篇通用知识文档
 - 🗺️ **学习路线** — 从零到 Offer 的 16 周完整学习计划
 - ✨ **特色亮点** — 题目全带答案、面经来自牛客真实分享、支持 GitHub Pages 在线浏览
 
@@ -89,34 +89,37 @@ AI Agent 工程师知识体系
 | 13 | [Agent Harness 与编码代理测评](通用知识/Agent%20Harness与编码代理测评.md) | Codex CLI / Claude Code / OpenHands 等 Harness 深度测评与源码入口 🆕 |
 | 14 | [2026 Agent 工程化新考点](通用知识/2026-Agent工程化新考点.md) | Runtime、可恢复执行、路径震荡、工具路由、Trace 与生产级评测 🆕 |
 | 15 | [Agent Harness 评测与发布门禁](通用知识/Agent-Harness评测与发布门禁.md) | Task/Environment/Outcome Spec、三层 Grading、Shadow 与 Canary |
-| 16 | [企业级 Agent 平台与 AgentOS](通用知识/企业级Agent平台与AgentOS.md) | 控制面、Runtime、多租户、Registry、模型网关与平台治理 |
-| 17 | [自进化 Agent 与 Skill 生命周期](通用知识/自进化Agent与Skill生命周期.md) | Trace 复盘、Curator、Skill 版本、灰度、回滚与防污染 |
+| 16 | [Coding Agent 源码架构对比](通用知识/Coding-Agent源码架构对比.md) | Codex、OpenHands、SWE-agent、DeepSeek Harness 的入口、Loop、Runtime 与协议 |
+| 17 | [Agent Benchmark 与失败分类](通用知识/Agent-Benchmark与失败分类.md) | SWE-bench、τ-bench、OSWorld 等测评边界与九层失败归因 |
+| 18 | [企业级 Agent 平台与 AgentOS](通用知识/企业级Agent平台与AgentOS.md) | 四平面、Runtime、多租户、Registry、模型网关、发布与事故治理 |
+| 19 | [自进化 Agent 与 Context Evolution](通用知识/自进化Agent与Skill生命周期.md) | Trace 复盘、Context Evolution、Curator、Skill 灰度、回滚与防污染 |
+| 20 | [Agentic RL 与多轮工具训练](通用知识/Agentic-RL与多轮工具训练.md) | 多轮 MDP、Trajectory、奖励、Rollout、训练推理一致性与污染防护 |
 
 ### 📝 面试题库
 
 | # | 文档 | 简介 |
 |---|------|------|
-| 18 | [最新 AI Agent 面经索引（2026）](通用知识/最新AI-Agent面经索引.md) | 牛客、小红书、知乎、CSDN、GitHub 等公开来源的最新面经入口 |
-| 19 | [Agent 高频题证据模型](通用知识/Agent高频题证据模型.md) | 公司、轮次、来源数、时效、一手/汇总与置信度 |
-| 20 | [跨公司 Agent 岗位能力矩阵](通用知识/跨公司Agent岗位能力矩阵.md) | 应用、算法、Runtime、Coding Agent 和平台岗位对比 |
-| 21 | [Agent 项目深挖与压力面试](通用知识/Agent项目深挖与压力面试.md) | 九组连续追问链、回答证据和评分标准 |
-| 22 | [Agent 项目简历与 STAR 表达](通用知识/Agent项目简历与STAR表达.md) | 1/3 分钟表达、技术难点、失败案例和指标写法 |
-| 23 | [核心概念详解与参考答案](通用知识/核心概念详解与参考答案.md) | 高频概念题精讲与标准答案 |
-| 24 | [八股文完整答案集](通用知识/八股文完整答案集.md) | 69 道八股题，全部附详细解答 |
-| 25 | [八股文题库 - DataWhale 开源](通用知识/八股文题库-DataWhale开源.md) | DataWhale 社区精选题库 |
-| 26 | [高频拷打题 - 牛客热帖](通用知识/高频拷打题-牛客热帖.md) | 牛客论坛高赞面试拷打合集 |
-| 27 | [技术知识点汇总](通用知识/技术知识点汇总.md) | 速查手册：关键知识点一网打尽 |
-| 28 | [其他公司面经 - 快手携程等](通用知识/其他公司面经-快手携程等.md) | 快手、携程等公司面经补充 |
+| 21 | [最新 AI Agent 面经索引（2026）](通用知识/最新AI-Agent面经索引.md) | 牛客、小红书、知乎、CSDN、GitHub 等公开来源的最新面经入口 |
+| 22 | [Agent 高频题证据模型](通用知识/Agent高频题证据模型.md) | 公司、轮次、来源数、时效、一手/汇总与置信度 |
+| 23 | [跨公司 Agent 岗位能力矩阵](通用知识/跨公司Agent岗位能力矩阵.md) | 应用、算法、Runtime、Coding Agent 和平台岗位对比 |
+| 24 | [Agent 项目深挖与压力面试](通用知识/Agent项目深挖与压力面试.md) | 九组连续追问链、回答证据和评分标准 |
+| 25 | [Agent 项目简历与 STAR 表达](通用知识/Agent项目简历与STAR表达.md) | 1/3 分钟表达、技术难点、失败案例和指标写法 |
+| 26 | [核心概念详解与参考答案](通用知识/核心概念详解与参考答案.md) | 高频概念题精讲与标准答案 |
+| 27 | [八股文完整答案集](通用知识/八股文完整答案集.md) | 69 道八股题，全部附详细解答 |
+| 28 | [八股文题库 - DataWhale 开源](通用知识/八股文题库-DataWhale开源.md) | DataWhale 社区精选题库 |
+| 29 | [高频拷打题 - 牛客热帖](通用知识/高频拷打题-牛客热帖.md) | 牛客论坛高赞面试拷打合集 |
+| 30 | [技术知识点汇总](通用知识/技术知识点汇总.md) | 速查手册：关键知识点一网打尽 |
+| 31 | [其他公司面经 - 快手携程等](通用知识/其他公司面经-快手携程等.md) | 快手、携程等公司面经补充 |
 
 ### 🌐 进阶面试题
 
 | # | 文档 | 简介 |
 |---|------|------|
-| 29 | [Agent 核心概念面试题 - 进阶篇](通用知识/Agent核心概念面试题-进阶篇.md) | 核心概念高频问答进阶版 |
-| 30 | [系统设计面试题 - 进阶篇](通用知识/系统设计面试题-进阶篇.md) | 系统设计题与参考答案进阶版 |
-| 31 | [AI 协作与工程化面试题 - 进阶篇](通用知识/AI协作与工程化面试题-进阶篇.md) | AI 协作工程化问答进阶版 |
-| 32 | [AI 模型与 Agent 手撕题](面试算法题/AI模型与Agent手撕题.md) | Attention、LoRA、检索、RRF、Tool 校验与 Agent Loop |
-| 33 | [交互式面试算法题图谱](https://zchary1106.github.io/agent-interview-hub/%E9%9D%A2%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/) | 近期公开 Agent / 大模型面经算法题，附可折叠 Java 解法 |
+| 32 | [Agent 核心概念面试题 - 进阶篇](通用知识/Agent核心概念面试题-进阶篇.md) | 核心概念高频问答进阶版 |
+| 33 | [系统设计面试题 - 进阶篇](通用知识/系统设计面试题-进阶篇.md) | 系统设计题与参考答案进阶版 |
+| 34 | [AI 协作与工程化面试题 - 进阶篇](通用知识/AI协作与工程化面试题-进阶篇.md) | AI 协作工程化问答进阶版 |
+| 35 | [AI 模型与 Agent 手撕题](面试算法题/AI模型与Agent手撕题.md) | Attention、LoRA、检索、RRF、Tool 校验与 Agent Loop |
+| 36 | [交互式面试算法题图谱](https://zchary1106.github.io/agent-interview-hub/%E9%9D%A2%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/) | 近期公开 Agent / 大模型面经算法题，附可折叠 Java 解法 |
 
 ---
 

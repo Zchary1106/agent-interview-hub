@@ -286,3 +286,22 @@
 - 一份项目 README
 - 一份评估报告
 - 一份 10 分钟项目答辩稿
+
+## 高级工程选修轨道
+
+完成 12 周主线后，根据目标岗位选择一条，不建议五项同时浅尝辄止。
+
+| 目标岗位 | 深入专题 | 必交付 Artifact |
+|---|---|---|
+| Coding Agent / Runtime | [Coding Agent 源码架构对比](Coding-Agent源码架构对比.md) | 锁定 commit 的调用链、边界图和一次失败 Trace |
+| Agent Eval / 质量平台 | [Agent Benchmark 与失败分类](Agent-Benchmark与失败分类.md) | 50+ 企业任务、九层失败标签、回归与 Canary 报告 |
+| 企业平台 / 架构师 | [企业级 Agent 平台与 AgentOS](企业级Agent平台与AgentOS.md) | 四平面架构、Registry、租户隔离和事故演练 |
+| Memory / Skill / 自进化 | [自进化 Agent 与 Context Evolution](自进化Agent与Skill生命周期.md) | Context Diff、正负证据、离线评测和回滚记录 |
+| Agent 算法 / 后训练 | [Agentic RL 与多轮工具训练](Agentic-RL与多轮工具训练.md) | 可复位环境、Trajectory Schema、Reward 与污染审计 |
+
+高级方向的共同验收标准：
+
+1. 能区分源码事实、黑盒观察和工程推断；
+2. 不只报告平均成功率，还报告稳定性、安全、成本与恢复；
+3. 所有关键状态和发布物都可版本化、可追溯、可回滚；
+4. 能用真实失败案例解释设计取舍，而不是只画理想架构图。
