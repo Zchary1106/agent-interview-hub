@@ -34,6 +34,8 @@ ROOT_DOCS = ["Agent工程师学习路线图.md"]
 
 GENERAL_ORDER = [
     "最新AI-Agent面经索引.md",
+    "2026-10-Agent面试题索引.md",
+    "2026-10-Agent面经来源与答案资料.md",
     "12周Agent工程师进阶路线.md",
     "Agent核心概念与设计模式.md",
     "Agent框架全景.md",

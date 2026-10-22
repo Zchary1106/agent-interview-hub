@@ -29,9 +29,20 @@ jobs:
           python -m py_compile scripts/build_site.py
           python -m py_compile scripts/collect_interviews.py
           python -m py_compile scripts/validate_data.py
+          python -m py_compile scripts/sync_practice_2026_10.py scripts/validate_practice_2026_10.py
 
       - name: Validate data files
         run: python scripts/validate_data.py
+
+      - name: Validate October practice coverage and generated content
+        run: |
+          python scripts/sync_practice_2026_10.py --check
+          python scripts/validate_practice_2026_10.py
+
+      - name: Test algorithm reference answers
+        run: |
+          python -m pip install 'pytest>=8,<10'
+          python -m pytest -q 面试算法题/python/test_algorithm_answers.py scripts/test_practice_2026_10.py
 
       - name: Build site (smoke test)
         run: python scripts/build_site.py
